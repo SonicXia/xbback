@@ -625,63 +625,253 @@ public class TbOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andDaysIsNull() {
-            addCriterion("days is null");
+        public Criteria andInvestmentdateIsNull() {
+            addCriterion("investmentDate is null");
             return (Criteria) this;
         }
 
-        public Criteria andDaysIsNotNull() {
-            addCriterion("days is not null");
+        public Criteria andInvestmentdateIsNotNull() {
+            addCriterion("investmentDate is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDaysEqualTo(Integer value) {
-            addCriterion("days =", value, "days");
+        public Criteria andInvestmentdateEqualTo(String value) {
+            addCriterion("investmentDate =", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysNotEqualTo(Integer value) {
-            addCriterion("days <>", value, "days");
+        public Criteria andInvestmentdateNotEqualTo(String value) {
+            addCriterion("investmentDate <>", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysGreaterThan(Integer value) {
-            addCriterion("days >", value, "days");
+        public Criteria andInvestmentdateGreaterThan(String value) {
+            addCriterion("investmentDate >", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysGreaterThanOrEqualTo(Integer value) {
-            addCriterion("days >=", value, "days");
+        public Criteria andInvestmentdateGreaterThanOrEqualTo(String value) {
+            addCriterion("investmentDate >=", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysLessThan(Integer value) {
-            addCriterion("days <", value, "days");
+        public Criteria andInvestmentdateLessThan(String value) {
+            addCriterion("investmentDate <", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysLessThanOrEqualTo(Integer value) {
-            addCriterion("days <=", value, "days");
+        public Criteria andInvestmentdateLessThanOrEqualTo(String value) {
+            addCriterion("investmentDate <=", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysIn(List<Integer> values) {
-            addCriterion("days in", values, "days");
+        public Criteria andInvestmentdateLike(String value) {
+            addCriterion("investmentDate like", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysNotIn(List<Integer> values) {
-            addCriterion("days not in", values, "days");
+        public Criteria andInvestmentdateNotLike(String value) {
+            addCriterion("investmentDate not like", value, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysBetween(Integer value1, Integer value2) {
-            addCriterion("days between", value1, value2, "days");
+        public Criteria andInvestmentdateIn(List<String> values) {
+            addCriterion("investmentDate in", values, "investmentdate");
             return (Criteria) this;
         }
 
-        public Criteria andDaysNotBetween(Integer value1, Integer value2) {
-            addCriterion("days not between", value1, value2, "days");
+        public Criteria andInvestmentdateNotIn(List<String> values) {
+            addCriterion("investmentDate not in", values, "investmentdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvestmentdateBetween(String value1, String value2) {
+            addCriterion("investmentDate between", value1, value2, "investmentdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvestmentdateNotBetween(String value1, String value2) {
+            addCriterion("investmentDate not between", value1, value2, "investmentdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsIsNull() {
+            addCriterion("rewardMonths is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsIsNotNull() {
+            addCriterion("rewardMonths is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsEqualTo(Integer value) {
+            addCriterion("rewardMonths =", value, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsNotEqualTo(Integer value) {
+            addCriterion("rewardMonths <>", value, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsGreaterThan(Integer value) {
+            addCriterion("rewardMonths >", value, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("rewardMonths >=", value, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsLessThan(Integer value) {
+            addCriterion("rewardMonths <", value, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsLessThanOrEqualTo(Integer value) {
+            addCriterion("rewardMonths <=", value, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsIn(List<Integer> values) {
+            addCriterion("rewardMonths in", values, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsNotIn(List<Integer> values) {
+            addCriterion("rewardMonths not in", values, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsBetween(Integer value1, Integer value2) {
+            addCriterion("rewardMonths between", value1, value2, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardmonthsNotBetween(Integer value1, Integer value2) {
+            addCriterion("rewardMonths not between", value1, value2, "rewardmonths");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysIsNull() {
+            addCriterion("extraDays is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysIsNotNull() {
+            addCriterion("extraDays is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysEqualTo(Integer value) {
+            addCriterion("extraDays =", value, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysNotEqualTo(Integer value) {
+            addCriterion("extraDays <>", value, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysGreaterThan(Integer value) {
+            addCriterion("extraDays >", value, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysGreaterThanOrEqualTo(Integer value) {
+            addCriterion("extraDays >=", value, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysLessThan(Integer value) {
+            addCriterion("extraDays <", value, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysLessThanOrEqualTo(Integer value) {
+            addCriterion("extraDays <=", value, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysIn(List<Integer> values) {
+            addCriterion("extraDays in", values, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysNotIn(List<Integer> values) {
+            addCriterion("extraDays not in", values, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysBetween(Integer value1, Integer value2) {
+            addCriterion("extraDays between", value1, value2, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtradaysNotBetween(Integer value1, Integer value2) {
+            addCriterion("extraDays not between", value1, value2, "extradays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysIsNull() {
+            addCriterion("rewardDays is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysIsNotNull() {
+            addCriterion("rewardDays is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysEqualTo(Integer value) {
+            addCriterion("rewardDays =", value, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysNotEqualTo(Integer value) {
+            addCriterion("rewardDays <>", value, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysGreaterThan(Integer value) {
+            addCriterion("rewardDays >", value, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysGreaterThanOrEqualTo(Integer value) {
+            addCriterion("rewardDays >=", value, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysLessThan(Integer value) {
+            addCriterion("rewardDays <", value, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysLessThanOrEqualTo(Integer value) {
+            addCriterion("rewardDays <=", value, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysIn(List<Integer> values) {
+            addCriterion("rewardDays in", values, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysNotIn(List<Integer> values) {
+            addCriterion("rewardDays not in", values, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysBetween(Integer value1, Integer value2) {
+            addCriterion("rewardDays between", value1, value2, "rewarddays");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewarddaysNotBetween(Integer value1, Integer value2) {
+            addCriterion("rewardDays not between", value1, value2, "rewarddays");
             return (Criteria) this;
         }
 
@@ -875,52 +1065,52 @@ public class TbOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusEqualTo(Boolean value) {
+        public Criteria andOrderstatusEqualTo(Integer value) {
             addCriterion("orderStatus =", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusNotEqualTo(Boolean value) {
+        public Criteria andOrderstatusNotEqualTo(Integer value) {
             addCriterion("orderStatus <>", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusGreaterThan(Boolean value) {
+        public Criteria andOrderstatusGreaterThan(Integer value) {
             addCriterion("orderStatus >", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andOrderstatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("orderStatus >=", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusLessThan(Boolean value) {
+        public Criteria andOrderstatusLessThan(Integer value) {
             addCriterion("orderStatus <", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusLessThanOrEqualTo(Boolean value) {
+        public Criteria andOrderstatusLessThanOrEqualTo(Integer value) {
             addCriterion("orderStatus <=", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusIn(List<Boolean> values) {
+        public Criteria andOrderstatusIn(List<Integer> values) {
             addCriterion("orderStatus in", values, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusNotIn(List<Boolean> values) {
+        public Criteria andOrderstatusNotIn(List<Integer> values) {
             addCriterion("orderStatus not in", values, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusBetween(Boolean value1, Boolean value2) {
+        public Criteria andOrderstatusBetween(Integer value1, Integer value2) {
             addCriterion("orderStatus between", value1, value2, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andOrderstatusNotBetween(Integer value1, Integer value2) {
             addCriterion("orderStatus not between", value1, value2, "orderstatus");
             return (Criteria) this;
         }

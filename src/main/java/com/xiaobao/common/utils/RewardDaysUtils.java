@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class getRewardDays {
+public class RewardDaysUtils {
 	public static int getRewardDays(String startDay, int to){
-		String endDay = DateUtils.getTheSameDate(startDay, 1);
+		String endDay = DateUtils.getTheSameDate(startDay, to);
 		try {
 			int betweenDays = DateUtils.getBetweenDays(startDay, endDay, "yyyy-MM-dd");
 			

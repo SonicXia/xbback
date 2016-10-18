@@ -10,11 +10,14 @@
     <result column="bonus" property="bonus" jdbcType="DOUBLE" />
     <result column="reward" property="reward" jdbcType="DOUBLE" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="days" property="days" jdbcType="INTEGER" />
+    <result column="investmentDate" property="investmentdate" jdbcType="VARCHAR" />
+    <result column="rewardMonths" property="rewardmonths" jdbcType="INTEGER" />
+    <result column="extraDays" property="extradays" jdbcType="INTEGER" />
+    <result column="rewardDays" property="rewarddays" jdbcType="INTEGER" />
     <result column="daysAlready" property="daysalready" jdbcType="INTEGER" />
     <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
-    <result column="orderStatus" property="orderstatus" jdbcType="BIT" />
+    <result column="orderStatus" property="orderstatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    orderId, cardId, orderCnt, address, amont, bonus, reward, remark, days, daysAlready, 
-    createDate, updateDate, orderStatus
+    orderId, cardId, orderCnt, address, amont, bonus, reward, remark, investmentDate, 
+    rewardMonths, extraDays, rewardDays, daysAlready, createDate, updateDate, orderStatus
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbOrderExample" >
     select
@@ -111,14 +114,16 @@
   <insert id="insert" parameterType="com.xiaobao.pojo.TbOrder" >
     insert into tb_order (orderId, cardId, orderCnt, 
       address, amont, bonus, 
-      reward, remark, days, 
+      reward, remark, investmentDate, 
+      rewardMonths, extraDays, rewardDays, 
       daysAlready, createDate, updateDate, 
       orderStatus)
     values (#{orderid,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, #{ordercnt,jdbcType=INTEGER}, 
       #{address,jdbcType=VARCHAR}, #{amont,jdbcType=DOUBLE}, #{bonus,jdbcType=DOUBLE}, 
-      #{reward,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{days,jdbcType=INTEGER}, 
+      #{reward,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{investmentdate,jdbcType=VARCHAR}, 
+      #{rewardmonths,jdbcType=INTEGER}, #{extradays,jdbcType=INTEGER}, #{rewarddays,jdbcType=INTEGER}, 
       #{daysalready,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, 
-      #{orderstatus,jdbcType=BIT})
+      #{orderstatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbOrder" >
     insert into tb_order
@@ -147,8 +152,17 @@
       <if test="remark != null" >
         remark,
       </if>
-      <if test="days != null" >
-        days,
+      <if test="investmentdate != null" >
+        investmentDate,
+      </if>
+      <if test="rewardmonths != null" >
+        rewardMonths,
+      </if>
+      <if test="extradays != null" >
+        extraDays,
+      </if>
+      <if test="rewarddays != null" >
+        rewardDays,
       </if>
       <if test="daysalready != null" >
         daysAlready,
@@ -188,8 +202,17 @@
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="days != null" >
-        #{days,jdbcType=INTEGER},
+      <if test="investmentdate != null" >
+        #{investmentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardmonths != null" >
+        #{rewardmonths,jdbcType=INTEGER},
+      </if>
+      <if test="extradays != null" >
+        #{extradays,jdbcType=INTEGER},
+      </if>
+      <if test="rewarddays != null" >
+        #{rewarddays,jdbcType=INTEGER},
       </if>
       <if test="daysalready != null" >
         #{daysalready,jdbcType=INTEGER},
@@ -201,7 +224,7 @@
         #{updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="orderstatus != null" >
-        #{orderstatus,jdbcType=BIT},
+        #{orderstatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -238,8 +261,17 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.days != null" >
-        days = #{record.days,jdbcType=INTEGER},
+      <if test="record.investmentdate != null" >
+        investmentDate = #{record.investmentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rewardmonths != null" >
+        rewardMonths = #{record.rewardmonths,jdbcType=INTEGER},
+      </if>
+      <if test="record.extradays != null" >
+        extraDays = #{record.extradays,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewarddays != null" >
+        rewardDays = #{record.rewarddays,jdbcType=INTEGER},
       </if>
       <if test="record.daysalready != null" >
         daysAlready = #{record.daysalready,jdbcType=INTEGER},
@@ -251,7 +283,7 @@
         updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.orderstatus != null" >
-        orderStatus = #{record.orderstatus,jdbcType=BIT},
+        orderStatus = #{record.orderstatus,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -268,11 +300,14 @@
       bonus = #{record.bonus,jdbcType=DOUBLE},
       reward = #{record.reward,jdbcType=DOUBLE},
       remark = #{record.remark,jdbcType=VARCHAR},
-      days = #{record.days,jdbcType=INTEGER},
+      investmentDate = #{record.investmentdate,jdbcType=VARCHAR},
+      rewardMonths = #{record.rewardmonths,jdbcType=INTEGER},
+      extraDays = #{record.extradays,jdbcType=INTEGER},
+      rewardDays = #{record.rewarddays,jdbcType=INTEGER},
       daysAlready = #{record.daysalready,jdbcType=INTEGER},
       createDate = #{record.createdate,jdbcType=TIMESTAMP},
       updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
-      orderStatus = #{record.orderstatus,jdbcType=BIT}
+      orderStatus = #{record.orderstatus,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -301,8 +336,17 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="days != null" >
-        days = #{days,jdbcType=INTEGER},
+      <if test="investmentdate != null" >
+        investmentDate = #{investmentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardmonths != null" >
+        rewardMonths = #{rewardmonths,jdbcType=INTEGER},
+      </if>
+      <if test="extradays != null" >
+        extraDays = #{extradays,jdbcType=INTEGER},
+      </if>
+      <if test="rewarddays != null" >
+        rewardDays = #{rewarddays,jdbcType=INTEGER},
       </if>
       <if test="daysalready != null" >
         daysAlready = #{daysalready,jdbcType=INTEGER},
@@ -314,7 +358,7 @@
         updateDate = #{updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="orderstatus != null" >
-        orderStatus = #{orderstatus,jdbcType=BIT},
+        orderStatus = #{orderstatus,jdbcType=INTEGER},
       </if>
     </set>
     where orderId = #{orderid,jdbcType=VARCHAR}
@@ -328,11 +372,14 @@
       bonus = #{bonus,jdbcType=DOUBLE},
       reward = #{reward,jdbcType=DOUBLE},
       remark = #{remark,jdbcType=VARCHAR},
-      days = #{days,jdbcType=INTEGER},
+      investmentDate = #{investmentdate,jdbcType=VARCHAR},
+      rewardMonths = #{rewardmonths,jdbcType=INTEGER},
+      extraDays = #{extradays,jdbcType=INTEGER},
+      rewardDays = #{rewarddays,jdbcType=INTEGER},
       daysAlready = #{daysalready,jdbcType=INTEGER},
       createDate = #{createdate,jdbcType=TIMESTAMP},
       updateDate = #{updatedate,jdbcType=TIMESTAMP},
-      orderStatus = #{orderstatus,jdbcType=BIT}
+      orderStatus = #{orderstatus,jdbcType=INTEGER}
     where orderId = #{orderid,jdbcType=VARCHAR}
   </update>
 </mapper>

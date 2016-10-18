@@ -19,7 +19,13 @@ public class TbOrder {
 
     private String remark;
 
-    private Integer days;
+    private String investmentdate;
+
+    private Integer rewardmonths;
+
+    private Integer extradays;
+
+    private Integer rewarddays;
 
     private Integer daysalready;
 
@@ -27,7 +33,7 @@ public class TbOrder {
 
     private Date updatedate;
 
-    private Boolean orderstatus;
+    private Integer orderstatus;
 
     public String getOrderid() {
         return orderid;
@@ -93,12 +99,36 @@ public class TbOrder {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Integer getDays() {
-        return days;
+    public String getInvestmentdate() {
+        return investmentdate;
     }
 
-    public void setDays(Integer days) {
-        this.days = days;
+    public void setInvestmentdate(String investmentdate) {
+        this.investmentdate = investmentdate == null ? null : investmentdate.trim();
+    }
+
+    public Integer getRewardmonths() {
+        return rewardmonths;
+    }
+
+    public void setRewardmonths(Integer rewardmonths) {
+        this.rewardmonths = rewardmonths;
+    }
+
+    public Integer getExtradays() {
+        return extradays;
+    }
+
+    public void setExtradays(Integer extradays) {
+        this.extradays = extradays;
+    }
+
+    public Integer getRewarddays() {
+        return rewarddays;
+    }
+
+    public void setRewarddays(Integer rewarddays) {
+        this.rewarddays = rewarddays;
     }
 
     public Integer getDaysalready() {
@@ -125,11 +155,11 @@ public class TbOrder {
         this.updatedate = updatedate;
     }
 
-    public Boolean getOrderstatus() {
+    public Integer getOrderstatus() {
         return orderstatus;
     }
 
-    public void setOrderstatus(Boolean orderstatus) {
+    public void setOrderstatus(Integer orderstatus) {
         this.orderstatus = orderstatus;
     }
 }
