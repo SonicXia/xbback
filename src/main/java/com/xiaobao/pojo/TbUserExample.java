@@ -165,76 +165,6 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andMemberidIsNull() {
-            addCriterion("memberId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidIsNotNull() {
-            addCriterion("memberId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidEqualTo(String value) {
-            addCriterion("memberId =", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidNotEqualTo(String value) {
-            addCriterion("memberId <>", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidGreaterThan(String value) {
-            addCriterion("memberId >", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidGreaterThanOrEqualTo(String value) {
-            addCriterion("memberId >=", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidLessThan(String value) {
-            addCriterion("memberId <", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidLessThanOrEqualTo(String value) {
-            addCriterion("memberId <=", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidLike(String value) {
-            addCriterion("memberId like", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidNotLike(String value) {
-            addCriterion("memberId not like", value, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidIn(List<String> values) {
-            addCriterion("memberId in", values, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidNotIn(List<String> values) {
-            addCriterion("memberId not in", values, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidBetween(String value1, String value2) {
-            addCriterion("memberId between", value1, value2, "memberid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberidNotBetween(String value1, String value2) {
-            addCriterion("memberId not between", value1, value2, "memberid");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -892,6 +822,66 @@ public class TbUserExample {
 
         public Criteria andReferrerNotBetween(String value1, String value2) {
             addCriterion("referrer not between", value1, value2, "referrer");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidIsNull() {
+            addCriterion("teamId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidIsNotNull() {
+            addCriterion("teamId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidEqualTo(Integer value) {
+            addCriterion("teamId =", value, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidNotEqualTo(Integer value) {
+            addCriterion("teamId <>", value, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidGreaterThan(Integer value) {
+            addCriterion("teamId >", value, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("teamId >=", value, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidLessThan(Integer value) {
+            addCriterion("teamId <", value, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidLessThanOrEqualTo(Integer value) {
+            addCriterion("teamId <=", value, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidIn(List<Integer> values) {
+            addCriterion("teamId in", values, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidNotIn(List<Integer> values) {
+            addCriterion("teamId not in", values, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidBetween(Integer value1, Integer value2) {
+            addCriterion("teamId between", value1, value2, "teamid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeamidNotBetween(Integer value1, Integer value2) {
+            addCriterion("teamId not between", value1, value2, "teamid");
             return (Criteria) this;
         }
 

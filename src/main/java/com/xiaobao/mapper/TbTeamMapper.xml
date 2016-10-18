@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaobao.mapper.TbTeamMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaobao.pojo.TbTeam" >
+    <id column="teamId" property="teamid" jdbcType="INTEGER" />
+    <result column="teamName" property="teamname" jdbcType="VARCHAR" />
+    <result column="teamLeaderId" property="teamleaderid" jdbcType="VARCHAR" />
+    <result column="leaderName" property="leadername" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    teamId, teamName, teamLeaderId, leaderName, number, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbTeamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_team
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_team
+    where teamId = #{teamid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_team
+    where teamId = #{teamid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiaobao.pojo.TbTeamExample" >
+    delete from tb_team
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiaobao.pojo.TbTeam" >
+    insert into tb_team (teamId, teamName, teamLeaderId, 
+      leaderName, number, description
+      )
+    values (#{teamid,jdbcType=INTEGER}, #{teamname,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=VARCHAR}, 
+      #{leadername,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbTeam" >
+    insert into tb_team
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teamid != null" >
+        teamId,
+      </if>
+      <if test="teamname != null" >
+        teamName,
+      </if>
+      <if test="teamleaderid != null" >
+        teamLeaderId,
+      </if>
+      <if test="leadername != null" >
+        leaderName,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teamid != null" >
+        #{teamid,jdbcType=INTEGER},
+      </if>
+      <if test="teamname != null" >
+        #{teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="teamleaderid != null" >
+        #{teamleaderid,jdbcType=VARCHAR},
+      </if>
+      <if test="leadername != null" >
+        #{leadername,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiaobao.pojo.TbTeamExample" resultType="java.lang.Integer" >
+    select count(*) from tb_team
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_team
+    <set >
+      <if test="record.teamid != null" >
+        teamId = #{record.teamid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teamname != null" >
+        teamName = #{record.teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamleaderid != null" >
+        teamLeaderId = #{record.teamleaderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadername != null" >
+        leaderName = #{record.leadername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_team
+    set teamId = #{record.teamid,jdbcType=INTEGER},
+      teamName = #{record.teamname,jdbcType=VARCHAR},
+      teamLeaderId = #{record.teamleaderid,jdbcType=VARCHAR},
+      leaderName = #{record.leadername,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaobao.pojo.TbTeam" >
+    update tb_team
+    <set >
+      <if test="teamname != null" >
+        teamName = #{teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="teamleaderid != null" >
+        teamLeaderId = #{teamleaderid,jdbcType=VARCHAR},
+      </if>
+      <if test="leadername != null" >
+        leaderName = #{leadername,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teamId = #{teamid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaobao.pojo.TbTeam" >
+    update tb_team
+    set teamName = #{teamname,jdbcType=VARCHAR},
+      teamLeaderId = #{teamleaderid,jdbcType=VARCHAR},
+      leaderName = #{leadername,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where teamId = #{teamid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -18,25 +18,11 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TbUserMapper userMapper;
-	
-	public TbUser getUserByMemberId(String memberId) {
-		
-		TbUserExample example = new TbUserExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andMemberidEqualTo(memberId);
-		List<TbUser> users = userMapper.selectByExample(example);
-		if(users != null && users.size() > 0){
-			TbUser user = users.get(0);
-			return user;
-		}
-		
-		return null;
-	}
 
 	public TbUser getUserByName(String name) {
 		TbUserExample example = new TbUserExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andMemberidEqualTo(name);
+		criteria.andNameEqualTo(name);
 		List<TbUser> users = userMapper.selectByExample(example);
 		if(users != null && users.size() > 0){
 			TbUser user = users.get(0);
@@ -45,13 +31,15 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	public XiaobaoResult insertUser(String name, String cardId, String password, String email, String referrer) {
+	public XiaobaoResult insertUser(String name, String cardId, String mobile, String password, String email, String referrer, int teamId) {
 		TbUser user = UserFactory.createUserInfo();
 		user.setName(name);
 		user.setCardid(cardId);
+		user.setMobile(mobile);
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setReferrer(referrer);
+		user.setTeamid(teamId);
 		userMapper.insert(user);
 		return XiaobaoResult.ok();
 	}

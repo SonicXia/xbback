@@ -8,9 +8,11 @@ com\xiaobao\pojo\TbOrderExample$Criteria.class
 com\xiaobao\common\utils\OrderNoUtils.class
 com\xiaobao\common\utils\HttpClientUtil.class
 com\xiaobao\common\utils\HttpUtils$1.class
+com\xiaobao\pojo\TbTeamExample$GeneratedCriteria.class
 com\xiaobao\common\utils\UtilResource.class
 com\xiaobao\common\utils\IDUtils.class
 com\xiaobao\common\utils\LogUtils.class
+com\xiaobao\mapper\TbTeamMapper.class
 com\xiaobao\common\utils\SystemConfigUtil.class
 com\xiaobao\pojo\TbUserExample$Criteria.class
 com\xiaobao\common\utils\JsonUtil.class
@@ -27,8 +29,10 @@ com\xiaobao\service\UserService.class
 com\xiaobao\common\utils\CollectionUtil.class
 com\xiaobao\common\utils\CookieUtils.class
 com\xiaobao\common\utils\MathUtils.class
+com\xiaobao\pojo\TbTeamExample$Criteria.class
 com\xiaobao\common\utils\DES.class
 com\xiaobao\pojo\TbUserExample.class
+com\xiaobao\pojo\TbTeam.class
 com\xiaobao\common\utils\ReflectionUtils.class
 com\xiaobao\common\utils\HttpUtils$2.class
 com\xiaobao\common\utils\ResultHelper.class
@@ -44,6 +48,7 @@ com\xiaobao\common\utils\DateUtils.class
 com\xiaobao\pojo\TbOrderExample$GeneratedCriteria.class
 com\xiaobao\common\utils\Crypto.class
 com\xiaobao\common\utils\PropertiesReader.class
+com\xiaobao\pojo\TbTeamExample$Criterion.class
 com\xiaobao\common\exception\ServiceExceptionConstants.class
 com\xiaobao\common\utils\HttpUtils$CallBack.class
 com\xiaobao\common\utils\MiscContants.class
@@ -51,5 +56,6 @@ com\xiaobao\common\utils\JsonUtils.class
 com\xiaobao\pojo\TbOrderExample.class
 com\xiaobao\common\pojo\EUDataGridResult.class
 com\xiaobao\common\utils\HttpUtils.class
+com\xiaobao\pojo\TbTeamExample.class
 com\xiaobao\common\utils\IdcardValidator.class
 com\xiaobao\common\utils\ConfigReader.class

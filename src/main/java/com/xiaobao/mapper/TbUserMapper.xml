@@ -3,7 +3,6 @@
 <mapper namespace="com.xiaobao.mapper.TbUserMapper" >
   <resultMap id="BaseResultMap" type="com.xiaobao.pojo.TbUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="memberId" property="memberid" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="cardId" property="cardid" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
@@ -14,6 +13,7 @@
     <result column="isBlackList" property="isblacklist" jdbcType="BIT" />
     <result column="referralCnt" property="referralcnt" jdbcType="INTEGER" />
     <result column="referrer" property="referrer" jdbcType="VARCHAR" />
+    <result column="teamId" property="teamid" jdbcType="INTEGER" />
     <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -76,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, memberId, name, cardId, mobile, password, email, totalCnt, isActive, isBlackList, 
-    referralCnt, referrer, createDate, updateDate
+    id, name, cardId, mobile, password, email, totalCnt, isActive, isBlackList, referralCnt, 
+    referrer, teamId, createDate, updateDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbUserExample" >
     select
@@ -110,15 +110,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xiaobao.pojo.TbUser" >
-    insert into tb_user (id, memberId, name, 
-      cardId, mobile, password, 
-      email, totalCnt, isActive, 
-      isBlackList, referralCnt, referrer, 
+    insert into tb_user (id, name, cardId, 
+      mobile, password, email, 
+      totalCnt, isActive, isBlackList, 
+      referralCnt, referrer, teamId, 
       createDate, updateDate)
-    values (#{id,jdbcType=INTEGER}, #{memberid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{cardid,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{totalcnt,jdbcType=INTEGER}, #{isactive,jdbcType=BIT}, 
-      #{isblacklist,jdbcType=BIT}, #{referralcnt,jdbcType=INTEGER}, #{referrer,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{totalcnt,jdbcType=INTEGER}, #{isactive,jdbcType=BIT}, #{isblacklist,jdbcType=BIT}, 
+      #{referralcnt,jdbcType=INTEGER}, #{referrer,jdbcType=VARCHAR}, #{teamid,jdbcType=INTEGER}, 
       #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbUser" >
@@ -126,9 +126,6 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
-      </if>
-      <if test="memberid != null" >
-        memberId,
       </if>
       <if test="name != null" >
         name,
@@ -160,6 +157,9 @@
       <if test="referrer != null" >
         referrer,
       </if>
+      <if test="teamid != null" >
+        teamId,
+      </if>
       <if test="createdate != null" >
         createDate,
       </if>
@@ -170,9 +170,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="memberid != null" >
-        #{memberid,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -204,6 +201,9 @@
       <if test="referrer != null" >
         #{referrer,jdbcType=VARCHAR},
       </if>
+      <if test="teamid != null" >
+        #{teamid,jdbcType=INTEGER},
+      </if>
       <if test="createdate != null" >
         #{createdate,jdbcType=TIMESTAMP},
       </if>
@@ -223,9 +223,6 @@
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.memberid != null" >
-        memberId = #{record.memberid,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -257,6 +254,9 @@
       <if test="record.referrer != null" >
         referrer = #{record.referrer,jdbcType=VARCHAR},
       </if>
+      <if test="record.teamid != null" >
+        teamId = #{record.teamid,jdbcType=INTEGER},
+      </if>
       <if test="record.createdate != null" >
         createDate = #{record.createdate,jdbcType=TIMESTAMP},
       </if>
@@ -271,7 +271,6 @@
   <update id="updateByExample" parameterType="map" >
     update tb_user
     set id = #{record.id,jdbcType=INTEGER},
-      memberId = #{record.memberid,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       cardId = #{record.cardid,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
@@ -282,6 +281,7 @@
       isBlackList = #{record.isblacklist,jdbcType=BIT},
       referralCnt = #{record.referralcnt,jdbcType=INTEGER},
       referrer = #{record.referrer,jdbcType=VARCHAR},
+      teamId = #{record.teamid,jdbcType=INTEGER},
       createDate = #{record.createdate,jdbcType=TIMESTAMP},
       updateDate = #{record.updatedate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -291,9 +291,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.xiaobao.pojo.TbUser" >
     update tb_user
     <set >
-      <if test="memberid != null" >
-        memberId = #{memberid,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -324,6 +321,9 @@
       <if test="referrer != null" >
         referrer = #{referrer,jdbcType=VARCHAR},
       </if>
+      <if test="teamid != null" >
+        teamId = #{teamid,jdbcType=INTEGER},
+      </if>
       <if test="createdate != null" >
         createDate = #{createdate,jdbcType=TIMESTAMP},
       </if>
@@ -335,8 +335,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xiaobao.pojo.TbUser" >
     update tb_user
-    set memberId = #{memberid,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       cardId = #{cardid,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -346,6 +345,7 @@
       isBlackList = #{isblacklist,jdbcType=BIT},
       referralCnt = #{referralcnt,jdbcType=INTEGER},
       referrer = #{referrer,jdbcType=VARCHAR},
+      teamId = #{teamid,jdbcType=INTEGER},
       createDate = #{createdate,jdbcType=TIMESTAMP},
       updateDate = #{updatedate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

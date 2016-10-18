@@ -22,7 +22,7 @@ public class UserFactory {
 	 */
 	public static TbUser createUserInfo(){
 		TbUser user = new TbUser();		
-		user.setMemberid(generateMemberId());
+//		user.setMemberid(generateMemberId());
 		user.setTotalcnt(0);
 		user.setIsactive(true);
 		user.setIsblacklist(false);

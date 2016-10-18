@@ -5,8 +5,6 @@ import java.util.Date;
 public class TbUser {
     private Integer id;
 
-    private String memberid;
-
     private String name;
 
     private String cardid;
@@ -27,6 +25,8 @@ public class TbUser {
 
     private String referrer;
 
+    private Integer teamid;
+
     private Date createdate;
 
     private Date updatedate;
@@ -37,14 +37,6 @@ public class TbUser {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getMemberid() {
-        return memberid;
-    }
-
-    public void setMemberid(String memberid) {
-        this.memberid = memberid == null ? null : memberid.trim();
     }
 
     public String getName() {
@@ -125,6 +117,14 @@ public class TbUser {
 
     public void setReferrer(String referrer) {
         this.referrer = referrer == null ? null : referrer.trim();
+    }
+
+    public Integer getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(Integer teamid) {
+        this.teamid = teamid;
     }
 
     public Date getCreatedate() {

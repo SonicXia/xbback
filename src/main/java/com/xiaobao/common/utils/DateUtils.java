@@ -1,18 +1,12 @@
 package com.xiaobao.common.utils;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.TimeZone;
-
-import jodd.util.ClassLoaderUtil;
-import jodd.util.PropertiesUtil;
 
 /**
  * <p>
@@ -539,6 +533,26 @@ public abstract class DateUtils {
 //		final Calendar cNow = Calendar.getInstance(Locale.CHINA);
 		return cNow.before(cAfter) && cNow.after(cBefore);
 	}
-
 	
+	/**
+	 * 查询某一天（所指定日期在之前月份或之后月份的同一天，如指定2016-10-18，查询之后的第4个月，结果为2017-02-18）
+	 * 
+	 * @param date	指定日期
+	 * @param to	之前月份或之后月份（-1：上一个月；1：下一个月）
+	 * @return
+	 */
+	public static String getTheSameDate(String startDay, int to){		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date date = sdf.parse(startDay);
+			Calendar c = Calendar.getInstance();
+			c.setTime(date);			
+			c.add(Calendar.MONTH, to);
+			String dateStrTo = sdf.format(c.getTime());
+			return dateStrTo;			
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Invalid date format(yyyy-MM-dd): " + startDay);
+		}	
+	}
+
 }
