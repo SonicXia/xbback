@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaobao.common.pojo.XiaobaoResult;
-import com.xiaobao.common.utils.JsonUtils;
 import com.xiaobao.pojo.TbOrder;
 import com.xiaobao.service.OrderService;
 
@@ -19,15 +19,19 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@RequestMapping(value="/order/insert", method=RequestMethod.POST)
+	@RequestMapping(value="/order/save", method=RequestMethod.POST)
 	@ResponseBody
-	public XiaobaoResult createUser(@RequestBody JSONObject jsoncode){
-		TbOrder tbOrder = new TbOrder();
-		JsonUtils.jsonToPojo(jsoncode, );
-		
-		XiaobaoResult result = orderService.insertOrder(cardId, orderCnt, address, amont, bonus, reward, remark, investmentDate, rewardMonths, extraDays);
-		return result;
-		
+	public XiaobaoResult createUser(@RequestBody JSONObject jsoncode){		
+		String jsonString = jsoncode.toJSONString();
+		TbOrder order = JSON.parseObject(jsonString, TbOrder.class);
+		XiaobaoResult result = orderService.saveOrder(order);
+		return result;	
+	}
+	
+	@RequestMapping(value="/order/findAll", method=RequestMethod.POST)
+	@ResponseBody
+	public XiaobaoResult findAll(){
+		return orderService.findAll();
 	}
 	
 }

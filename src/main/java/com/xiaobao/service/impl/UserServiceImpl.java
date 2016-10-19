@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xiaobao.common.factory.UserFactory;
+import com.xiaobao.common.factory.Factory;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.mapper.TbUserMapper;
 import com.xiaobao.pojo.TbUser;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public XiaobaoResult insertUser(String name, String cardId, String mobile, String password, String email, String referrer, int teamId) {
-		TbUser user = UserFactory.createUserInfo();
+		TbUser user = Factory.createUserInfo();
 		user.setName(name);
 		user.setCardid(cardId);
 		user.setMobile(mobile);

@@ -4,13 +4,15 @@
   <resultMap id="BaseResultMap" type="com.xiaobao.pojo.TbOrder" >
     <id column="orderId" property="orderid" jdbcType="VARCHAR" />
     <result column="cardId" property="cardid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="orderCnt" property="ordercnt" jdbcType="INTEGER" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="amont" property="amont" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="investmentDate" property="investmentdate" jdbcType="VARCHAR" />
     <result column="bonus" property="bonus" jdbcType="DOUBLE" />
     <result column="reward" property="reward" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="investmentDate" property="investmentdate" jdbcType="VARCHAR" />
     <result column="rewardMonths" property="rewardmonths" jdbcType="INTEGER" />
     <result column="extraDays" property="extradays" jdbcType="INTEGER" />
     <result column="rewardDays" property="rewarddays" jdbcType="INTEGER" />
@@ -78,8 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    orderId, cardId, orderCnt, address, amont, bonus, reward, remark, investmentDate, 
-    rewardMonths, extraDays, rewardDays, daysAlready, createDate, updateDate, orderStatus
+    orderId, cardId, name, orderCnt, price, amount, investmentDate, bonus, reward, address, 
+    remark, rewardMonths, extraDays, rewardDays, daysAlready, createDate, updateDate, 
+    orderStatus
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbOrderExample" >
     select
@@ -112,18 +115,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xiaobao.pojo.TbOrder" >
-    insert into tb_order (orderId, cardId, orderCnt, 
-      address, amont, bonus, 
-      reward, remark, investmentDate, 
-      rewardMonths, extraDays, rewardDays, 
-      daysAlready, createDate, updateDate, 
-      orderStatus)
-    values (#{orderid,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, #{ordercnt,jdbcType=INTEGER}, 
-      #{address,jdbcType=VARCHAR}, #{amont,jdbcType=DOUBLE}, #{bonus,jdbcType=DOUBLE}, 
-      #{reward,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{investmentdate,jdbcType=VARCHAR}, 
-      #{rewardmonths,jdbcType=INTEGER}, #{extradays,jdbcType=INTEGER}, #{rewarddays,jdbcType=INTEGER}, 
-      #{daysalready,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, 
-      #{orderstatus,jdbcType=INTEGER})
+    insert into tb_order (orderId, cardId, name, 
+      orderCnt, price, amount, 
+      investmentDate, bonus, reward, 
+      address, remark, rewardMonths, 
+      extraDays, rewardDays, daysAlready, 
+      createDate, updateDate, orderStatus
+      )
+    values (#{orderid,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{ordercnt,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
+      #{investmentdate,jdbcType=VARCHAR}, #{bonus,jdbcType=DOUBLE}, #{reward,jdbcType=DOUBLE}, 
+      #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{rewardmonths,jdbcType=INTEGER}, 
+      #{extradays,jdbcType=INTEGER}, #{rewarddays,jdbcType=INTEGER}, #{daysalready,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbOrder" >
     insert into tb_order
@@ -134,14 +139,20 @@
       <if test="cardid != null" >
         cardId,
       </if>
+      <if test="name != null" >
+        name,
+      </if>
       <if test="ordercnt != null" >
         orderCnt,
       </if>
-      <if test="address != null" >
-        address,
+      <if test="price != null" >
+        price,
       </if>
-      <if test="amont != null" >
-        amont,
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="investmentdate != null" >
+        investmentDate,
       </if>
       <if test="bonus != null" >
         bonus,
@@ -149,11 +160,11 @@
       <if test="reward != null" >
         reward,
       </if>
+      <if test="address != null" >
+        address,
+      </if>
       <if test="remark != null" >
         remark,
-      </if>
-      <if test="investmentdate != null" >
-        investmentDate,
       </if>
       <if test="rewardmonths != null" >
         rewardMonths,
@@ -184,14 +195,20 @@
       <if test="cardid != null" >
         #{cardid,jdbcType=VARCHAR},
       </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="ordercnt != null" >
         #{ordercnt,jdbcType=INTEGER},
       </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
       </if>
-      <if test="amont != null" >
-        #{amont,jdbcType=DOUBLE},
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="investmentdate != null" >
+        #{investmentdate,jdbcType=VARCHAR},
       </if>
       <if test="bonus != null" >
         #{bonus,jdbcType=DOUBLE},
@@ -199,11 +216,11 @@
       <if test="reward != null" >
         #{reward,jdbcType=DOUBLE},
       </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="investmentdate != null" >
-        #{investmentdate,jdbcType=VARCHAR},
       </if>
       <if test="rewardmonths != null" >
         #{rewardmonths,jdbcType=INTEGER},
@@ -243,14 +260,20 @@
       <if test="record.cardid != null" >
         cardId = #{record.cardid,jdbcType=VARCHAR},
       </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
       <if test="record.ordercnt != null" >
         orderCnt = #{record.ordercnt,jdbcType=INTEGER},
       </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
       </if>
-      <if test="record.amont != null" >
-        amont = #{record.amont,jdbcType=DOUBLE},
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.investmentdate != null" >
+        investmentDate = #{record.investmentdate,jdbcType=VARCHAR},
       </if>
       <if test="record.bonus != null" >
         bonus = #{record.bonus,jdbcType=DOUBLE},
@@ -258,11 +281,11 @@
       <if test="record.reward != null" >
         reward = #{record.reward,jdbcType=DOUBLE},
       </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.investmentdate != null" >
-        investmentDate = #{record.investmentdate,jdbcType=VARCHAR},
       </if>
       <if test="record.rewardmonths != null" >
         rewardMonths = #{record.rewardmonths,jdbcType=INTEGER},
@@ -294,13 +317,15 @@
     update tb_order
     set orderId = #{record.orderid,jdbcType=VARCHAR},
       cardId = #{record.cardid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
       orderCnt = #{record.ordercnt,jdbcType=INTEGER},
-      address = #{record.address,jdbcType=VARCHAR},
-      amont = #{record.amont,jdbcType=DOUBLE},
+      price = #{record.price,jdbcType=DOUBLE},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      investmentDate = #{record.investmentdate,jdbcType=VARCHAR},
       bonus = #{record.bonus,jdbcType=DOUBLE},
       reward = #{record.reward,jdbcType=DOUBLE},
+      address = #{record.address,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      investmentDate = #{record.investmentdate,jdbcType=VARCHAR},
       rewardMonths = #{record.rewardmonths,jdbcType=INTEGER},
       extraDays = #{record.extradays,jdbcType=INTEGER},
       rewardDays = #{record.rewarddays,jdbcType=INTEGER},
@@ -318,14 +343,20 @@
       <if test="cardid != null" >
         cardId = #{cardid,jdbcType=VARCHAR},
       </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="ordercnt != null" >
         orderCnt = #{ordercnt,jdbcType=INTEGER},
       </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="amont != null" >
-        amont = #{amont,jdbcType=DOUBLE},
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="investmentdate != null" >
+        investmentDate = #{investmentdate,jdbcType=VARCHAR},
       </if>
       <if test="bonus != null" >
         bonus = #{bonus,jdbcType=DOUBLE},
@@ -333,11 +364,11 @@
       <if test="reward != null" >
         reward = #{reward,jdbcType=DOUBLE},
       </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="investmentdate != null" >
-        investmentDate = #{investmentdate,jdbcType=VARCHAR},
       </if>
       <if test="rewardmonths != null" >
         rewardMonths = #{rewardmonths,jdbcType=INTEGER},
@@ -366,13 +397,15 @@
   <update id="updateByPrimaryKey" parameterType="com.xiaobao.pojo.TbOrder" >
     update tb_order
     set cardId = #{cardid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       orderCnt = #{ordercnt,jdbcType=INTEGER},
-      address = #{address,jdbcType=VARCHAR},
-      amont = #{amont,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      amount = #{amount,jdbcType=DOUBLE},
+      investmentDate = #{investmentdate,jdbcType=VARCHAR},
       bonus = #{bonus,jdbcType=DOUBLE},
       reward = #{reward,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      investmentDate = #{investmentdate,jdbcType=VARCHAR},
       rewardMonths = #{rewardmonths,jdbcType=INTEGER},
       extraDays = #{extradays,jdbcType=INTEGER},
       rewardDays = #{rewarddays,jdbcType=INTEGER},

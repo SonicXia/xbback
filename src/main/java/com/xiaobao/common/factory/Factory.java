@@ -1,5 +1,6 @@
 package com.xiaobao.common.factory;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,7 +10,7 @@ import com.xiaobao.pojo.TbUser;
  * 用户工厂类
  *
  */
-public class UserFactory {
+public class Factory {
 	
 	/**
 	 * 用于生成原始订单Id
@@ -32,16 +33,16 @@ public class UserFactory {
 		return user;
 	}
 	
-//	/**
-//	 * @return 生成的原子id供订单
-//	 */
-//	private static String generateId() {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-//		StringBuffer sb = new StringBuffer();
-//		sb.append("M");
-//		sb.append(sdf.format(new Date())).append(String.format("%06d", atomicInteger.getAndIncrement() % 1000));
-//		return sb.toString();
-//	}
+	/**
+	 * @return 生成的原子id供订单
+	 */
+	public static String generateOrderId() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		StringBuffer sb = new StringBuffer();
+		sb.append("B");
+		sb.append(sdf.format(new Date())).append(String.format("%06d", atomicInteger.getAndIncrement() % 1000));
+		return sb.toString();
+	}
 	
 	private static String generateMemberId(){
 		StringBuffer sb = new StringBuffer();

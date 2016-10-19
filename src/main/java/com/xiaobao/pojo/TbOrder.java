@@ -7,19 +7,23 @@ public class TbOrder {
 
     private String cardid;
 
+    private String name;
+
     private Integer ordercnt;
 
-    private String address;
+    private Double price;
 
-    private Double amont;
+    private Double amount;
+
+    private String investmentdate;
 
     private Double bonus;
 
     private Double reward;
 
-    private String remark;
+    private String address;
 
-    private String investmentdate;
+    private String remark;
 
     private Integer rewardmonths;
 
@@ -51,6 +55,14 @@ public class TbOrder {
         this.cardid = cardid == null ? null : cardid.trim();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
     public Integer getOrdercnt() {
         return ordercnt;
     }
@@ -59,20 +71,28 @@ public class TbOrder {
         this.ordercnt = ordercnt;
     }
 
-    public String getAddress() {
-        return address;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public Double getAmont() {
-        return amont;
+    public Double getAmount() {
+        return amount;
     }
 
-    public void setAmont(Double amont) {
-        this.amont = amont;
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public String getInvestmentdate() {
+        return investmentdate;
+    }
+
+    public void setInvestmentdate(String investmentdate) {
+        this.investmentdate = investmentdate == null ? null : investmentdate.trim();
     }
 
     public Double getBonus() {
@@ -91,20 +111,20 @@ public class TbOrder {
         this.reward = reward;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getInvestmentdate() {
-        return investmentdate;
-    }
-
-    public void setInvestmentdate(String investmentdate) {
-        this.investmentdate = investmentdate == null ? null : investmentdate.trim();
     }
 
     public Integer getRewardmonths() {

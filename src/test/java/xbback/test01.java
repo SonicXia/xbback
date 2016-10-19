@@ -9,7 +9,7 @@ public class test01 {
 	
 	
 	public static void main(String[] args) throws ParseException {
-		System.err.println(RewardDaysUtils.getRewardDays("2016-01-31",1));
+		System.err.println(RewardDaysUtils.getRewardDays("2016-01-31", 1, 0));
 		
 	}
 
