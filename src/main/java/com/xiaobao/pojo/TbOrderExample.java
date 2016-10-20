@@ -175,73 +175,73 @@ public class TbOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andCardidIsNull() {
-            addCriterion("cardId is null");
+        public Criteria andMobileIsNull() {
+            addCriterion("mobile is null");
             return (Criteria) this;
         }
 
-        public Criteria andCardidIsNotNull() {
-            addCriterion("cardId is not null");
+        public Criteria andMobileIsNotNull() {
+            addCriterion("mobile is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCardidEqualTo(String value) {
-            addCriterion("cardId =", value, "cardid");
+        public Criteria andMobileEqualTo(String value) {
+            addCriterion("mobile =", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidNotEqualTo(String value) {
-            addCriterion("cardId <>", value, "cardid");
+        public Criteria andMobileNotEqualTo(String value) {
+            addCriterion("mobile <>", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidGreaterThan(String value) {
-            addCriterion("cardId >", value, "cardid");
+        public Criteria andMobileGreaterThan(String value) {
+            addCriterion("mobile >", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidGreaterThanOrEqualTo(String value) {
-            addCriterion("cardId >=", value, "cardid");
+        public Criteria andMobileGreaterThanOrEqualTo(String value) {
+            addCriterion("mobile >=", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidLessThan(String value) {
-            addCriterion("cardId <", value, "cardid");
+        public Criteria andMobileLessThan(String value) {
+            addCriterion("mobile <", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidLessThanOrEqualTo(String value) {
-            addCriterion("cardId <=", value, "cardid");
+        public Criteria andMobileLessThanOrEqualTo(String value) {
+            addCriterion("mobile <=", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidLike(String value) {
-            addCriterion("cardId like", value, "cardid");
+        public Criteria andMobileLike(String value) {
+            addCriterion("mobile like", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidNotLike(String value) {
-            addCriterion("cardId not like", value, "cardid");
+        public Criteria andMobileNotLike(String value) {
+            addCriterion("mobile not like", value, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidIn(List<String> values) {
-            addCriterion("cardId in", values, "cardid");
+        public Criteria andMobileIn(List<String> values) {
+            addCriterion("mobile in", values, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidNotIn(List<String> values) {
-            addCriterion("cardId not in", values, "cardid");
+        public Criteria andMobileNotIn(List<String> values) {
+            addCriterion("mobile not in", values, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidBetween(String value1, String value2) {
-            addCriterion("cardId between", value1, value2, "cardid");
+        public Criteria andMobileBetween(String value1, String value2) {
+            addCriterion("mobile between", value1, value2, "mobile");
             return (Criteria) this;
         }
 
-        public Criteria andCardidNotBetween(String value1, String value2) {
-            addCriterion("cardId not between", value1, value2, "cardid");
+        public Criteria andMobileNotBetween(String value1, String value2) {
+            addCriterion("mobile not between", value1, value2, "mobile");
             return (Criteria) this;
         }
 

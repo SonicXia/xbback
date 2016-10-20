@@ -28,6 +28,14 @@ public class OrderController {
 		return result;	
 	}
 	
+//	@RequestMapping(value="/order/save", method=RequestMethod.POST)
+//	@ResponseBody
+//	public XiaobaoResult createUser(@RequestParam TbOrder order){		
+//		
+//		XiaobaoResult result = orderService.saveOrder(order);
+//		return result;	
+//	}
+	
 	@RequestMapping(value="/order/findAll", method=RequestMethod.POST)
 	@ResponseBody
 	public XiaobaoResult findAll(){

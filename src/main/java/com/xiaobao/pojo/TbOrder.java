@@ -5,7 +5,7 @@ import java.util.Date;
 public class TbOrder {
     private String orderid;
 
-    private String cardid;
+    private String mobile;
 
     private String name;
 
@@ -47,12 +47,12 @@ public class TbOrder {
         this.orderid = orderid == null ? null : orderid.trim();
     }
 
-    public String getCardid() {
-        return cardid;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setCardid(String cardid) {
-        this.cardid = cardid == null ? null : cardid.trim();
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public String getName() {

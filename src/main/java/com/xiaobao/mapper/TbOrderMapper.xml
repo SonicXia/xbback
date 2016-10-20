@@ -3,7 +3,7 @@
 <mapper namespace="com.xiaobao.mapper.TbOrderMapper" >
   <resultMap id="BaseResultMap" type="com.xiaobao.pojo.TbOrder" >
     <id column="orderId" property="orderid" jdbcType="VARCHAR" />
-    <result column="cardId" property="cardid" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="orderCnt" property="ordercnt" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DOUBLE" />
@@ -80,7 +80,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    orderId, cardId, name, orderCnt, price, amount, investmentDate, bonus, reward, address, 
+    orderId, mobile, name, orderCnt, price, amount, investmentDate, bonus, reward, address, 
     remark, rewardMonths, extraDays, rewardDays, daysAlready, createDate, updateDate, 
     orderStatus
   </sql>
@@ -115,14 +115,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xiaobao.pojo.TbOrder" >
-    insert into tb_order (orderId, cardId, name, 
+    insert into tb_order (orderId, mobile, name, 
       orderCnt, price, amount, 
       investmentDate, bonus, reward, 
       address, remark, rewardMonths, 
       extraDays, rewardDays, daysAlready, 
       createDate, updateDate, orderStatus
       )
-    values (#{orderid,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{orderid,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{ordercnt,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
       #{investmentdate,jdbcType=VARCHAR}, #{bonus,jdbcType=DOUBLE}, #{reward,jdbcType=DOUBLE}, 
       #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{rewardmonths,jdbcType=INTEGER}, 
@@ -136,8 +136,8 @@
       <if test="orderid != null" >
         orderId,
       </if>
-      <if test="cardid != null" >
-        cardId,
+      <if test="mobile != null" >
+        mobile,
       </if>
       <if test="name != null" >
         name,
@@ -192,8 +192,8 @@
       <if test="orderid != null" >
         #{orderid,jdbcType=VARCHAR},
       </if>
-      <if test="cardid != null" >
-        #{cardid,jdbcType=VARCHAR},
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -257,8 +257,8 @@
       <if test="record.orderid != null" >
         orderId = #{record.orderid,jdbcType=VARCHAR},
       </if>
-      <if test="record.cardid != null" >
-        cardId = #{record.cardid,jdbcType=VARCHAR},
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -316,7 +316,7 @@
   <update id="updateByExample" parameterType="map" >
     update tb_order
     set orderId = #{record.orderid,jdbcType=VARCHAR},
-      cardId = #{record.cardid,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       orderCnt = #{record.ordercnt,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DOUBLE},
@@ -340,8 +340,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.xiaobao.pojo.TbOrder" >
     update tb_order
     <set >
-      <if test="cardid != null" >
-        cardId = #{cardid,jdbcType=VARCHAR},
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -396,7 +396,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xiaobao.pojo.TbOrder" >
     update tb_order
-    set cardId = #{cardid,jdbcType=VARCHAR},
+    set mobile = #{mobile,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       orderCnt = #{ordercnt,jdbcType=INTEGER},
       price = #{price,jdbcType=DOUBLE},
