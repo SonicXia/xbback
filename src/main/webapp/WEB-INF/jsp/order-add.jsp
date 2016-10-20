@@ -3,7 +3,7 @@
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
-	<form id="itemAddForm" class="itemForm" method="post">
+	<form id="orderAddForm" class="itemForm" method="post">
 	    <table cellpadding="10">
 	        
 	        <tr>
@@ -68,13 +68,13 @@
 	//提交表单
 	function submitForm(){
 		//有效性验证
-		if(!$('#itemAddForm').form('validate')){
+		if(!$('#orderAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
 		
 		var parm = {};
-	     $('#itemAddForm').serializeArray().forEach(function(item,i){
+	     $('#orderAddForm').serializeArray().forEach(function(item,i){
 	      parm[item.name] = item.value;
 	     })
 	     console.log(parm);
@@ -89,6 +89,8 @@
 	            	if(data.status == 200){
 	    				$.messager.alert('提示','新增订单成功!');
 	    			}
+	            	$('#orderAddForm').form('reset');
+	        		itemAddEditor.html('');
 	            },
 	            error: function (xhr, type) {
 	                console.log('Ajax error');
@@ -98,7 +100,7 @@
 	}
 	
 	function clearForm(){
-		$('#itemAddForm').form('reset');
+		$('#orderAddForm').form('reset');
 		itemAddEditor.html('');
 	}
 </script>
