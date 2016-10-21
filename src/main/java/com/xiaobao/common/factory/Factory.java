@@ -37,10 +37,10 @@ public class Factory {
 	 * @return 生成的原子id供订单
 	 */
 	public static String generateOrderId() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
 		StringBuffer sb = new StringBuffer();
 		sb.append("B");
-		sb.append(sdf.format(new Date())).append(String.format("%06d", atomicInteger.getAndIncrement() % 1000));
+		sb.append(sdf.format(new Date())).append(String.format("%03d", atomicInteger.getAndIncrement() % 1000));
 		return sb.toString();
 	}
 	

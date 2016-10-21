@@ -1195,52 +1195,52 @@ public class TbOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusEqualTo(Integer value) {
+        public Criteria andOrderstatusEqualTo(Byte value) {
             addCriterion("orderStatus =", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusNotEqualTo(Integer value) {
+        public Criteria andOrderstatusNotEqualTo(Byte value) {
             addCriterion("orderStatus <>", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusGreaterThan(Integer value) {
+        public Criteria andOrderstatusGreaterThan(Byte value) {
             addCriterion("orderStatus >", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusGreaterThanOrEqualTo(Integer value) {
+        public Criteria andOrderstatusGreaterThanOrEqualTo(Byte value) {
             addCriterion("orderStatus >=", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusLessThan(Integer value) {
+        public Criteria andOrderstatusLessThan(Byte value) {
             addCriterion("orderStatus <", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusLessThanOrEqualTo(Integer value) {
+        public Criteria andOrderstatusLessThanOrEqualTo(Byte value) {
             addCriterion("orderStatus <=", value, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusIn(List<Integer> values) {
+        public Criteria andOrderstatusIn(List<Byte> values) {
             addCriterion("orderStatus in", values, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusNotIn(List<Integer> values) {
+        public Criteria andOrderstatusNotIn(List<Byte> values) {
             addCriterion("orderStatus not in", values, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusBetween(Integer value1, Integer value2) {
+        public Criteria andOrderstatusBetween(Byte value1, Byte value2) {
             addCriterion("orderStatus between", value1, value2, "orderstatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderstatusNotBetween(Integer value1, Integer value2) {
+        public Criteria andOrderstatusNotBetween(Byte value1, Byte value2) {
             addCriterion("orderStatus not between", value1, value2, "orderstatus");
             return (Criteria) this;
         }

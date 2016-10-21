@@ -19,6 +19,9 @@ Date.prototype.format = function(format){
     return format; 
 };
 
+
+
+
 var TT = TAOTAO = {
 	// 编辑器参数
 	kingEditorParams : {
@@ -31,6 +34,8 @@ var TT = TAOTAO = {
 	},
 	// 格式化时间
 	formatDateTime : function(val,row){
+		
+		//alert(val.val());
 		var now = new Date(val);
     	return now.format("yyyy-MM-dd hh:mm:ss");
 	},
@@ -49,8 +54,8 @@ var TT = TAOTAO = {
 	formatItemStatus : function formatStatus(val,row){
         if (val == 1){
             return '正常';
-        } else if(val == 2){
-        	return '<span style="color:red;">下架</span>';
+        } else if(val == 0){
+        	return '<span style="color:red;">关闭</span>';
         } else {
         	return '未知';
         }

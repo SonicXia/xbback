@@ -37,7 +37,7 @@ public class TbOrder {
 
     private Date updatedate;
 
-    private Integer orderstatus;
+    private Byte orderstatus;
 
     public String getOrderid() {
         return orderid;
@@ -175,11 +175,11 @@ public class TbOrder {
         this.updatedate = updatedate;
     }
 
-    public Integer getOrderstatus() {
+    public Byte getOrderstatus() {
         return orderstatus;
     }
 
-    public void setOrderstatus(Integer orderstatus) {
+    public void setOrderstatus(Byte orderstatus) {
         this.orderstatus = orderstatus;
     }
 }

@@ -1,37 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid" id="orderList" title="商品列表" 
+<table class="easyui-datagrid" id="orderList" title="订单列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/order/list',method:'get',pageSize:10,toolbar:toolbar">
     <thead>
         <tr>
+        	<!-- 条件搜索框 -->
+        	<div id="tb" style="padding:3px" >
+				<!-- <span>姓名：</span>
+				<input id="sname"  style="line-height:26px;border:1px solid #ccc"> -->
+				<span>手机号：</span>
+				<input id="smobile" style="line-height:26px;border:1px solid #ccc">
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="doSearch()">搜索</a>
+			</div>
+        	
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'orderId',width:60">订单编号</th>
-            <th data-options="field:'name',width:200">姓名</th>
-            <th data-options="field:'mobile',width:100">手机号</th>
-            <th data-options="field:'orderCnt',width:100">投单数</th>
-            <th data-options="field:'price',width:70,align:'right',formatter:TAOTAO.formatPrice">每单金额</th>
-            <th data-options="field:'amount',width:70,align:'right',formatter:TAOTAO.formatPrice">投单总金额</th>
-            <th data-options="field:'investmentDate',width:100">投单日期</th>
-            <th data-options="field:'address',width:130">收货地址</th>
-            <th data-options="field:'remark',width:130">备注</th>
-            <th data-options="field:'rewardMonths',width:60">分红月数</th>
-            <th data-options="field:'extraDays',width:60">额外分红天数</th>
-            <th data-options="field:'rewardDays',width:60">总分红天数</th>
-            <th data-options="field:'createDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">创建时间</th>
-            <th data-options="field:'updateDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">更新时间</th>
-            <th data-options="field:'orderStatus',width:60,align:'center',formatter:TAOTAO.formatItemStatus">订单状态</th>
+        	<th data-options="field:'orderid',width:110">订单编号</th>
+            <th data-options="field:'name',width:60">姓名</th>
+            <th data-options="field:'mobile',width:80">手机号</th>
+            <th data-options="field:'ordercnt',width:45,align:'right'">投单数</th>
+            <th data-options="field:'price',width:55,align:'right'">每单金额</th>
+            <th data-options="field:'amount',width:70,align:'right'">投单总金额</th>
+            <th data-options="field:'investmentdate',width:70">投单日期</th>
+            <th data-options="field:'address',width:260">收货地址</th>
+            <th data-options="field:'remark',width:115">备注</th>
+            <th data-options="field:'rewardmonths',width:55,align:'right'">分红月数</th>
+            <th data-options="field:'extradays',width:80,align:'right'">额外分红天数</th>
+            <th data-options="field:'rewarddays',width:70,align:'right'">总分红天数</th>
+            <th data-options="field:'createdate',width:120,align:'center',formatter:TAOTAO.formatDateTime">创建时间</th>
+            <th data-options="field:'updatedate',width:120,align:'center',formatter:TAOTAO.formatDateTime">更新时间</th>
+            <th data-options="field:'orderstatus',width:55,align:'center',formatter:TAOTAO.formatItemStatus">订单状态</th>
         </tr>
     </thead>
 </table>
-<div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">
-</div>
+
+
+<!-- <div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">
+	
+	
+		
+</div> -->
+
 <script>
+
+	function doSearch(){
+		$('#orderList').datagrid('load',{
+			smobile: $('#smobile').val()
+		});
+	}
 
     function getSelectionsIds(){
     	var orderList = $("#orderList");
     	var sels = orderList.datagrid("getSelections");
     	var ids = [];
     	for(var i in sels){
-    		ids.push(sels[i].id);
+    		ids.push(sels[i].orderid);	//sels[i].orderid要对应订单编号的field值
     	}
     	ids = ids.join(",");
     	return ids;
@@ -57,7 +78,7 @@
         		return ;
         	}
         	
-        	$("#orderEditWindow").window({
+        	/* $("#orderEditWindow").window({
         		onLoad :function(){
         			//回显数据
         			var data = $("#orderList").datagrid("getSelections")[0];
@@ -65,12 +86,12 @@
         			$("#orderEditForm").form("load",data);
         			
         			// 加载商品描述
-        			/* $.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
+        			$.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
         				if(_data.status == 200){
         					//UM.getEditor('itemeEditDescEditor').setContent(_data.data.itemDesc, false);
         					itemEditEditor.html(_data.data.itemDesc);
         				}
-        			}); */
+        			});
         			
         			//加载商品规格
         			$.getJSON('/rest/item/param/item/query/'+data.id,function(_data){
@@ -108,13 +129,23 @@
         				}
         			});
         		}
-        	}).window("open");
+        	}).window("open"); */
+        	
+        	TT.createWindow({
+    			url : "/order-edit",
+    			onLoad : function(){
+    				var data = $("#orderList").datagrid("getSelections")[0];
+    				$("#orderEditForm").form("load",data);
+    			}
+    		});  
+        	
+        	
         }
     },{
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
-        	var ids = getSelectionsIds();
+        	var ids = getSelectionsIds('#orderList');
         	if(ids.length == 0){
         		$.messager.alert('提示','未选中订单!');
         		return ;
@@ -122,7 +153,7 @@
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/delete",params, function(data){
+                	$.post("/order/delete",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除订单成功!',undefined,function(){
             					$("#orderList").datagrid("reload");

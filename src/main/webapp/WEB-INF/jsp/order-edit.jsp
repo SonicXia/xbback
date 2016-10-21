@@ -3,7 +3,7 @@
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
-	<form id="orderAddForm" class="orderForm" method="post">
+	<form id="orderEditForm" class="orderForm" method="post">
 	    <table cellpadding="10">
 	        
 	        <tr>
@@ -49,58 +49,98 @@
 	        
 	    </table>
 	    
-	    <input type="hidden" value="" name='orderid'>
-		<input type="hidden" value="" name='bonus'>
-		<input type="hidden" value="" name='reward'>
-		<input type="hidden" value="" name='rewarddays'>
-		<input type="hidden" value="" name='daysalready'>
-		<input type="hidden" value="" name='createdate'>
-		<input type="hidden" value="" name='updatedate'>
-		<input type="hidden" value="" name='orderstatus'>
+	    <input type="hidden" name='orderid'>
+		<input type="hidden" name='bonus'>
+		<input type="hidden" name='reward'>
+		<input type="hidden" name='rewarddays'>
+		<input type="hidden" name='daysalready'>
+		<input type="hidden" name='createdate'>
+		<input type="hidden" name='updatedate'>
+		<input type="hidden" name='orderstatus'>
+		
 	</form>
+	
+	
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
+
+
 <script type="text/javascript">
+
+	/* var itemEditEditor ;
+	$(function(){
+		//实例化编辑器
+		itemEditEditor = TAOTAO.createEditor("#itemeEditForm [name=desc]");
+	}); */
 	
-	//提交表单
 	function submitForm(){
-		//有效性验证
-		if(!$('#orderAddForm').form('validate')){
+		if(!$('#orderEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
 		
+		/* $("#itemeEditForm [name=price]").val(eval($("#itemeEditForm [name=priceView]").val()) * 1000);
+		itemEditEditor.sync(); */
+		
+		/* var paramJson = [];
+		$("#itemeEditForm .params li").each(function(i,e){
+			var trs = $(e).find("tr");
+			var group = trs.eq(0).text();
+			var ps = [];
+			for(var i = 1;i<trs.length;i++){
+				var tr = trs.eq(i);
+				ps.push({
+					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
+					"v" : $.trim(tr.find("input").val())
+				});
+			}
+			paramJson.push({
+				"group" : group,
+				"params": ps
+			});
+		}); 
+		paramJson = JSON.stringify(paramJson);
+		
+		$("#itemeEditForm [name=itemParams]").val(paramJson); */
+		
+		/* $.post("/order/update",$("#orderEditForm").serialize(), function(data){
+			if(data.status == 200){
+				$.messager.alert('提示','修改商品成功!','info',function(){
+					$("#orderEditWindow").window('close');
+					$("#orderList").datagrid("reload");
+				});
+			}
+		}); */
 		var parm = {};
-	     $('#orderAddForm').serializeArray().forEach(function(item,i){
+	     $('#orderEditForm').serializeArray().forEach(function(item,i){
 	      parm[item.name] = item.value;
 	     })
 	     console.log(parm);
-		 $.ajax({
-	            type: 'POST',
-	            url: '/order/save',
-	            data: JSON.stringify(parm),
-	            dataType: 'json',
-	            contentType: 'application/json', 
-	            timeout: 30000,
-	            success: function (data) {
-	            	if(data.status == 200){
-	    				$.messager.alert('提示','新增订单成功!');
-	    			}
-	            	$('#orderAddForm').form('reset');
-	        		itemAddEditor.html('');
-	            },
-	            error: function (xhr, type) {
-	                console.log('Ajax error');
-	            }
-	        })
-	        
+		$.ajax({
+            type: 'POST',
+            url: '/order/update',
+            data: JSON.stringify(parm),
+            dataType: 'json',
+            contentType: 'application/json', 
+            timeout: 30000,
+            success: function (data) {
+            	if(data.status == 200){
+    				$.messager.alert('提示','订单修改成功!');
+    			}
+            	$('#orderEditForm').form('reset');
+            },
+            error: function (xhr, type) {
+                console.log('Ajax error');
+            }
+        })
+		
 	}
 	
 	function clearForm(){
-		$('#orderAddForm').form('reset');
-		itemAddEditor.html('');
+		$('#orderEditForm').form('reset');
 	}
+	
 </script>

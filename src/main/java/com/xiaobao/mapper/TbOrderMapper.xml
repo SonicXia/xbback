@@ -19,7 +19,7 @@
     <result column="daysAlready" property="daysalready" jdbcType="INTEGER" />
     <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
-    <result column="orderStatus" property="orderstatus" jdbcType="INTEGER" />
+    <result column="orderStatus" property="orderstatus" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -127,7 +127,7 @@
       #{investmentdate,jdbcType=VARCHAR}, #{bonus,jdbcType=DOUBLE}, #{reward,jdbcType=DOUBLE}, 
       #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{rewardmonths,jdbcType=INTEGER}, 
       #{extradays,jdbcType=INTEGER}, #{rewarddays,jdbcType=INTEGER}, #{daysalready,jdbcType=INTEGER}, 
-      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=INTEGER}
+      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbOrder" >
@@ -241,7 +241,7 @@
         #{updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="orderstatus != null" >
-        #{orderstatus,jdbcType=INTEGER},
+        #{orderstatus,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -306,7 +306,7 @@
         updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.orderstatus != null" >
-        orderStatus = #{record.orderstatus,jdbcType=INTEGER},
+        orderStatus = #{record.orderstatus,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -332,7 +332,7 @@
       daysAlready = #{record.daysalready,jdbcType=INTEGER},
       createDate = #{record.createdate,jdbcType=TIMESTAMP},
       updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
-      orderStatus = #{record.orderstatus,jdbcType=INTEGER}
+      orderStatus = #{record.orderstatus,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -389,7 +389,7 @@
         updateDate = #{updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="orderstatus != null" >
-        orderStatus = #{orderstatus,jdbcType=INTEGER},
+        orderStatus = #{orderstatus,jdbcType=TINYINT},
       </if>
     </set>
     where orderId = #{orderid,jdbcType=VARCHAR}
@@ -412,7 +412,7 @@
       daysAlready = #{daysalready,jdbcType=INTEGER},
       createDate = #{createdate,jdbcType=TIMESTAMP},
       updateDate = #{updatedate,jdbcType=TIMESTAMP},
-      orderStatus = #{orderstatus,jdbcType=INTEGER}
+      orderStatus = #{orderstatus,jdbcType=TINYINT}
     where orderId = #{orderid,jdbcType=VARCHAR}
   </update>
 </mapper>
