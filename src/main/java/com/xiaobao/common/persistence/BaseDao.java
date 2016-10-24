@@ -7,5 +7,5 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public abstract class BaseDao {
 	@Autowired
 	@Qualifier("jdbcTemplate")
-	protected JdbcTemplate jdbctemplate;
+	protected JdbcTemplate jdbcTemplate;
 }

@@ -105,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	/**
-	 * 根据mobile查询订单信息
+	 * 根据mobile查询订单信息		(未完成)
 	 */
 	public EUDataGridResult getOrderByMobile(String mobile, int page, int rows) {
 		//根据条件查询订单列表

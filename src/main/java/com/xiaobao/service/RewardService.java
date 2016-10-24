@@ -2,8 +2,8 @@ package com.xiaobao.service;
 
 import com.xiaobao.common.pojo.EUDataGridResult;
 
-public interface BonusService {
+public interface RewardService {
 	
-	EUDataGridResult getBonusList(int page, int rows);
+	EUDataGridResult getRewardList(int page, int rows);
 	
 }

@@ -14,12 +14,15 @@ import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.pojo.TbOrder;
 import com.xiaobao.service.OrderService;
+import com.xiaobao.service.RewardService;
 
 @Controller
 public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private RewardService rewardService;
 	
 	@RequestMapping(value="/order/save", method=RequestMethod.POST)
 	@ResponseBody
@@ -66,6 +69,13 @@ public class OrderController {
 		String jsonString = jsoncode.toJSONString();
 		TbOrder order = JSON.parseObject(jsonString, TbOrder.class);
 		XiaobaoResult result = orderService.editOrder(order);
+		return result;
+	}
+	
+	@RequestMapping("/order/rewardOrderList")
+	@ResponseBody
+	public EUDataGridResult getRewardOrderList(Integer page, Integer rows){
+		EUDataGridResult result = rewardService.getRewardList(page, rows);
 		return result;
 	}
 	
