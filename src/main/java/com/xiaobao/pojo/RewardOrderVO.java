@@ -24,13 +24,6 @@ public class RewardOrderVO {
 		this.todayReward = todayReward;
 	}
 	
-	public RewardOrderVO cloneRewardOrderVO(RewardOrderVO vo){
-		RewardOrderVO vo2 = new RewardOrderVO();
-		vo2.name = vo.getName();
-		vo2.mobile = vo.getMobile();
-		vo2.todayReward = vo.getTodayReward();
-		return vo2;
-	}
 	
 	
 }

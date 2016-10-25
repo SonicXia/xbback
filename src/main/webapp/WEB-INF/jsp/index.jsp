@@ -30,8 +30,8 @@
          	<li>
          		<span>代理管理</span>
          		<ul>
-	         		<li data-options="attributes:{'url':'agent-add'}">新增代理</li>
-	         		<li data-options="attributes:{'url':'agent-list'}">查询代理</li>
+	         		<li data-options="attributes:{'url':'user-add'}">新增代理</li>
+	         		<li data-options="attributes:{'url':'user-list'}">查询代理</li>
 	         	</ul>
          	</li>
          	<li>

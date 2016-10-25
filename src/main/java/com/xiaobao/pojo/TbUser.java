@@ -25,6 +25,8 @@ public class TbUser {
 
     private String referrer;
 
+    private String referrermobile;
+
     private Integer teamid;
 
     private Date createdate;
@@ -117,6 +119,14 @@ public class TbUser {
 
     public void setReferrer(String referrer) {
         this.referrer = referrer == null ? null : referrer.trim();
+    }
+
+    public String getReferrermobile() {
+        return referrermobile;
+    }
+
+    public void setReferrermobile(String referrermobile) {
+        this.referrermobile = referrermobile == null ? null : referrermobile.trim();
     }
 
     public Integer getTeamid() {

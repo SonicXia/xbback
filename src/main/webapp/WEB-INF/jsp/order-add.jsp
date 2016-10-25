@@ -44,7 +44,7 @@
 	        </tr>
 	        <tr>
 	            <td>额外分红天数:</td>
-	            <td><input class="easyui-textbox" type="text" name="extradays" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="extradays" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 	        
 	    </table>

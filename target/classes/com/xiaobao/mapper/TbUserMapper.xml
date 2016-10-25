@@ -13,6 +13,7 @@
     <result column="isBlackList" property="isblacklist" jdbcType="BIT" />
     <result column="referralCnt" property="referralcnt" jdbcType="INTEGER" />
     <result column="referrer" property="referrer" jdbcType="VARCHAR" />
+    <result column="referrerMobile" property="referrermobile" jdbcType="VARCHAR" />
     <result column="teamId" property="teamid" jdbcType="INTEGER" />
     <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, name, cardId, mobile, password, email, totalCnt, isActive, isBlackList, referralCnt, 
-    referrer, teamId, createDate, updateDate
+    referrer, referrerMobile, teamId, createDate, updateDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbUserExample" >
     select
@@ -113,13 +114,15 @@
     insert into tb_user (id, name, cardId, 
       mobile, password, email, 
       totalCnt, isActive, isBlackList, 
-      referralCnt, referrer, teamId, 
-      createDate, updateDate)
+      referralCnt, referrer, referrerMobile, 
+      teamId, createDate, updateDate
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, 
       #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{totalcnt,jdbcType=INTEGER}, #{isactive,jdbcType=BIT}, #{isblacklist,jdbcType=BIT}, 
-      #{referralcnt,jdbcType=INTEGER}, #{referrer,jdbcType=VARCHAR}, #{teamid,jdbcType=INTEGER}, 
-      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP})
+      #{referralcnt,jdbcType=INTEGER}, #{referrer,jdbcType=VARCHAR}, #{referrermobile,jdbcType=VARCHAR}, 
+      #{teamid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbUser" >
     insert into tb_user
@@ -156,6 +159,9 @@
       </if>
       <if test="referrer != null" >
         referrer,
+      </if>
+      <if test="referrermobile != null" >
+        referrerMobile,
       </if>
       <if test="teamid != null" >
         teamId,
@@ -200,6 +206,9 @@
       </if>
       <if test="referrer != null" >
         #{referrer,jdbcType=VARCHAR},
+      </if>
+      <if test="referrermobile != null" >
+        #{referrermobile,jdbcType=VARCHAR},
       </if>
       <if test="teamid != null" >
         #{teamid,jdbcType=INTEGER},
@@ -254,6 +263,9 @@
       <if test="record.referrer != null" >
         referrer = #{record.referrer,jdbcType=VARCHAR},
       </if>
+      <if test="record.referrermobile != null" >
+        referrerMobile = #{record.referrermobile,jdbcType=VARCHAR},
+      </if>
       <if test="record.teamid != null" >
         teamId = #{record.teamid,jdbcType=INTEGER},
       </if>
@@ -281,6 +293,7 @@
       isBlackList = #{record.isblacklist,jdbcType=BIT},
       referralCnt = #{record.referralcnt,jdbcType=INTEGER},
       referrer = #{record.referrer,jdbcType=VARCHAR},
+      referrerMobile = #{record.referrermobile,jdbcType=VARCHAR},
       teamId = #{record.teamid,jdbcType=INTEGER},
       createDate = #{record.createdate,jdbcType=TIMESTAMP},
       updateDate = #{record.updatedate,jdbcType=TIMESTAMP}
@@ -321,6 +334,9 @@
       <if test="referrer != null" >
         referrer = #{referrer,jdbcType=VARCHAR},
       </if>
+      <if test="referrermobile != null" >
+        referrerMobile = #{referrermobile,jdbcType=VARCHAR},
+      </if>
       <if test="teamid != null" >
         teamId = #{teamid,jdbcType=INTEGER},
       </if>
@@ -345,6 +361,7 @@
       isBlackList = #{isblacklist,jdbcType=BIT},
       referralCnt = #{referralcnt,jdbcType=INTEGER},
       referrer = #{referrer,jdbcType=VARCHAR},
+      referrerMobile = #{referrermobile,jdbcType=VARCHAR},
       teamId = #{teamid,jdbcType=INTEGER},
       createDate = #{createdate,jdbcType=TIMESTAMP},
       updateDate = #{updatedate,jdbcType=TIMESTAMP}

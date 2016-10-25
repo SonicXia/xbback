@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaobao.mapper.TbRewardMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaobao.pojo.TbReward" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="reward" property="reward" jdbcType="DOUBLE" />
+    <result column="bonus" property="bonus" jdbcType="DOUBLE" />
+    <result column="releaseDate" property="releasedate" jdbcType="TIMESTAMP" />
+    <result column="isRelease" property="isrelease" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    name, mobile, reward, bonus, releaseDate, isRelease
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbRewardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xiaobao.pojo.TbRewardExample" >
+    delete from tb_reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiaobao.pojo.TbReward" >
+    insert into tb_reward (name, mobile, reward, 
+      bonus, releaseDate, isRelease
+      )
+    values (#{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{reward,jdbcType=DOUBLE}, 
+      #{bonus,jdbcType=DOUBLE}, #{releasedate,jdbcType=TIMESTAMP}, #{isrelease,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbReward" >
+    insert into tb_reward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="reward != null" >
+        reward,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="releasedate != null" >
+        releaseDate,
+      </if>
+      <if test="isrelease != null" >
+        isRelease,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="reward != null" >
+        #{reward,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="releasedate != null" >
+        #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrelease != null" >
+        #{isrelease,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiaobao.pojo.TbRewardExample" resultType="java.lang.Integer" >
+    select count(*) from tb_reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_reward
+    <set >
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reward != null" >
+        reward = #{record.reward,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.releasedate != null" >
+        releaseDate = #{record.releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isrelease != null" >
+        isRelease = #{record.isrelease,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_reward
+    set name = #{record.name,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      reward = #{record.reward,jdbcType=DOUBLE},
+      bonus = #{record.bonus,jdbcType=DOUBLE},
+      releaseDate = #{record.releasedate,jdbcType=TIMESTAMP},
+      isRelease = #{record.isrelease,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

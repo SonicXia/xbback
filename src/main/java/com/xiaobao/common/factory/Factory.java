@@ -13,12 +13,12 @@ import com.xiaobao.pojo.TbUser;
 public class Factory {
 	
 	/**
-	 * 用于生成原始订单Id
+	 * 用于生成原始Id
 	 */
 	private final static AtomicInteger atomicInteger = new AtomicInteger();
 	
 	/**
-	 * 生成原始订单
+	 * 生成原始用户
 	 * @return
 	 */
 	public static TbUser createUserInfo(){
@@ -34,7 +34,7 @@ public class Factory {
 	}
 	
 	/**
-	 * @return 生成的原子id供订单
+	 * @return 生成的原子id
 	 */
 	public static String generateOrderId() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");

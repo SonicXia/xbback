@@ -14,15 +14,12 @@ import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.pojo.TbOrder;
 import com.xiaobao.service.OrderService;
-import com.xiaobao.service.RewardService;
 
 @Controller
 public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-	@Autowired
-	private RewardService rewardService;
 	
 	@RequestMapping(value="/order/save", method=RequestMethod.POST)
 	@ResponseBody
@@ -48,6 +45,7 @@ public class OrderController {
 		return result;
 	}
 	
+	//未完成
 	@RequestMapping("/order/getByMobile")
 	@ResponseBody
 	public EUDataGridResult getOrderListByMobile(String smobile, Integer page, Integer rows){
@@ -58,25 +56,19 @@ public class OrderController {
 	
 	@RequestMapping(value="/order/delete", method=RequestMethod.POST)
 	@ResponseBody
-	public XiaobaoResult createUser(@RequestParam String ids){		
+	public XiaobaoResult deleteOrderList(@RequestParam String ids){		
 		XiaobaoResult result = orderService.deleteOrderList(ids);
 		return result;
 	}
 	
 	@RequestMapping("/order/update")
 	@ResponseBody
-	public XiaobaoResult editContent(@RequestBody JSONObject jsoncode){
-		String jsonString = jsoncode.toJSONString();
-		TbOrder order = JSON.parseObject(jsonString, TbOrder.class);
+	public XiaobaoResult updateOrder(@RequestBody JSONObject jsoncode){
+		String jsonString = jsoncode.toJSONString();	//jsonObject转jsonString
+		TbOrder order = JSON.parseObject(jsonString, TbOrder.class);	//json转bean对象
 		XiaobaoResult result = orderService.editOrder(order);
 		return result;
 	}
-	
-	@RequestMapping("/order/rewardOrderList")
-	@ResponseBody
-	public EUDataGridResult getRewardOrderList(Integer page, Integer rows){
-		EUDataGridResult result = rewardService.getRewardList(page, rows);
-		return result;
-	}
+
 	
 }

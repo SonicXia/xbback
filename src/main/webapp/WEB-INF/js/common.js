@@ -60,6 +60,26 @@ var TT = TAOTAO = {
         	return '未知';
         }
     },
+    // 格式化代理的状态
+	formatIsActiveStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '激活';
+        } else if(val == 0){
+        	return '<span style="color:red;">关闭</span>';
+        } else {
+        	return '未知';
+        }
+    },
+    // 格式化黑名单的状态
+	formatIsBlackListStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '<span style="color:red;">被列入</span>';
+        } else if(val == 0){
+        	return '未列入';
+        } else {
+        	return '未知';
+        }
+    },
     
     init : function(data){
     	// 初始化图片上传组件

@@ -825,6 +825,76 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andReferrermobileIsNull() {
+            addCriterion("referrerMobile is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileIsNotNull() {
+            addCriterion("referrerMobile is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileEqualTo(String value) {
+            addCriterion("referrerMobile =", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileNotEqualTo(String value) {
+            addCriterion("referrerMobile <>", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileGreaterThan(String value) {
+            addCriterion("referrerMobile >", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileGreaterThanOrEqualTo(String value) {
+            addCriterion("referrerMobile >=", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileLessThan(String value) {
+            addCriterion("referrerMobile <", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileLessThanOrEqualTo(String value) {
+            addCriterion("referrerMobile <=", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileLike(String value) {
+            addCriterion("referrerMobile like", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileNotLike(String value) {
+            addCriterion("referrerMobile not like", value, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileIn(List<String> values) {
+            addCriterion("referrerMobile in", values, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileNotIn(List<String> values) {
+            addCriterion("referrerMobile not in", values, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileBetween(String value1, String value2) {
+            addCriterion("referrerMobile between", value1, value2, "referrermobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andReferrermobileNotBetween(String value1, String value2) {
+            addCriterion("referrerMobile not between", value1, value2, "referrermobile");
+            return (Criteria) this;
+        }
+
         public Criteria andTeamidIsNull() {
             addCriterion("teamId is null");
             return (Criteria) this;
