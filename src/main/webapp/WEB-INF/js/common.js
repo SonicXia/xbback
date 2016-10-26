@@ -63,7 +63,7 @@ var TT = TAOTAO = {
     // 格式化代理的状态
 	formatIsActiveStatus : function formatStatus(val,row){
         if (val == 1){
-            return '激活';
+            return '已激活';
         } else if(val == 0){
         	return '<span style="color:red;">关闭</span>';
         } else {
@@ -73,7 +73,7 @@ var TT = TAOTAO = {
     // 格式化黑名单的状态
 	formatIsBlackListStatus : function formatStatus(val,row){
         if (val == 1){
-            return '<span style="color:red;">被列入</span>';
+            return '<span style="color:red;">已列入</span>';
         } else if(val == 0){
         	return '未列入';
         } else {

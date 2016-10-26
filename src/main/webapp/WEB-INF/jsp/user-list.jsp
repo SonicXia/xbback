@@ -48,6 +48,17 @@
     	ids = ids.join(",");
     	return ids;
     }
+	
+	function getSelectionsMobiles(){
+    	var userList = $("#userList");
+    	var sels = userList.datagrid("getSelections");
+    	var mobiles = [];
+    	for(var i in sels){
+    		mobiles.push(sels[i].mobile);	//sels[i].mobiles要对应订单编号的field值
+    	}
+    	mobiles = mobiles.join(",");
+    	return mobiles;
+    }
     
     var toolbar = [{
         text:'新增',
@@ -83,14 +94,14 @@
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
-        	var ids = getSelectionsIds('#userList');	//这里需要修改getSelectionsIds()，返回值定义为手机号
-        	if(ids.length == 0){
+        	var mobiles = getSelectionsMobiles('#userList');	//这里需要修改getSelectionsMobiles()，返回值定义为手机号
+        	if(mobiles.length == 0){
         		$.messager.alert('提示','未选中代理!');
         		return ;
         	}
-        	$.messager.confirm('确认','确定删除姓名为 '+ids+' 的代理吗？',function(r){
+        	$.messager.confirm('确认','确定删除手机号为 '+mobiles+' 的代理吗？',function(r){
         	    if (r){
-        	    	var params = {"ids":ids};
+        	    	var params = {"mobiles":mobiles};
                 	$.post("/user/delete",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除代理成功!',undefined,function(){

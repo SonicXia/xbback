@@ -40,11 +40,11 @@
 	        </tr>
 	        <tr>
 	            <td>分红月数:</td>
-	            <td><input class="easyui-textbox" type="text" name="rewardmonths" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-numberbox" type="text" name="rewardmonths" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>额外分红天数:</td>
-	            <td><input class="easyui-textbox" type="text" name="extradays" style="width: 280px;"></input></td>
+	            <td><input class="easyui-numberbox" type="text" name="extradays" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 	        
 	    </table>
@@ -82,38 +82,6 @@
 			return ;
 		}
 		
-		/* $("#itemeEditForm [name=price]").val(eval($("#itemeEditForm [name=priceView]").val()) * 1000);
-		itemEditEditor.sync(); */
-		
-		/* var paramJson = [];
-		$("#itemeEditForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		}); 
-		paramJson = JSON.stringify(paramJson);
-		
-		$("#itemeEditForm [name=itemParams]").val(paramJson); */
-		
-		/* $.post("/order/update",$("#orderEditForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','修改商品成功!','info',function(){
-					$("#orderEditWindow").window('close');
-					$("#orderList").datagrid("reload");
-				});
-			}
-		}); */
 		var parm = {};
 	     $('#orderEditForm').serializeArray().forEach(function(item,i){
 	      parm[item.name] = item.value;

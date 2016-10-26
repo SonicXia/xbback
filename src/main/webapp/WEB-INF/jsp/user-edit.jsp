@@ -20,31 +20,40 @@
 	        </tr>	        
 	        <tr>
 	            <td>总投单数:</td>
-	            <td><input class="easyui-textbox" type="text" name="totalcnt" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-numberbox" type="text" name="totalcnt" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>已推荐人数:</td>
-	            <td><input class="easyui-textbox" type="text" name="referralcnt" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-numberbox" type="text" name="referralcnt" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>推荐人姓名：</td>
-	            <td><input class="easyui-textbox" type="text" name="referrer" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="referrer" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>推荐人手机号:</td>
-	            <td><input class="easyui-textbox" type="text" name="referrermobile" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="referrermobile" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>所属团队:</td>
-	            <td><input class="easyui-textbox" type="text" name="teamid" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-numberbox" type="text" name="teamid" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>代理状态:</td>
-	            <td><input class="easyui-textbox" type="text" name="isactive" data-options="required:true" style="width: 280px;"></input></td>
-	        </tr>
+	            <td style="text-align:left">
+	            <span class="radioSpan">
+	                <input type="radio" name="isactive" value="0">未激活</input>
+	                <input type="radio" name="isactive" value="1">已激活</input>
+	            </span>
+       		</td>
+	        </tr>	        
 	        <tr>
 	            <td>黑名单状态:</td>
-	            <td><input class="easyui-textbox" type="text" name="isblacklist" data-options="required:true" style="width: 280px;"></input></td>
+	            <td style="text-align:left">
+	            <span class="radioSpan">
+	                <input type="radio" name="isblacklist" value="0">未列入</input>
+	                <input type="radio" name="isblacklist" value="1">已列入</input>
+	            </span>
 	        </tr>
 	        
 	    </table>
