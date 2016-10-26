@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiaobao.mapper.TbRewardMapper" >
   <resultMap id="BaseResultMap" type="com.xiaobao.pojo.TbReward" >
+    <id column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="reward" property="reward" jdbcType="DOUBLE" />
     <result column="bonus" property="bonus" jdbcType="DOUBLE" />
-    <result column="releaseDate" property="releasedate" jdbcType="TIMESTAMP" />
+    <result column="releaseDate" property="releasedate" jdbcType="VARCHAR" />
     <result column="isRelease" property="isrelease" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    name, mobile, reward, bonus, releaseDate, isRelease
+    mobile, name, reward, bonus, releaseDate, isRelease
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbRewardExample" >
     select
@@ -84,6 +84,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_reward
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_reward
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.xiaobao.pojo.TbRewardExample" >
     delete from tb_reward
     <if test="_parameter != null" >
@@ -91,21 +101,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xiaobao.pojo.TbReward" >
-    insert into tb_reward (name, mobile, reward, 
+    insert into tb_reward (mobile, name, reward, 
       bonus, releaseDate, isRelease
       )
-    values (#{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{reward,jdbcType=DOUBLE}, 
-      #{bonus,jdbcType=DOUBLE}, #{releasedate,jdbcType=TIMESTAMP}, #{isrelease,jdbcType=BIT}
+    values (#{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{reward,jdbcType=DOUBLE}, 
+      #{bonus,jdbcType=DOUBLE}, #{releasedate,jdbcType=VARCHAR}, #{isrelease,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbReward" >
     insert into tb_reward
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
       <if test="mobile != null" >
         mobile,
+      </if>
+      <if test="name != null" >
+        name,
       </if>
       <if test="reward != null" >
         reward,
@@ -121,11 +131,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
       <if test="mobile != null" >
         #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="reward != null" >
         #{reward,jdbcType=DOUBLE},
@@ -134,7 +144,7 @@
         #{bonus,jdbcType=DOUBLE},
       </if>
       <if test="releasedate != null" >
-        #{releasedate,jdbcType=TIMESTAMP},
+        #{releasedate,jdbcType=VARCHAR},
       </if>
       <if test="isrelease != null" >
         #{isrelease,jdbcType=BIT},
@@ -150,11 +160,11 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update tb_reward
     <set >
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
       <if test="record.mobile != null" >
         mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.reward != null" >
         reward = #{record.reward,jdbcType=DOUBLE},
@@ -163,7 +173,7 @@
         bonus = #{record.bonus,jdbcType=DOUBLE},
       </if>
       <if test="record.releasedate != null" >
-        releaseDate = #{record.releasedate,jdbcType=TIMESTAMP},
+        releaseDate = #{record.releasedate,jdbcType=VARCHAR},
       </if>
       <if test="record.isrelease != null" >
         isRelease = #{record.isrelease,jdbcType=BIT},
@@ -175,14 +185,44 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update tb_reward
-    set name = #{record.name,jdbcType=VARCHAR},
-      mobile = #{record.mobile,jdbcType=VARCHAR},
+    set mobile = #{record.mobile,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
       reward = #{record.reward,jdbcType=DOUBLE},
       bonus = #{record.bonus,jdbcType=DOUBLE},
-      releaseDate = #{record.releasedate,jdbcType=TIMESTAMP},
+      releaseDate = #{record.releasedate,jdbcType=VARCHAR},
       isRelease = #{record.isrelease,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaobao.pojo.TbReward" >
+    update tb_reward
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="reward != null" >
+        reward = #{reward,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="releasedate != null" >
+        releaseDate = #{releasedate,jdbcType=VARCHAR},
+      </if>
+      <if test="isrelease != null" >
+        isRelease = #{isrelease,jdbcType=BIT},
+      </if>
+    </set>
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaobao.pojo.TbReward" >
+    update tb_reward
+    set name = #{name,jdbcType=VARCHAR},
+      reward = #{reward,jdbcType=DOUBLE},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      releaseDate = #{releasedate,jdbcType=VARCHAR},
+      isRelease = #{isrelease,jdbcType=BIT}
+    where mobile = #{mobile,jdbcType=VARCHAR}
   </update>
 </mapper>

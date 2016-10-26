@@ -1,7 +1,6 @@
 package com.xiaobao.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TbRewardExample {
@@ -105,76 +104,6 @@ public class TbRewardExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameIsNotNull() {
-            addCriterion("name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("name =", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("name <>", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("name >", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("name >=", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameLessThan(String value) {
-            addCriterion("name <", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("name <=", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameLike(String value) {
-            addCriterion("name like", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameNotLike(String value) {
-            addCriterion("name not like", value, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("name between", value1, value2, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("name not between", value1, value2, "name");
-            return (Criteria) this;
-        }
-
         public Criteria andMobileIsNull() {
             addCriterion("mobile is null");
             return (Criteria) this;
@@ -242,6 +171,76 @@ public class TbRewardExample {
 
         public Criteria andMobileNotBetween(String value1, String value2) {
             addCriterion("mobile not between", value1, value2, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
 
@@ -375,52 +374,62 @@ public class TbRewardExample {
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateEqualTo(Date value) {
+        public Criteria andReleasedateEqualTo(String value) {
             addCriterion("releaseDate =", value, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateNotEqualTo(Date value) {
+        public Criteria andReleasedateNotEqualTo(String value) {
             addCriterion("releaseDate <>", value, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateGreaterThan(Date value) {
+        public Criteria andReleasedateGreaterThan(String value) {
             addCriterion("releaseDate >", value, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateGreaterThanOrEqualTo(Date value) {
+        public Criteria andReleasedateGreaterThanOrEqualTo(String value) {
             addCriterion("releaseDate >=", value, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateLessThan(Date value) {
+        public Criteria andReleasedateLessThan(String value) {
             addCriterion("releaseDate <", value, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateLessThanOrEqualTo(Date value) {
+        public Criteria andReleasedateLessThanOrEqualTo(String value) {
             addCriterion("releaseDate <=", value, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateIn(List<Date> values) {
+        public Criteria andReleasedateLike(String value) {
+            addCriterion("releaseDate like", value, "releasedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleasedateNotLike(String value) {
+            addCriterion("releaseDate not like", value, "releasedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleasedateIn(List<String> values) {
             addCriterion("releaseDate in", values, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateNotIn(List<Date> values) {
+        public Criteria andReleasedateNotIn(List<String> values) {
             addCriterion("releaseDate not in", values, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateBetween(Date value1, Date value2) {
+        public Criteria andReleasedateBetween(String value1, String value2) {
             addCriterion("releaseDate between", value1, value2, "releasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReleasedateNotBetween(Date value1, Date value2) {
+        public Criteria andReleasedateNotBetween(String value1, String value2) {
             addCriterion("releaseDate not between", value1, value2, "releasedate");
             return (Criteria) this;
         }

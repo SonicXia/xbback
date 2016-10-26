@@ -80,6 +80,16 @@ var TT = TAOTAO = {
         	return '未知';
         }
     },
+    // 格式化发放分红的状态
+	formatIsReleased : function formatStatus(val,row){
+        if (val == 1){
+            return '是';
+        } else if(val == 0){
+        	return '<span style="color:red;">否</span>';
+        } else {
+        	return '未知';
+        }
+    },
     
     init : function(data){
     	// 初始化图片上传组件

@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
+Source Server         : localhost
 Source Server Version : 50529
 Source Host           : localhost:3306
 Source Database       : xiaobao
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-10-25 17:34:52
+Date: 2016-10-26 23:40:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,17 +75,18 @@ CREATE TABLE `tb_reward` (
   `mobile` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
   `reward` double(20,2) NOT NULL COMMENT '当日应分红',
   `bonus` double(20,2) DEFAULT NULL COMMENT '当日应奖励',
-  `releaseDate` datetime DEFAULT NULL COMMENT '分红（奖励）日期',
-  `isRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）'
+  `releaseDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '分红（奖励）日期',
+  `isRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）',
+  PRIMARY KEY (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_reward
 -- ----------------------------
-INSERT INTO `tb_reward` VALUES ('张三', '13666666666', '189.00', '0.00', '2016-10-25 00:00:00', '0');
-INSERT INTO `tb_reward` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-25 00:00:00', '0');
-INSERT INTO `tb_reward` VALUES ('王五', '13555555555', '630.00', '0.00', '2016-10-25 00:00:00', '0');
-INSERT INTO `tb_reward` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-25 00:00:00', '0');
+INSERT INTO `tb_reward` VALUES ('王五', '13555555555', '630.00', '0.00', '2016-10-26', '1');
+INSERT INTO `tb_reward` VALUES ('张三', '13666666666', '189.00', '0.00', '2016-10-26', '1');
+INSERT INTO `tb_reward` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1');
+INSERT INTO `tb_reward` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '1');
 
 -- ----------------------------
 -- Table structure for tb_team
@@ -129,7 +130,7 @@ CREATE TABLE `tb_user` (
   `updateDate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_user_mobile` (`mobile`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_user
@@ -1299,9 +1300,10 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_reward`()
 BEGIN
 	
-	INSERT INTO tb_reward(name, mobile, reward, bonus, releaseDate)     
+	INSERT INTO tb_reward(name, mobile, reward, bonus, releaseDate) 
 
-	SELECT name, mobile, sum(orderCnt * 63) reward, bonus, curdate() releaseDate FROM tb_order WHERE orderStatus = 1 GROUP BY name, mobile, bonus, releaseDate;
+	SELECT name, mobile, sum(orderCnt * 63) reward, bonus, DATE_FORMAT(CURDATE(),'%Y-%m-%d') releaseDate FROM tb_order 
+		WHERE orderStatus = 1 GROUP BY name, mobile, bonus, releaseDate;
 
 END
 ;;
@@ -1331,14 +1333,5 @@ BEGIN
 	DROP TABLE IF EXISTS tmp_calendar;
 	
 END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Event structure for e_report_day_add
--- ----------------------------
-DROP EVENT IF EXISTS `e_report_day_add`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` EVENT `e_report_day_add` ON SCHEDULE AT '2016-10-25 11:29:19' ON COMPLETION NOT PRESERVE DISABLE DO call p_report_day_add(date_sub(curdate(), interval 1 day))
 ;;
 DELIMITER ;

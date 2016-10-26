@@ -25,33 +25,6 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private TbOrderMapper orderMapper;
 	
-//	public XiaobaoResult insertOrder(String cardId, int orderCnt, String address, double amont, 
-//			String remark, String investmentDate, int rewardMonths, int extraDays) {
-//		
-//		TbOrder order = new TbOrder();
-//		order.setOrderid(Factory.generateOrderId());
-//		order.setCardid(cardId);
-//		order.setOrdercnt(orderCnt);
-//		order.setAddress(address);
-//		order.setAmont(amont);
-//		order.setBonus(0.00);
-//		order.setReward(0.00);
-//		order.setRemark(remark);
-//		order.setInvestmentdate(investmentDate);
-//		order.setRewardmonths(rewardMonths);
-//		order.setExtradays(extraDays);
-//		int rewardDays = RewardDaysUtils.getRewardDays(investmentDate, rewardMonths, extraDays);
-//		order.setRewarddays(rewardDays);		
-//		order.setDaysalready(0);
-//		order.setCreatedate(new Date());
-//		order.setUpdatedate(new Date());
-//		order.setOrderstatus(1);
-//		
-//		orderMapper.insert(order);
-//		
-//		return XiaobaoResult.ok();
-//	}
-	
 	/**
 	 * 保存订单
 	 */
@@ -75,16 +48,9 @@ public class OrderServiceImpl implements OrderService {
 		
 		return XiaobaoResult.ok();
 	}
-
-//	public XiaobaoResult findAll() {
-//		TbOrderExample example = new TbOrderExample();
-//		List<TbOrder> list = orderMapper.selectByExample(example);
-//		
-//		return XiaobaoResult.ok(list);
-//	}
 	
 	/**
-	 * 商品列表查询
+	 * 查询商品列表
 	 */
 	@Transactional
 	public EUDataGridResult getOrderList(int page, int rows) {
@@ -121,27 +87,22 @@ public class OrderServiceImpl implements OrderService {
 		//取记录总条数
 		PageInfo<TbOrder> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
-		
-		
-		return null;
+		return result;
 	}
 
 	/**
 	 * 根据orderId删除订单
 	 */
 	@Transactional
-	public XiaobaoResult deleteOrderList(String orderIdsStr) {
-		
+	public XiaobaoResult deleteOrderList(String orderIdsStr) {		
 		String[] orderIds = orderIdsStr.split(",");
 		for(int i = 0; i < orderIds.length; i++){
 			String orderId = orderIds[i];
 			TbOrderExample example = new TbOrderExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andOrderidEqualTo(orderId);
-			orderMapper.deleteByExample(example);
-			
+			orderMapper.deleteByExample(example);			
 		}
-		
 		return XiaobaoResult.ok();
 	}
 

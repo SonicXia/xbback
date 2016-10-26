@@ -12,8 +12,6 @@ import com.xiaobao.common.factory.Factory;
 import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.mapper.TbUserMapper;
-import com.xiaobao.pojo.TbOrder;
-import com.xiaobao.pojo.TbOrderExample;
 import com.xiaobao.pojo.TbUser;
 import com.xiaobao.pojo.TbUserExample;
 import com.xiaobao.pojo.TbUserExample.Criteria;
@@ -25,6 +23,10 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private TbUserMapper userMapper;
 
+	
+	/**
+	 * 通过用户名查找用户
+	 */
 	public TbUser getUserByName(String name) {
 		TbUserExample example = new TbUserExample();
 		Criteria criteria = example.createCriteria();
@@ -37,19 +39,9 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-//	public XiaobaoResult insertUser(String name, String cardId, String mobile, String password, String email, String referrer, int teamId) {
-//		TbUser user = Factory.createUserInfo();
-//		user.setName(name);
-//		user.setCardid(cardId);
-//		user.setMobile(mobile);
-//		user.setPassword(password);
-//		user.setEmail(email);
-//		user.setReferrer(referrer);
-//		user.setTeamid(teamId);
-//		userMapper.insert(user);
-//		return XiaobaoResult.ok();
-//	}
-
+	/**
+	 * 保存用户
+	 */
 	@Override
 	public XiaobaoResult saveUser(TbUser user) {
 		
@@ -67,6 +59,9 @@ public class UserServiceImpl implements UserService {
 		return XiaobaoResult.ok();
 	}
 
+	/**
+	 * 获取用户列表
+	 */
 	@Override
 	public EUDataGridResult getUserList(int page, int rows) {
 		
@@ -85,6 +80,9 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	/**
+	 * 根据手机号删除用户
+	 */
 	@Override
 	public XiaobaoResult deleteUserList(String mobiles) {
 		String[] mobileArr = mobiles.split(",");
@@ -98,6 +96,9 @@ public class UserServiceImpl implements UserService {
 		return XiaobaoResult.ok();
 	}
 
+	/**
+	 * 修改用户
+	 */
 	@Override
 	public XiaobaoResult updateUser(TbUser user) {
 		TbUserExample example = new TbUserExample();
@@ -107,11 +108,9 @@ public class UserServiceImpl implements UserService {
 		if(users.size() > 0 && users != null){
 			TbUser user2 = users.get(0);
 			user.setCreatedate(user2.getCreatedate());
-		}
-
-		user.setUpdatedate(new Date());
-		userMapper.updateByPrimaryKey(user);
-		
+			user.setUpdatedate(new Date());
+			userMapper.updateByPrimaryKey(user);
+		}			
 		return XiaobaoResult.ok(user);
 	}
 

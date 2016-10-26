@@ -1,27 +1,17 @@
 package com.xiaobao.pojo;
 
-import java.util.Date;
-
 public class TbReward {
-    private String name;
-
     private String mobile;
+
+    private String name;
 
     private Double reward;
 
     private Double bonus;
 
-    private Date releasedate;
+    private String releasedate;
 
     private Boolean isrelease;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
 
     public String getMobile() {
         return mobile;
@@ -29,6 +19,14 @@ public class TbReward {
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public Double getReward() {
@@ -47,12 +45,12 @@ public class TbReward {
         this.bonus = bonus;
     }
 
-    public Date getReleasedate() {
+    public String getReleasedate() {
         return releasedate;
     }
 
-    public void setReleasedate(Date releasedate) {
-        this.releasedate = releasedate;
+    public void setReleasedate(String releasedate) {
+        this.releasedate = releasedate == null ? null : releasedate.trim();
     }
 
     public Boolean getIsrelease() {
