@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-10-26 23:40:34
+Date: 2016-10-27 01:24:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -76,17 +76,18 @@ CREATE TABLE `tb_reward` (
   `reward` double(20,2) NOT NULL COMMENT '当日应分红',
   `bonus` double(20,2) DEFAULT NULL COMMENT '当日应奖励',
   `releaseDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '分红（奖励）日期',
-  `isRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）',
+  `isRewardRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）',
+  `isBonusRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已奖励（0：未发；1已发）',
   PRIMARY KEY (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_reward
 -- ----------------------------
-INSERT INTO `tb_reward` VALUES ('王五', '13555555555', '630.00', '0.00', '2016-10-26', '1');
-INSERT INTO `tb_reward` VALUES ('张三', '13666666666', '189.00', '0.00', '2016-10-26', '1');
-INSERT INTO `tb_reward` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1');
-INSERT INTO `tb_reward` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '1');
+INSERT INTO `tb_reward` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-10-26', '1', '1');
+INSERT INTO `tb_reward` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-10-26', '1', '1');
+INSERT INTO `tb_reward` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1', '0');
+INSERT INTO `tb_reward` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '0', '0');
 
 -- ----------------------------
 -- Table structure for tb_team
@@ -136,7 +137,7 @@ CREATE TABLE `tb_user` (
 -- Records of tb_user
 -- ----------------------------
 INSERT INTO `tb_user` VALUES ('12', '老王', '311111111111111110', '18888888888', null, null, '0', '1', '0', '5', null, '', '1', '2016-10-01 18:37:37', '2016-10-01 18:39:06');
-INSERT INTO `tb_user` VALUES ('13', '张三', '340111111111111111', '13333333333', '', '', '3', '1', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:37:37', '2016-10-21 18:37:37');
+INSERT INTO `tb_user` VALUES ('13', '张三', '340111111111111111', '13333333333', '', '', '3', '0', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:37:37', '2016-10-27 01:12:49');
 INSERT INTO `tb_user` VALUES ('14', '李四', '340111111111111112', '13999999999', '', '', '2', '1', '1', '0', '老王', '18888888888', '0', '2016-10-21 18:38:36', '2016-10-25 17:17:25');
 INSERT INTO `tb_user` VALUES ('15', '王五', '340111111111111113', '13555555555', '', '', '12', '1', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:38:51', '2016-10-21 18:38:51');
 INSERT INTO `tb_user` VALUES ('16', '陈六', '340111111111111114', '15000000000', '', '', '1', '1', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:39:06', '2016-10-21 18:39:06');
