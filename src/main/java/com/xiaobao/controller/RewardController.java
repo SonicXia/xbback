@@ -24,10 +24,17 @@ public class RewardController {
 		return result;
 	}
 	
-	@RequestMapping(value="/reward/distribute", method=RequestMethod.POST)
+	@RequestMapping(value="/reward/distributeReward", method=RequestMethod.POST)
 	@ResponseBody
 	public XiaobaoResult distributeReward(@RequestParam String mobiles){		
 		XiaobaoResult result = rewardService.distributeReward(mobiles);
+		return result;
+	}
+	
+	@RequestMapping(value="/reward/distributeBonus", method=RequestMethod.POST)
+	@ResponseBody
+	public XiaobaoResult distributeBonus(@RequestParam String mobiles){		
+		XiaobaoResult result = rewardService.distributeBonus(mobiles);
 		return result;
 	}
 	

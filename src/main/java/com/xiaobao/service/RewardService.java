@@ -9,4 +9,6 @@ public interface RewardService {
 	
 	XiaobaoResult distributeReward(String mobiles);
 	
+	XiaobaoResult distributeBonus(String mobiles);
+	
 }

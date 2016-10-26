@@ -59,7 +59,30 @@ public class RewardServiceImpl implements RewardService {
 			if(list != null && list.size() > 0){
 				TbReward rewardVO = list.get(0);
 				System.err.println("name = "+rewardVO.getName());
-				rewardVO.setIsrelease(true);
+				rewardVO.setIsrewardrelease(true);
+				rewardMapper.updateByPrimaryKey(rewardVO);
+			}
+		}	
+		return XiaobaoResult.ok();
+	}
+	
+	/**
+	 * 确认发放奖励
+	 */
+	@Override
+	public XiaobaoResult distributeBonus(String mobiles) {
+		String[] mobileArr = mobiles.split(",");
+		for(int i = 0; i < mobileArr.length; i++){
+			String mobile = mobileArr[i];
+			System.err.println("mobile = "+mobile);
+			TbRewardExample example = new TbRewardExample();
+			Criteria criteria = example.createCriteria();	
+			criteria.andMobileEqualTo(mobile);
+			List<TbReward> list = rewardMapper.selectByExample(example);	//根据mobile查询rewardVO
+			if(list != null && list.size() > 0){
+				TbReward rewardVO = list.get(0);
+				System.err.println("name = "+rewardVO.getName());
+				rewardVO.setIsbonusrelease(true);;
 				rewardMapper.updateByPrimaryKey(rewardVO);
 			}
 		}	

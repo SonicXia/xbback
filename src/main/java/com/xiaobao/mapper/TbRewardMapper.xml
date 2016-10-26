@@ -7,7 +7,8 @@
     <result column="reward" property="reward" jdbcType="DOUBLE" />
     <result column="bonus" property="bonus" jdbcType="DOUBLE" />
     <result column="releaseDate" property="releasedate" jdbcType="VARCHAR" />
-    <result column="isRelease" property="isrelease" jdbcType="BIT" />
+    <result column="isRewardRelease" property="isrewardrelease" jdbcType="BIT" />
+    <result column="isBonusRelease" property="isbonusrelease" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mobile, name, reward, bonus, releaseDate, isRelease
+    mobile, name, reward, bonus, releaseDate, isRewardRelease, isBonusRelease
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaobao.pojo.TbRewardExample" >
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.xiaobao.pojo.TbReward" >
     insert into tb_reward (mobile, name, reward, 
-      bonus, releaseDate, isRelease
-      )
+      bonus, releaseDate, isRewardRelease, 
+      isBonusRelease)
     values (#{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{reward,jdbcType=DOUBLE}, 
-      #{bonus,jdbcType=DOUBLE}, #{releasedate,jdbcType=VARCHAR}, #{isrelease,jdbcType=BIT}
-      )
+      #{bonus,jdbcType=DOUBLE}, #{releasedate,jdbcType=VARCHAR}, #{isrewardrelease,jdbcType=BIT}, 
+      #{isbonusrelease,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.xiaobao.pojo.TbReward" >
     insert into tb_reward
@@ -126,8 +127,11 @@
       <if test="releasedate != null" >
         releaseDate,
       </if>
-      <if test="isrelease != null" >
-        isRelease,
+      <if test="isrewardrelease != null" >
+        isRewardRelease,
+      </if>
+      <if test="isbonusrelease != null" >
+        isBonusRelease,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -146,8 +150,11 @@
       <if test="releasedate != null" >
         #{releasedate,jdbcType=VARCHAR},
       </if>
-      <if test="isrelease != null" >
-        #{isrelease,jdbcType=BIT},
+      <if test="isrewardrelease != null" >
+        #{isrewardrelease,jdbcType=BIT},
+      </if>
+      <if test="isbonusrelease != null" >
+        #{isbonusrelease,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -175,8 +182,11 @@
       <if test="record.releasedate != null" >
         releaseDate = #{record.releasedate,jdbcType=VARCHAR},
       </if>
-      <if test="record.isrelease != null" >
-        isRelease = #{record.isrelease,jdbcType=BIT},
+      <if test="record.isrewardrelease != null" >
+        isRewardRelease = #{record.isrewardrelease,jdbcType=BIT},
+      </if>
+      <if test="record.isbonusrelease != null" >
+        isBonusRelease = #{record.isbonusrelease,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -190,7 +200,8 @@
       reward = #{record.reward,jdbcType=DOUBLE},
       bonus = #{record.bonus,jdbcType=DOUBLE},
       releaseDate = #{record.releasedate,jdbcType=VARCHAR},
-      isRelease = #{record.isrelease,jdbcType=BIT}
+      isRewardRelease = #{record.isrewardrelease,jdbcType=BIT},
+      isBonusRelease = #{record.isbonusrelease,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,8 +221,11 @@
       <if test="releasedate != null" >
         releaseDate = #{releasedate,jdbcType=VARCHAR},
       </if>
-      <if test="isrelease != null" >
-        isRelease = #{isrelease,jdbcType=BIT},
+      <if test="isrewardrelease != null" >
+        isRewardRelease = #{isrewardrelease,jdbcType=BIT},
+      </if>
+      <if test="isbonusrelease != null" >
+        isBonusRelease = #{isbonusrelease,jdbcType=BIT},
       </if>
     </set>
     where mobile = #{mobile,jdbcType=VARCHAR}
@@ -222,7 +236,8 @@
       reward = #{reward,jdbcType=DOUBLE},
       bonus = #{bonus,jdbcType=DOUBLE},
       releaseDate = #{releasedate,jdbcType=VARCHAR},
-      isRelease = #{isrelease,jdbcType=BIT}
+      isRewardRelease = #{isrewardrelease,jdbcType=BIT},
+      isBonusRelease = #{isbonusrelease,jdbcType=BIT}
     where mobile = #{mobile,jdbcType=VARCHAR}
   </update>
 </mapper>

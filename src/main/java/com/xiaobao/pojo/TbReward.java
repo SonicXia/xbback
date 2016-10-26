@@ -11,7 +11,9 @@ public class TbReward {
 
     private String releasedate;
 
-    private Boolean isrelease;
+    private Boolean isrewardrelease;
+
+    private Boolean isbonusrelease;
 
     public String getMobile() {
         return mobile;
@@ -53,11 +55,19 @@ public class TbReward {
         this.releasedate = releasedate == null ? null : releasedate.trim();
     }
 
-    public Boolean getIsrelease() {
-        return isrelease;
+    public Boolean getIsrewardrelease() {
+        return isrewardrelease;
     }
 
-    public void setIsrelease(Boolean isrelease) {
-        this.isrelease = isrelease;
+    public void setIsrewardrelease(Boolean isrewardrelease) {
+        this.isrewardrelease = isrewardrelease;
+    }
+
+    public Boolean getIsbonusrelease() {
+        return isbonusrelease;
+    }
+
+    public void setIsbonusrelease(Boolean isbonusrelease) {
+        this.isbonusrelease = isbonusrelease;
     }
 }

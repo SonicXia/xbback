@@ -434,63 +434,123 @@ public class TbRewardExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseIsNull() {
-            addCriterion("isRelease is null");
+        public Criteria andIsrewardreleaseIsNull() {
+            addCriterion("isRewardRelease is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseIsNotNull() {
-            addCriterion("isRelease is not null");
+        public Criteria andIsrewardreleaseIsNotNull() {
+            addCriterion("isRewardRelease is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseEqualTo(Boolean value) {
-            addCriterion("isRelease =", value, "isrelease");
+        public Criteria andIsrewardreleaseEqualTo(Boolean value) {
+            addCriterion("isRewardRelease =", value, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseNotEqualTo(Boolean value) {
-            addCriterion("isRelease <>", value, "isrelease");
+        public Criteria andIsrewardreleaseNotEqualTo(Boolean value) {
+            addCriterion("isRewardRelease <>", value, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseGreaterThan(Boolean value) {
-            addCriterion("isRelease >", value, "isrelease");
+        public Criteria andIsrewardreleaseGreaterThan(Boolean value) {
+            addCriterion("isRewardRelease >", value, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("isRelease >=", value, "isrelease");
+        public Criteria andIsrewardreleaseGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("isRewardRelease >=", value, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseLessThan(Boolean value) {
-            addCriterion("isRelease <", value, "isrelease");
+        public Criteria andIsrewardreleaseLessThan(Boolean value) {
+            addCriterion("isRewardRelease <", value, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseLessThanOrEqualTo(Boolean value) {
-            addCriterion("isRelease <=", value, "isrelease");
+        public Criteria andIsrewardreleaseLessThanOrEqualTo(Boolean value) {
+            addCriterion("isRewardRelease <=", value, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseIn(List<Boolean> values) {
-            addCriterion("isRelease in", values, "isrelease");
+        public Criteria andIsrewardreleaseIn(List<Boolean> values) {
+            addCriterion("isRewardRelease in", values, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseNotIn(List<Boolean> values) {
-            addCriterion("isRelease not in", values, "isrelease");
+        public Criteria andIsrewardreleaseNotIn(List<Boolean> values) {
+            addCriterion("isRewardRelease not in", values, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseBetween(Boolean value1, Boolean value2) {
-            addCriterion("isRelease between", value1, value2, "isrelease");
+        public Criteria andIsrewardreleaseBetween(Boolean value1, Boolean value2) {
+            addCriterion("isRewardRelease between", value1, value2, "isrewardrelease");
             return (Criteria) this;
         }
 
-        public Criteria andIsreleaseNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("isRelease not between", value1, value2, "isrelease");
+        public Criteria andIsrewardreleaseNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("isRewardRelease not between", value1, value2, "isrewardrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseIsNull() {
+            addCriterion("isBonusRelease is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseIsNotNull() {
+            addCriterion("isBonusRelease is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseEqualTo(Boolean value) {
+            addCriterion("isBonusRelease =", value, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseNotEqualTo(Boolean value) {
+            addCriterion("isBonusRelease <>", value, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseGreaterThan(Boolean value) {
+            addCriterion("isBonusRelease >", value, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("isBonusRelease >=", value, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseLessThan(Boolean value) {
+            addCriterion("isBonusRelease <", value, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseLessThanOrEqualTo(Boolean value) {
+            addCriterion("isBonusRelease <=", value, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseIn(List<Boolean> values) {
+            addCriterion("isBonusRelease in", values, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseNotIn(List<Boolean> values) {
+            addCriterion("isBonusRelease not in", values, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseBetween(Boolean value1, Boolean value2) {
+            addCriterion("isBonusRelease between", value1, value2, "isbonusrelease");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsbonusreleaseNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("isBonusRelease not between", value1, value2, "isbonusrelease");
             return (Criteria) this;
         }
     }
