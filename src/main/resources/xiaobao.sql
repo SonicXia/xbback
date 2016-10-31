@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : local_mysql
 Source Server Version : 50529
 Source Host           : localhost:3306
 Source Database       : xiaobao
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-10-27 01:24:21
+Date: 2016-10-31 17:40:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,6 +28,32 @@ CREATE TABLE `tb_admin` (
 -- Records of tb_admin
 -- ----------------------------
 INSERT INTO `tb_admin` VALUES ('admin', '123456');
+
+-- ----------------------------
+-- Table structure for tb_money
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_money`;
+CREATE TABLE `tb_money` (
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '姓名',
+  `mobile` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
+  `reward` double(20,2) NOT NULL COMMENT '当日应分红',
+  `bonus` double(20,2) DEFAULT NULL COMMENT '当日应奖励',
+  `releaseDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '分红（奖励）日期',
+  `isRewardRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）',
+  `isBonusRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已奖励（0：未发；1已发）'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of tb_money
+-- ----------------------------
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-10-26', '1', '1');
+INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-10-26', '1', '1');
+INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1', '0');
+INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '1', '0');
+INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-10-26', '1', '1');
+INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1', '0');
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-10-26', '1', '1');
+INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '1', '0');
 
 -- ----------------------------
 -- Table structure for tb_order
@@ -65,29 +91,6 @@ INSERT INTO `tb_order` VALUES ('B161021182746003', '15000000000', '陈六', '1',
 INSERT INTO `tb_order` VALUES ('B161021182857004', '13555555555', '王五', '3', '3200.00', '9600.00', '2016-09-11', '0.00', '0.00', '浙江杭州', '', '4', '0', '87', '0', '2016-10-21 18:28:57', '2016-10-21 18:28:57', '1');
 INSERT INTO `tb_order` VALUES ('B161021183034005', '13555555555', '王五', '1', '3200.00', '3200.00', '2016-08-18', '0.00', '0.00', '浙江杭州', '', '4', '3', '89', '0', '2016-10-21 18:30:34', '2016-10-21 18:30:34', '1');
 INSERT INTO `tb_order` VALUES ('B161024164001000', '13555555555', '王五', '2', '3000.00', '6000.00', '2016-05-05', '0.00', '0.00', '浙江杭州', '', '4', '0', '86', '0', '2016-10-24 16:40:01', '2016-10-24 16:40:01', '0');
-
--- ----------------------------
--- Table structure for tb_reward
--- ----------------------------
-DROP TABLE IF EXISTS `tb_reward`;
-CREATE TABLE `tb_reward` (
-  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '姓名',
-  `mobile` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
-  `reward` double(20,2) NOT NULL COMMENT '当日应分红',
-  `bonus` double(20,2) DEFAULT NULL COMMENT '当日应奖励',
-  `releaseDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '分红（奖励）日期',
-  `isRewardRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）',
-  `isBonusRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已奖励（0：未发；1已发）',
-  PRIMARY KEY (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of tb_reward
--- ----------------------------
-INSERT INTO `tb_reward` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-10-26', '1', '1');
-INSERT INTO `tb_reward` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-10-26', '1', '1');
-INSERT INTO `tb_reward` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1', '0');
-INSERT INTO `tb_reward` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '0', '0');
 
 -- ----------------------------
 -- Table structure for tb_team
@@ -1301,7 +1304,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_reward`()
 BEGIN
 	
-	INSERT INTO tb_reward(name, mobile, reward, bonus, releaseDate) 
+	INSERT INTO tb_money(name, mobile, reward, bonus, releaseDate) 
 
 	SELECT name, mobile, sum(orderCnt * 63) reward, bonus, DATE_FORMAT(CURDATE(),'%Y-%m-%d') releaseDate FROM tb_order 
 		WHERE orderStatus = 1 GROUP BY name, mobile, bonus, releaseDate;
