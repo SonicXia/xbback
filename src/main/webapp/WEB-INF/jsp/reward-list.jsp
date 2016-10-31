@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid" id="rewardList" title="分红列表" 
+<table class="easyui-datagrid" id="rewardList" title="分红列表" iconCls="icon-save" 
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/reward/rewardOrderList',method:'get',pageSize:10,toolbar:toolbar">
     <thead>
         <tr>
-        	
+        	<div id="tb" style="padding:3px">
+				<span>姓名：</span>
+				<input id="name" style="line-height:26px;border:1px solid #ccc">
+				<!-- <span>手机号：</span>
+				<input id="mobile" style="line-height:26px;border:1px solid #ccc"> -->
+				<a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</a>
+			</div>
         	
         	<th data-options="field:'ck',checkbox:true"></th>
             <th data-options="field:'name',width:60">姓名</th>
@@ -17,6 +23,13 @@
 
 
 <script>
+    
+	function doSearch(){
+		$('#rewardList').datagrid('load',{
+			name: $('#name').val(),
+			mobile: $('#mobile').val()
+		});
+	}
     
     function getSelectionsMobiles(){
     	var userList = $("#rewardList");

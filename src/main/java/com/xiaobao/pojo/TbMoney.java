@@ -1,9 +1,9 @@
 package com.xiaobao.pojo;
 
-public class TbReward {
-    private String mobile;
-
+public class TbMoney {
     private String name;
+
+    private String mobile;
 
     private Double reward;
 
@@ -15,20 +15,20 @@ public class TbReward {
 
     private Boolean isbonusrelease;
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public Double getReward() {

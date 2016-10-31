@@ -5,42 +5,70 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.dubbo.common.utils.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
-import com.xiaobao.mapper.TbRewardMapper;
-import com.xiaobao.pojo.TbReward;
-import com.xiaobao.pojo.TbRewardExample;
-import com.xiaobao.pojo.TbRewardExample.Criteria;
-import com.xiaobao.service.RewardService;
+import com.xiaobao.mapper.TbMoneyMapper;
+import com.xiaobao.pojo.TbMoney;
+import com.xiaobao.pojo.TbMoneyExample;
+import com.xiaobao.pojo.TbMoneyExample.Criteria;
+import com.xiaobao.service.MoneyService;
+
+import jodd.util.StringUtil;
+
+
 
 @Service
-public class RewardServiceImpl implements RewardService {
+public class MoneyServiceImpl implements MoneyService {
 
 //	@Autowired
 //	private JdbcTemplate jdbcTemplate;
 	@Autowired
-	private TbRewardMapper rewardMapper;
+	private TbMoneyMapper moneyMapper;
 	
 	/**
-	 * 查询分红记录
+	 * 查询资金记录
 	 */
 	@Override
-	public EUDataGridResult getRewardList(int page, int rows) {	
+	public EUDataGridResult getMoneyList(int page, int rows) {	
+		System.err.println("无条件查询");
 		//查询分红列表
-		TbRewardExample example = new TbRewardExample();
+		TbMoneyExample example = new TbMoneyExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TbReward> list = rewardMapper.selectByExample(example);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
 		//创建一个返回对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<TbReward> pageInfo = new PageInfo<>(list);
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 
 		return result;
+	}
+	
+	/**
+	 * 根据姓名查询资金记录
+	 */
+	@Override
+	public EUDataGridResult getMoneyListByName(int page, int rows, String name) {	
+
+		System.err.println("带条件查询："+name);
+		//查询分红列表
+		TbMoneyExample example = new TbMoneyExample();
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+		
 	}
 
 	/**
@@ -52,17 +80,17 @@ public class RewardServiceImpl implements RewardService {
 		for(int i = 0; i < mobileArr.length; i++){
 			String mobile = mobileArr[i];
 			System.err.println("mobile = "+mobile);
-			TbRewardExample example = new TbRewardExample();
+			TbMoneyExample example = new TbMoneyExample();
 			Criteria criteria = example.createCriteria();	
 			criteria.andMobileEqualTo(mobile);
-			List<TbReward> list = rewardMapper.selectByExample(example);	//根据mobile查询rewardVO
+			List<TbMoney> list = moneyMapper.selectByExample(example);	//根据mobile查询rewardVO
 			if(list != null && list.size() > 0){
-				TbReward rewardVO = list.get(0);
-				System.err.println("name = "+rewardVO.getName());
-				rewardVO.setIsrewardrelease(true);
-				rewardMapper.updateByPrimaryKey(rewardVO);
+				TbMoney moneyVO = list.get(0);
+				System.err.println("name = "+moneyVO.getName());
+				moneyVO.setIsrewardrelease(true);
+				moneyMapper.updateByExample(moneyVO, example);
 			}
-		}	
+		}
 		return XiaobaoResult.ok();
 	}
 	
@@ -75,15 +103,15 @@ public class RewardServiceImpl implements RewardService {
 		for(int i = 0; i < mobileArr.length; i++){
 			String mobile = mobileArr[i];
 			System.err.println("mobile = "+mobile);
-			TbRewardExample example = new TbRewardExample();
+			TbMoneyExample example = new TbMoneyExample();
 			Criteria criteria = example.createCriteria();	
 			criteria.andMobileEqualTo(mobile);
-			List<TbReward> list = rewardMapper.selectByExample(example);	//根据mobile查询rewardVO
+			List<TbMoney> list = moneyMapper.selectByExample(example);	//根据mobile查询rewardVO
 			if(list != null && list.size() > 0){
-				TbReward rewardVO = list.get(0);
-				System.err.println("name = "+rewardVO.getName());
-				rewardVO.setIsbonusrelease(true);;
-				rewardMapper.updateByPrimaryKey(rewardVO);
+				TbMoney moneyVO = list.get(0);
+				System.err.println("name = "+moneyVO.getName());
+				moneyVO.setIsbonusrelease(true);;
+				moneyMapper.updateByExample(moneyVO, example);
 			}
 		}	
 		return XiaobaoResult.ok();
