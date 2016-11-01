@@ -3,6 +3,7 @@ package com.xiaobao.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,17 +47,56 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public XiaobaoResult saveUser(TbUser user) {	
-		TbUser user2 = Factory.createUserInfo();
-		user2.setName(user.getName());
-		user2.setCardid(user.getCardid());
-		user2.setMobile(user.getMobile());
-		user2.setPassword(user.getPassword());
-		user2.setEmail(user.getEmail());
-		user2.setReferrer(user.getReferrer());
-		user2.setReferrermobile(user.getReferrermobile());
-		user2.setTeamid(user.getTeamid());
-		userMapper.insert(user2);	
-		return XiaobaoResult.ok();
+		TbUser newUser = Factory.createUserInfo();
+		newUser.setName(user.getName());
+		newUser.setCardid(user.getCardid());
+		newUser.setMobile(user.getMobile());
+		newUser.setPassword(user.getPassword());
+		newUser.setEmail(user.getEmail());
+		newUser.setReferrer(user.getReferrer());
+		newUser.setReferrermobile(user.getReferrermobile());
+		newUser.setTeamid(user.getTeamid());
+		//判断是否填入推荐人信息
+		if(StringUtils.isNotEmpty(user.getReferrer()) && 
+				StringUtils.isNotEmpty(user.getReferrermobile())){
+			if(referralCntAdd(user.getReferrermobile())){
+				userMapper.insert(newUser);
+				return XiaobaoResult.ok();
+			}else{
+				return XiaobaoResult.build(400, "推荐人推荐次数加1失败");
+			}
+		}else{
+			userMapper.insert(newUser);
+			return XiaobaoResult.ok();
+		}
+	}
+	
+	/**
+	 * 推荐人推荐次数加1
+	 * @param referrerMobile
+	 * @return
+	 */
+	@Transactional
+	private boolean referralCntAdd(String referrerMobile){
+		System.err.println("---进入referralCntAdd---");
+		TbUserExample example = new TbUserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andMobileEqualTo(referrerMobile);
+		System.err.println("根据推荐人手机号查找推荐人信息");
+		List<TbUser> list = userMapper.selectByExample(example);	//根据推荐人手机号查找推荐人信息
+		System.err.println("根据推荐人手机号查找推荐人信息---结束");
+		if(list != null && list.size() > 0){
+			TbUser referrer = list.get(0);
+			Integer referralcnt = referrer.getReferralcnt();
+			referralcnt += 1;	//推荐人数加1
+			referrer.setReferralcnt(referralcnt);
+			referrer.setUpdatedate(new Date());
+			System.err.println("根据推荐人手机号修改推荐人信息");
+			userMapper.updateByExample(referrer, example);	//根据推荐人手机号修改推荐人信息
+			System.err.println("---结束referralCntAdd---");
+			return true;
+		}
+		return false;
 	}
 
 	/**

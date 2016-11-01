@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
+Source Server         : localhost
 Source Server Version : 50529
 Source Host           : localhost:3306
 Source Database       : xiaobao
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-11-01 18:30:07
+Date: 2016-11-02 00:16:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,11 +36,11 @@ DROP TABLE IF EXISTS `tb_money`;
 CREATE TABLE `tb_money` (
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '姓名',
   `mobile` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
-  `reward` double(20,2) NOT NULL COMMENT '当日应分红',
-  `bonus` double(20,2) DEFAULT NULL COMMENT '当日应奖励',
+  `reward` double(20,2) NOT NULL COMMENT '当日应付分红',
+  `bonus` double(20,2) DEFAULT NULL COMMENT '当日应付奖金',
   `releaseDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '分红（奖励）日期',
-  `isRewardRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已分红（奖励）（0：未发；1已发）',
-  `isBonusRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已奖励（0：未发；1已发）'
+  `isRewardRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已发放分红（奖励）（0：未发；1已发）',
+  `isBonusRelease` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已发放奖金（0：未发；1已发）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -48,8 +48,12 @@ CREATE TABLE `tb_money` (
 -- ----------------------------
 INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '0.00', '2016-11-01', '1', '0');
 INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-11-01', '0', '0');
-INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '0.00', '2016-11-01', '0', '0');
-INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-11-01', '0', '0');
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '0.00', '2016-11-01', '1', '0');
+INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-11-01', '1', '0');
+INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '0.00', '2016-11-02', '0', '0');
+INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-11-02', '0', '0');
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '567.00', '0.00', '2016-11-02', '0', '0');
+INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-11-02', '0', '0');
 
 -- ----------------------------
 -- Table structure for tb_order
@@ -63,7 +67,7 @@ CREATE TABLE `tb_order` (
   `price` double(20,2) DEFAULT NULL COMMENT '每单金额',
   `amount` double(20,2) DEFAULT NULL COMMENT '投单总金额',
   `investmentDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '投单日期',
-  `bonusAlready` double(20,2) DEFAULT NULL COMMENT '本次投单已累计奖励',
+  `bonusAlready` double(20,2) DEFAULT NULL COMMENT '本次投单已累计奖金（一次性给予）',
   `rewardAlready` double(20,2) DEFAULT NULL COMMENT '本次投单已累计分红',
   `address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '收货地址',
   `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
@@ -82,10 +86,10 @@ CREATE TABLE `tb_order` (
 -- ----------------------------
 INSERT INTO `tb_order` VALUES ('B161021182434000', '13666666666', '张三', '3', '3300.00', '9900.00', '2016-10-01', '0.00', '189.00', '安徽合肥', '', '4', '10', '97', '1', '2016-10-21 18:24:34', '2016-10-21 18:24:34', '1');
 INSERT INTO `tb_order` VALUES ('B161021182523001', '13999999999', '李四', '2', '3200.00', '6400.00', '2016-09-06', '0.00', '0.00', '安徽合肥', '', '4', '0', '87', '0', '2016-10-21 18:25:23', '2016-10-21 18:25:23', '1');
-INSERT INTO `tb_order` VALUES ('B161021182641002', '13555555555', '王五', '6', '3200.00', '19200.00', '2016-07-07', '0.00', '0.00', '浙江杭州', '', '4', '0', '86', '0', '2016-10-21 18:26:41', '2016-10-21 18:26:41', '1');
-INSERT INTO `tb_order` VALUES ('B161021182746003', '15000000000', '陈六', '1', '3200.00', '3200.00', '2016-08-21', '0.00', '0.00', '宁夏甘肃', '', '4', '3', '90', '0', '2016-10-21 18:27:46', '2016-10-21 18:27:46', '1');
-INSERT INTO `tb_order` VALUES ('B161021182857004', '13555555555', '王五', '3', '3200.00', '9600.00', '2016-09-11', '0.00', '0.00', '浙江杭州', '', '4', '0', '87', '0', '2016-10-21 18:28:57', '2016-10-21 18:28:57', '1');
-INSERT INTO `tb_order` VALUES ('B161021183034005', '13555555555', '王五', '1', '3200.00', '3200.00', '2016-08-18', '0.00', '0.00', '浙江杭州', '', '4', '3', '89', '0', '2016-10-21 18:30:34', '2016-10-21 18:30:34', '1');
+INSERT INTO `tb_order` VALUES ('B161021182641002', '13555555555', '王五', '6', '3200.00', '19200.00', '2016-07-07', '0.00', '756.00', '浙江杭州', '', '4', '0', '86', '2', '2016-10-21 18:26:41', '2016-11-01 22:21:49', '1');
+INSERT INTO `tb_order` VALUES ('B161021182746003', '15000000000', '陈六', '1', '3200.00', '3200.00', '2016-08-21', '0.00', '126.00', '宁夏甘肃', '', '4', '3', '90', '2', '2016-10-21 18:27:46', '2016-11-01 22:21:49', '1');
+INSERT INTO `tb_order` VALUES ('B161021182857004', '13555555555', '王五', '3', '3200.00', '9600.00', '2016-09-11', '0.00', '378.00', '浙江杭州', '', '4', '0', '87', '2', '2016-10-21 18:28:57', '2016-11-01 22:21:49', '1');
+INSERT INTO `tb_order` VALUES ('B161021183034005', '13555555555', '王五', '1', '3200.00', '3200.00', '2016-08-18', '0.00', '126.00', '浙江杭州', '', '4', '3', '89', '89', '2016-10-21 18:30:34', '2016-11-01 22:21:49', '0');
 INSERT INTO `tb_order` VALUES ('B161024164001000', '13555555555', '王五', '2', '3000.00', '6000.00', '2016-05-05', '0.00', '0.00', '浙江杭州', '', '4', '0', '86', '0', '2016-10-24 16:40:01', '2016-10-24 16:40:01', '0');
 
 -- ----------------------------
@@ -130,19 +134,23 @@ CREATE TABLE `tb_user` (
   `updateDate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_user_mobile` (`mobile`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
-INSERT INTO `tb_user` VALUES ('12', '老王', '311111111111111110', '18888888888', null, null, '0', '1', '0', '5', null, '', '1', '2016-10-01 18:37:37', '2016-10-01 18:39:06');
+INSERT INTO `tb_user` VALUES ('12', '老王', '311111111111111110', '18888888888', null, null, '0', '1', '0', '7', null, '', '1', '2016-10-01 18:37:37', '2016-11-01 23:53:37');
 INSERT INTO `tb_user` VALUES ('13', '张三', '340111111111111111', '13333333333', '', '', '3', '0', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:37:37', '2016-10-27 01:12:49');
 INSERT INTO `tb_user` VALUES ('14', '李四', '340111111111111112', '13999999999', '', '', '2', '1', '1', '0', '老王', '18888888888', '0', '2016-10-21 18:38:36', '2016-10-25 17:17:25');
 INSERT INTO `tb_user` VALUES ('15', '王五', '340111111111111113', '13555555555', '', '', '12', '1', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:38:51', '2016-10-21 18:38:51');
 INSERT INTO `tb_user` VALUES ('16', '陈六', '340111111111111114', '15000000000', '', '', '1', '1', '0', '0', '老王', '18888888888', '1', '2016-10-21 18:39:06', '2016-10-21 18:39:06');
-INSERT INTO `tb_user` VALUES ('20', '鬼脚七', '340111111111111117', '17000000000', '', '', '0', '1', '0', '0', '王五', '13555555555', '1', '2016-10-25 12:59:05', '2016-10-25 17:19:24');
+INSERT INTO `tb_user` VALUES ('20', '鬼脚七', '340111111111111117', '17000000000', '', '', '0', '1', '0', '1', '王五', '13555555555', '1', '2016-10-25 12:59:05', '2016-11-02 00:13:00');
 INSERT INTO `tb_user` VALUES ('22', '八二哥', '341118888888888888', '13858558585', '', '', '0', '1', '0', '0', '老王', '18888888888', '1', '2016-10-25 13:16:09', '2016-10-25 13:16:09');
 INSERT INTO `tb_user` VALUES ('23', '九筒', '340999999999999999', '19999999999', '', '', '0', '1', '0', '0', '张三', '13333333333', '1', '2016-10-25 16:52:59', '2016-10-25 16:52:59');
+INSERT INTO `tb_user` VALUES ('25', '呜呜呜', '42143145234', '4343433434', '', '', '0', '1', '0', '0', '', '', '1', '2016-11-01 23:53:37', '2016-11-01 23:53:37');
+INSERT INTO `tb_user` VALUES ('26', '555555', '5555555', '555555', '', '', '0', '1', '0', '0', '', '', '1', '2016-11-02 00:07:41', '2016-11-02 00:07:41');
+INSERT INTO `tb_user` VALUES ('27', '6666', '66666', '66666', '', '', '0', '1', '0', '0', '鬼脚七', '17000000000', '1', '2016-11-02 00:13:00', '2016-11-02 00:13:00');
+INSERT INTO `tb_user` VALUES ('28', '7777', '7777', '7777', '', '', '0', '1', '0', '0', '', '', '7', '2016-11-02 00:13:35', '2016-11-02 00:13:35');
 
 -- ----------------------------
 -- Table structure for t_calendar
@@ -1302,7 +1310,7 @@ BEGIN
 	
 	INSERT INTO tb_money(name, mobile, reward, bonus, releaseDate) 
 
-	SELECT name, mobile, sum(orderCnt * 63) reward, 0, DATE_FORMAT(CURDATE(),'%Y-%m-%d') releaseDate FROM tb_order 
+	SELECT name, mobile, sum(orderCnt * 63) reward, 0, DATE_FORMAT(CURDATE()+1,'%Y-%m-%d') releaseDate FROM tb_order 
 		WHERE orderStatus = 1 GROUP BY name, mobile, bonusAlready, releaseDate;
 
 END

@@ -73,10 +73,9 @@
 	            timeout: 30000,
 	            success: function (data) {
 	            	if(data.status == 200){
-	    				$.messager.alert('提示','新增订单成功!');
+	    				$.messager.alert('提示','新增代理成功!');
 	    			}
 	            	$('#userAddForm').form('reset');
-	        		/* itemAddEditor.html(''); */
 	            },
 	            error: function (xhr, type) {
 	                console.log('Ajax error');

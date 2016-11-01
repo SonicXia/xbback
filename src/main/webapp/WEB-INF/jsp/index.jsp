@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>小报</title>
+<title>小鲍</title>
 <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icon.css" />
 <link rel="stylesheet" type="text/css" href="css/taotao.css" />
@@ -38,7 +38,7 @@
          		<span>资金管理</span>
          		<ul>
 	         		<li data-options="attributes:{'url':'reward-list'}">分红</li>
-	         		<li data-options="attributes:{'url':'bonus-list'}">奖励</li>
+	         		<li data-options="attributes:{'url':'bonus-list'}">奖金</li>
 	         	</ul>
          	</li>
          </ul>

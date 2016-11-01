@@ -1,8 +1,10 @@
 package com.xiaobao.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +27,8 @@ import com.xiaobao.service.MoneyService;
 @Service
 public class MoneyServiceImpl implements MoneyService {
 
-//	@Autowired
-//	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private TbMoneyMapper moneyMapper;
 	@Autowired
@@ -235,22 +237,18 @@ public class MoneyServiceImpl implements MoneyService {
 			moneyCriteria.andMobileEqualTo(mobile);
 			List<TbMoney> moneyList = moneyMapper.selectByExample(moneyExample);	//根据mobile查询money
 			if(moneyList != null && moneyList.size() > 0){
-				TbMoney money = moneyList.get(0);
-				money.setIsrewardrelease(true);
-				moneyMapper.updateByExample(money, moneyExample);
-				
+				TbMoney money = moneyList.get(0);				
 				//修改mobile对应的当天tb_order表信息
 				//根据手机号更新tb_order表分红累计以及已分红天数信息
-				if(updateReward(mobile)){
-					
+				if(updateReward(mobile, reward)){
+					money.setIsrewardrelease(true);
+					moneyMapper.updateByExample(money, moneyExample);		
+				}else{
+					return XiaobaoResult.build(400, "更新分红失败");
 				}
-				
-				
-				
 			}
-
 		}
-		return XiaobaoResult.ok();
+		return XiaobaoResult.ok();		
 	}
 	
 	/**
@@ -259,7 +257,7 @@ public class MoneyServiceImpl implements MoneyService {
 	 * @return
 	 */
 	@Transactional
-	private boolean updateReward(String mobile){
+	private boolean updateReward(String mobile, double reward){
 		TbOrderExample example1 = new TbOrderExample();
 		com.xiaobao.pojo.TbOrderExample.Criteria criteria1 = example1.createCriteria();
 		
@@ -268,27 +266,44 @@ public class MoneyServiceImpl implements MoneyService {
 		
 		List<TbOrder> list = orderMapper.selectByExample(example1);	//根据手机号和订单状态查询相关订单
 		if(list != null && list.size() > 0){
-			//遍历该mobile下的有效订单，并更新分红累计以及已分红天数信息
+			double todayRewardTotal = 0;
 			for(int i = 0; i < list.size(); i++){
 				TbOrder order = list.get(i);
-				String orderid = order.getOrderid();
-				Double rewardalready = order.getRewardalready();
 				Integer ordercnt = order.getOrdercnt();
-				Integer daysalready = order.getDaysalready();
-				
-				rewardalready += everyReward * ordercnt;	//累计每天的分红金额
-				daysalready += 1;	//分红天数自加1
-				
-				order.setRewardalready(rewardalready);
-				order.setDaysalready(daysalready);
-				
-				TbOrderExample example2 = new TbOrderExample();
-				com.xiaobao.pojo.TbOrderExample.Criteria criteria2 = example2.createCriteria();
-				criteria2.andOrderidEqualTo(orderid);
-				orderMapper.updateByExample(order, example2);	//根据订单号更新订单信息
-				
+				double rewardToday = everyReward * ordercnt;
+				todayRewardTotal += rewardToday;
+			}
+			if(todayRewardTotal == reward){	//校验前台传来的reward是否和后台数据库读取计算的todayRewardTotal一致
+				//遍历该mobile下的有效订单，并更新分红累计以及已分红天数信息
+				for(int i = 0; i < list.size(); i++){
+					TbOrder order = list.get(i);		
+					String orderid = order.getOrderid();
+					Double rewardalready = order.getRewardalready();
+					Integer rewardDays = order.getRewarddays();
+					Integer ordercnt = order.getOrdercnt();
+					Integer daysalready = order.getDaysalready();
+					Double rewardToday = everyReward * ordercnt;
+					
+					rewardalready += rewardToday;	//累计每天的分红金额
+					daysalready += 1;	//分红天数自加1
+					
+					//如果分红总天数等于已分红天数，则关闭该订单
+					if(rewardDays == daysalready){
+						order.setOrderstatus((byte) 0);
+					}
+					
+					order.setRewardalready(rewardalready);
+					order.setDaysalready(daysalready);
+					order.setUpdatedate(new Date());
+
+					TbOrderExample example2 = new TbOrderExample();
+					com.xiaobao.pojo.TbOrderExample.Criteria criteria2 = example2.createCriteria();
+					criteria2.andOrderidEqualTo(orderid);
+					orderMapper.updateByExample(order, example2);	//根据订单号更新订单信息				
+				}
 				return true;
 			}
+			return false;	
 		}
 		return false;
 	}
