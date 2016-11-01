@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-11-01 14:09:57
+Date: 2016-11-01 18:30:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,13 +46,10 @@ CREATE TABLE `tb_money` (
 -- ----------------------------
 -- Records of tb_money
 -- ----------------------------
-INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-11-26', '0', '0');
-INSERT INTO `tb_money` VALUES ('张三', '13777777777', '189.00', '63.00', '2016-11-26', '0', '0');
-INSERT INTO `tb_money` VALUES ('李四', '13777777777', '126.00', '0.00', '2016-11-25', '0', '0');
-INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-11-26', '0', '0');
-INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-11-26', '0', '0');
-INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-11-26', '0', '0');
-INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-11-26', '0', '0');
+INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '0.00', '2016-11-01', '1', '0');
+INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-11-01', '0', '0');
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '0.00', '2016-11-01', '0', '0');
+INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-11-01', '0', '0');
 
 -- ----------------------------
 -- Table structure for tb_order
@@ -66,8 +63,8 @@ CREATE TABLE `tb_order` (
   `price` double(20,2) DEFAULT NULL COMMENT '每单金额',
   `amount` double(20,2) DEFAULT NULL COMMENT '投单总金额',
   `investmentDate` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '投单日期',
-  `bonus` double(20,2) DEFAULT NULL COMMENT '本次投单已累计奖励',
-  `reward` double(20,2) DEFAULT NULL COMMENT '本次投单已累计分红',
+  `bonusAlready` double(20,2) DEFAULT NULL COMMENT '本次投单已累计奖励',
+  `rewardAlready` double(20,2) DEFAULT NULL COMMENT '本次投单已累计分红',
   `address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '收货地址',
   `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
   `rewardMonths` int(11) DEFAULT NULL COMMENT '分红月数',
@@ -83,7 +80,7 @@ CREATE TABLE `tb_order` (
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
-INSERT INTO `tb_order` VALUES ('B161021182434000', '13666666666', '张三', '3', '3300.00', '9900.00', '2016-10-01', '0.00', '0.00', '安徽合肥', '', '4', '10', '97', '0', '2016-10-21 18:24:34', '2016-10-21 18:24:34', '1');
+INSERT INTO `tb_order` VALUES ('B161021182434000', '13666666666', '张三', '3', '3300.00', '9900.00', '2016-10-01', '0.00', '189.00', '安徽合肥', '', '4', '10', '97', '1', '2016-10-21 18:24:34', '2016-10-21 18:24:34', '1');
 INSERT INTO `tb_order` VALUES ('B161021182523001', '13999999999', '李四', '2', '3200.00', '6400.00', '2016-09-06', '0.00', '0.00', '安徽合肥', '', '4', '0', '87', '0', '2016-10-21 18:25:23', '2016-10-21 18:25:23', '1');
 INSERT INTO `tb_order` VALUES ('B161021182641002', '13555555555', '王五', '6', '3200.00', '19200.00', '2016-07-07', '0.00', '0.00', '浙江杭州', '', '4', '0', '86', '0', '2016-10-21 18:26:41', '2016-10-21 18:26:41', '1');
 INSERT INTO `tb_order` VALUES ('B161021182746003', '15000000000', '陈六', '1', '3200.00', '3200.00', '2016-08-21', '0.00', '0.00', '宁夏甘肃', '', '4', '3', '90', '0', '2016-10-21 18:27:46', '2016-10-21 18:27:46', '1');
@@ -1305,8 +1302,8 @@ BEGIN
 	
 	INSERT INTO tb_money(name, mobile, reward, bonus, releaseDate) 
 
-	SELECT name, mobile, sum(orderCnt * 63) reward, bonus, DATE_FORMAT(CURDATE(),'%Y-%m-%d') releaseDate FROM tb_order 
-		WHERE orderStatus = 1 GROUP BY name, mobile, bonus, releaseDate;
+	SELECT name, mobile, sum(orderCnt * 63) reward, 0, DATE_FORMAT(CURDATE(),'%Y-%m-%d') releaseDate FROM tb_order 
+		WHERE orderStatus = 1 GROUP BY name, mobile, bonusAlready, releaseDate;
 
 END
 ;;
