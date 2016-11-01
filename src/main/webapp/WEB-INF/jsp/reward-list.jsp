@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <table class="easyui-datagrid" id="rewardList" title="分红列表" iconCls="icon-save" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/reward/rewardOrderList',method:'get',pageSize:10,toolbar:toolbar">
+       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/money/moneyList',method:'get',pageSize:10,toolbar:toolbar">
     <thead>
         <tr>
+        	<!-- 搜索栏 -->
+        	<!-- id名称要与其他tab页的搜索栏id避免冲突，不然会造成搜索结果相互干扰的情况 -->
         	<div id="tb" style="padding:3px">
 				<span>姓名：</span>
-				<input id="name" style="line-height:26px;border:1px solid #ccc">
-				<!-- <span>手机号：</span>
-				<input id="mobile" style="line-height:26px;border:1px solid #ccc"> -->
-				<a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</a>
-			</div>
-        	
+				<input id="reward_name" style="line-height:20px;border:1px solid #ccc">
+				<span>手机号：</span>
+				<input id="reward_mobile" style="line-height:20px;border:1px solid #ccc">
+				<span>日期：</span>
+				<input id="reward_releasedate" class="easyui-datebox">
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="doSearch()">查询</a>
+			</div>       	
         	<th data-options="field:'ck',checkbox:true"></th>
             <th data-options="field:'name',width:60">姓名</th>
             <th data-options="field:'mobile',width:80">手机号</th>
-            <th data-options="field:'reward',width:60,align:'right'">今日分红</th>
+            <th data-options="field:'reward',width:60,align:'right'">分红金额</th>
             <th data-options="field:'releasedate',width:75">发放日期</th>
             <th data-options="field:'isrewardrelease',width:70,align:'right',formatter:TAOTAO.formatIsReleased">是否已发放</th>           
         </tr>
@@ -23,17 +26,18 @@
 
 
 <script>
-    
+  	/* 搜索栏事件 */
 	function doSearch(){
 		$('#rewardList').datagrid('load',{
-			name: $('#name').val(),
-			mobile: $('#mobile').val()
+			name: $('#reward_name').val(),
+			mobile: $('#reward_mobile').val(),
+			releasedate: $('#reward_releasedate').datebox('getValue')
 		});
 	}
     
     function getSelectionsMobiles(){
-    	var userList = $("#rewardList");
-    	var sels = userList.datagrid("getSelections");
+    	var rewardList = $("#rewardList");
+    	var sels = rewardList.datagrid("getSelections");
     	var mobiles = [];
     	for(var i in sels){
     		mobiles.push(sels[i].mobile);	//sels[i].mobile要对应订单编号的field值
@@ -54,7 +58,7 @@
         	$.messager.confirm('确认','确定发放手机号为 '+mobiles+' 的分红吗？',function(r){
         	    if (r){
         	    	var params = {"mobiles":mobiles};
-                	$.post("/reward/distributeReward",params, function(data){
+                	$.post("/money/distributeReward",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','发放分红成功!',undefined,function(){
             					$("#rewardList").datagrid("reload");

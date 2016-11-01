@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-10-31 17:40:30
+Date: 2016-11-01 14:09:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,14 +46,13 @@ CREATE TABLE `tb_money` (
 -- ----------------------------
 -- Records of tb_money
 -- ----------------------------
-INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-10-26', '1', '1');
-INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-10-26', '1', '1');
-INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1', '0');
-INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '1', '0');
-INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-10-26', '1', '1');
-INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-10-26', '1', '0');
-INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-10-26', '1', '1');
-INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-10-26', '1', '0');
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-11-26', '0', '0');
+INSERT INTO `tb_money` VALUES ('张三', '13777777777', '189.00', '63.00', '2016-11-26', '0', '0');
+INSERT INTO `tb_money` VALUES ('李四', '13777777777', '126.00', '0.00', '2016-11-25', '0', '0');
+INSERT INTO `tb_money` VALUES ('张三', '13666666666', '189.00', '63.00', '2016-11-26', '0', '0');
+INSERT INTO `tb_money` VALUES ('李四', '13999999999', '126.00', '0.00', '2016-11-26', '0', '0');
+INSERT INTO `tb_money` VALUES ('王五', '13555555555', '630.00', '126.00', '2016-11-26', '0', '0');
+INSERT INTO `tb_money` VALUES ('陈六', '15000000000', '63.00', '0.00', '2016-11-26', '0', '0');
 
 -- ----------------------------
 -- Table structure for tb_order
@@ -134,7 +133,7 @@ CREATE TABLE `tb_user` (
   `updateDate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_user_mobile` (`mobile`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_user

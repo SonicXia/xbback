@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xiaobao.common.pojo.EUDataGridResult;
@@ -15,8 +15,6 @@ import com.xiaobao.pojo.TbMoney;
 import com.xiaobao.pojo.TbMoneyExample;
 import com.xiaobao.pojo.TbMoneyExample.Criteria;
 import com.xiaobao.service.MoneyService;
-
-import jodd.util.StringUtil;
 
 
 
@@ -29,12 +27,12 @@ public class MoneyServiceImpl implements MoneyService {
 	private TbMoneyMapper moneyMapper;
 	
 	/**
-	 * 查询资金记录
+	 * 无条件查询资金总记录
 	 */
 	@Override
+	@Transactional
 	public EUDataGridResult getMoneyList(int page, int rows) {	
-		System.err.println("无条件查询");
-		//查询分红列表
+		//无条件查询分红列表
 		TbMoneyExample example = new TbMoneyExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -45,22 +43,44 @@ public class MoneyServiceImpl implements MoneyService {
 		//取记录总条数
 		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
-
 		return result;
 	}
 	
 	/**
-	 * 根据姓名查询资金记录
+	 * 根据name查询资金记录
 	 */
 	@Override
+	@Transactional
 	public EUDataGridResult getMoneyListByName(int page, int rows, String name) {	
-
-		System.err.println("带条件查询："+name);
-		//查询分红列表
+		//按照name查询资金记录列表
 		TbMoneyExample example = new TbMoneyExample();
-		//分页处理
-		PageHelper.startPage(page, rows);
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(name);
 		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;	
+	}
+	
+	/**
+	 * 根据mobile查询资金记录
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getMoneyListByMobile(int page, int rows, String mobile) {
+		//按照mobile查询资金记录列表
+		TbMoneyExample example = new TbMoneyExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andMobileEqualTo(mobile);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
 		//创建一个返回对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -68,13 +88,128 @@ public class MoneyServiceImpl implements MoneyService {
 		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
-		
+	}
+	
+	/**
+	 * 根据releasedate查询资金记录
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getMoneyListByDate(int page, int rows, String releasedate) {
+		//按照releasedate查询资金记录列表
+		TbMoneyExample example = new TbMoneyExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andReleasedateEqualTo(releasedate);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+	
+	/**
+	 * 根据name和mobile联合查询资金记录
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getMoneyListByNameAndMobile(int page, int rows, String name, String mobile) {
+		//按照name和mobile联合查询资金记录列表
+		TbMoneyExample example = new TbMoneyExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(name);
+		criteria.andMobileEqualTo(mobile);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}	
+	
+	/**
+	 * 根据name和releasedate联合查询资金记录
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getMoneyListByNameAndDate(int page, int rows, String name, String releasedate) {
+		//按照name和releasedate联合查询资金记录列表
+		TbMoneyExample example = new TbMoneyExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(name);
+		criteria.andReleasedateEqualTo(releasedate);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	/**
+	 * 根据mobile和releasedate联合查询资金记录
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getMoneyListByMobileAndDate(int page, int rows, String mobile, String releasedate) {
+		//按照mobile和releasedate联合查询资金记录列表
+		TbMoneyExample example = new TbMoneyExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andMobileEqualTo(mobile);
+		criteria.andReleasedateEqualTo(releasedate);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	/**
+	 * 根据name、mobile和releasedate联合查询资金记录
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getMoneyListByNameAndMobileAndDate(int page, int rows, String name, String mobile, String releasedate) {
+		//按照name、mobile和releasedate联合查询资金记录列表
+		TbMoneyExample example = new TbMoneyExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(name);
+		criteria.andMobileEqualTo(mobile);
+		criteria.andReleasedateEqualTo(releasedate);
+		List<TbMoney> list = moneyMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbMoney> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
 	}
 
 	/**
 	 * 确认发放分红
 	 */
 	@Override
+	@Transactional
 	public XiaobaoResult distributeReward(String mobiles) {
 		String[] mobileArr = mobiles.split(",");
 		for(int i = 0; i < mobileArr.length; i++){
@@ -98,6 +233,7 @@ public class MoneyServiceImpl implements MoneyService {
 	 * 确认发放奖励
 	 */
 	@Override
+	@Transactional
 	public XiaobaoResult distributeBonus(String mobiles) {
 		String[] mobileArr = mobiles.split(",");
 		for(int i = 0; i < mobileArr.length; i++){
@@ -116,10 +252,14 @@ public class MoneyServiceImpl implements MoneyService {
 		}	
 		return XiaobaoResult.ok();
 	}
+
+
+
+
 	
 
 	
-	
+	//通过jdbcTemplate以及VO对象编写
 //	@Transactional
 //	public EUDataGridResult getRewardList(int page, int rows) {
 //		

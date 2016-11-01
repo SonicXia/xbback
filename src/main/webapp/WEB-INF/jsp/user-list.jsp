@@ -3,15 +3,15 @@
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/user/list',method:'get',pageSize:10,toolbar:toolbar">
     <thead>
         <tr>
-        	<!-- 条件搜索框 -->
-        	<!-- <div id="tb" style="padding:3px" >
+        	<!-- 搜索栏 -->
+        	<!-- id名称要与其他tab页的搜索栏id避免冲突，不然会造成搜索结果相互干扰的情况 -->
+        	<div id="tb" style="padding:3px">
 				<span>姓名：</span>
-				<input id="sname"  style="line-height:26px;border:1px solid #ccc">
+				<input id="user_name" style="line-height:20px;border:1px solid #ccc">
 				<span>手机号：</span>
-				<input id="smobile" style="line-height:26px;border:1px solid #ccc">
-				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="doSearch()">搜索</a>
-			</div> -->
-        	
+				<input id="user_mobile" style="line-height:20px;border:1px solid #ccc">
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="doSearch()">查询</a>
+			</div>    	
         	<th data-options="field:'ck',checkbox:true"></th>
             <th data-options="field:'name',width:60">姓名</th>
             <th data-options="field:'mobile',width:80">手机号</th>
@@ -31,12 +31,13 @@
 
 
 <script>
-
-	/* function doSearch(){
+	/* 搜索栏事件 */
+	function doSearch(){
 		$('#userList').datagrid('load',{
-			smobile: $('#smobile').val()
+			name: $('#user_name').val(),
+			mobile: $('#user_mobile').val()
 		});
-	} */
+	}
 
     function getSelectionsIds(){
     	var userList = $("#userList");

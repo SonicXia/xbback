@@ -13,11 +13,11 @@ public class test01 {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date2 = sdf.parse(date);
 
-		for(int i = 0; i <= 30; i++){
+		for(int i = 0; i <= 60; i++){
 			Date dateAdd = DateUtils.dateAdd(date2, i);
 			
 			String dateStr = sdf.format(dateAdd);
-			int rewardDays = RewardDaysUtils.getRewardDays(dateStr, 4, 0);
+			int rewardDays = RewardDaysUtils.getRewardDays(dateStr, month, 0);
 			System.out.println("投单日期：" + dateStr + "， 分红"+ month +"个月，共"+ rewardDays +"天");
 		}
 			
@@ -26,7 +26,7 @@ public class test01 {
 	
 	public static void main(String[] args) throws ParseException {
 //		System.err.println(RewardDaysUtils.getRewardDays("2016-01-31", 4, 0));
-		testRewardDays("2016-10-25", 4 , 0);
+		testRewardDays("2016-11-01", 4 , 0);
 	}
 
 }

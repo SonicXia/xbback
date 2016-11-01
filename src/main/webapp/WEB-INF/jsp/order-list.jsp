@@ -3,15 +3,15 @@
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/order/list',method:'get',pageSize:10,toolbar:toolbar">
     <thead>
         <tr>
-        	<!-- 条件搜索框 -->
-        	<div id="tb" style="padding:3px" >
-				<!-- <span>姓名：</span>
-				<input id="sname"  style="line-height:26px;border:1px solid #ccc"> -->
+        	<!-- 搜索栏 -->
+        	<!-- id名称要与其他tab页的搜索栏id避免冲突，不然会造成搜索结果相互干扰的情况 -->
+        	<div id="tb" style="padding:3px">
+				<span>姓名：</span>
+				<input id="order_name" style="line-height:20px;border:1px solid #ccc">
 				<span>手机号：</span>
-				<input id="smobile" style="line-height:26px;border:1px solid #ccc">
-				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="doSearch()">搜索</a>
-			</div>
-        	
+				<input id="order_mobile" style="line-height:20px;border:1px solid #ccc">
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="doSearch()">查询</a>
+			</div>    	
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'orderid',width:110">订单编号</th>
             <th data-options="field:'name',width:60">姓名</th>
@@ -32,18 +32,12 @@
     </thead>
 </table>
 
-
-<!-- <div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">
-	
-	
-		
-</div> -->
-
 <script>
 
 	function doSearch(){
 		$('#orderList').datagrid('load',{
-			smobile: $('#smobile').val()
+			name: $('#order_name').val(),
+			mobile: $('#order_mobile').val()
 		});
 	}
 

@@ -14,6 +14,8 @@ import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.common.utils.RewardDaysUtils;
 import com.xiaobao.mapper.TbOrderMapper;
+import com.xiaobao.pojo.TbMoney;
+import com.xiaobao.pojo.TbMoneyExample;
 import com.xiaobao.pojo.TbOrder;
 import com.xiaobao.pojo.TbOrderExample;
 import com.xiaobao.pojo.TbOrderExample.Criteria;
@@ -50,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	/**
-	 * 查询商品列表
+	 * 查询订单列表
 	 */
 	@Transactional
 	public EUDataGridResult getOrderList(int page, int rows) {
@@ -69,25 +71,71 @@ public class OrderServiceImpl implements OrderService {
 		return result;
 	}
 	
-	
 	/**
-	 * 根据mobile查询订单信息		(未完成)
+	 * 根据name查询订单列表
 	 */
-	public EUDataGridResult getOrderByMobile(String mobile, int page, int rows) {
-		//根据条件查询订单列表
+	@Override
+	@Transactional
+	public EUDataGridResult getOrderListByName(int page, int rows, String name) {
+		//按照name查询订单列表
 		TbOrderExample example = new TbOrderExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andMobileEqualTo(mobile);
-		//分页处理
-		PageHelper.startPage(page, rows);
+		criteria.andNameEqualTo(name);
 		List<TbOrder> list = orderMapper.selectByExample(example);
-		//创建一个返回值对象
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
 		PageInfo<TbOrder> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
-		return result;
+		return result;	
+	}
+
+	/**
+	 * 根据mobile查询订单列表
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getOrderListByMobile(int page, int rows, String mobile) {
+		//按照mobile查询订单列表
+		TbOrderExample example = new TbOrderExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andMobileEqualTo(mobile);
+		List<TbOrder> list = orderMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbOrder> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;	
+	}
+	
+	/**
+	 * 根据name和mobile联合查询订单列表
+	 */
+	@Override
+	@Transactional
+	public EUDataGridResult getOrderListByNameAndMobile(int page, int rows, String name, String mobile) {
+		//按照mobile查询订单列表
+		TbOrderExample example = new TbOrderExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(name);
+		criteria.andMobileEqualTo(mobile);
+		List<TbOrder> list = orderMapper.selectByExample(example);
+		//分页处理
+		PageHelper.startPage(page, rows);		
+		//创建一个返回对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<TbOrder> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;	
 	}
 
 	/**
@@ -120,6 +168,8 @@ public class OrderServiceImpl implements OrderService {
 		
 		return XiaobaoResult.ok(order);
 	}
+
+
 	
 
 }

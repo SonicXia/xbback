@@ -12,6 +12,12 @@ public interface UserService {
 	
 	EUDataGridResult getUserList(int page, int rows);
 	
+	EUDataGridResult getUserByName(int page, int rows, String name);
+	
+	EUDataGridResult getUserByMobile(int page, int rows, String mobile);
+	
+	EUDataGridResult getUserByNameAndMobile(int page, int rows, String name, String mobile);
+	
 	XiaobaoResult deleteUserList(String mobiles);
 	
 	XiaobaoResult updateUser(TbUser user);

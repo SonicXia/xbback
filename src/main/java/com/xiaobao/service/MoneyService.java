@@ -9,6 +9,18 @@ public interface MoneyService {
 	
 	EUDataGridResult getMoneyListByName(int page, int rows, String name);
 	
+	EUDataGridResult getMoneyListByMobile(int page, int rows, String mobile);
+	
+	EUDataGridResult getMoneyListByDate(int page, int rows, String releasedate);
+	
+	EUDataGridResult getMoneyListByNameAndMobile(int page, int rows, String name, String mobile);
+	
+	EUDataGridResult getMoneyListByNameAndDate(int page, int rows, String name, String releasedate);
+	
+	EUDataGridResult getMoneyListByMobileAndDate(int page, int rows, String mobile, String releasedate);
+	
+	EUDataGridResult getMoneyListByNameAndMobileAndDate (int page, int rows, String name, String mobile, String releasedate);
+	
 	XiaobaoResult distributeReward(String mobiles);
 	
 	XiaobaoResult distributeBonus(String mobiles);

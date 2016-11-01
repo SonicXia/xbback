@@ -35,10 +35,10 @@
 	         	</ul>
          	</li>
          	<li>
-         		<span>分红管理</span>
+         		<span>资金管理</span>
          		<ul>
-	         		<li data-options="attributes:{'url':'reward-list'}">今日分红</li>
-	         		<li data-options="attributes:{'url':'bonus-list'}">今日奖励</li>
+	         		<li data-options="attributes:{'url':'reward-list'}">分红</li>
+	         		<li data-options="attributes:{'url':'bonus-list'}">奖励</li>
 	         	</ul>
          	</li>
          </ul>

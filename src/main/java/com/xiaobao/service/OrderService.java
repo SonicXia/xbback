@@ -13,7 +13,11 @@ public interface OrderService {
 	
 	EUDataGridResult getOrderList(int page, int rows);
 	
-	EUDataGridResult getOrderByMobile(String mobile, int page, int rows);
+	EUDataGridResult getOrderListByName(int page, int rows, String name);
+	
+	EUDataGridResult getOrderListByMobile(int page, int rows, String mobile);
+	
+	EUDataGridResult getOrderListByNameAndMobile(int page, int rows, String name, String mobile);
 	
 	XiaobaoResult deleteOrderList(String orderIdsStr);
 	
