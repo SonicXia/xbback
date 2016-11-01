@@ -14,8 +14,6 @@ import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.common.utils.RewardDaysUtils;
 import com.xiaobao.mapper.TbOrderMapper;
-import com.xiaobao.pojo.TbMoney;
-import com.xiaobao.pojo.TbMoneyExample;
 import com.xiaobao.pojo.TbOrder;
 import com.xiaobao.pojo.TbOrderExample;
 import com.xiaobao.pojo.TbOrderExample.Criteria;
@@ -34,8 +32,8 @@ public class OrderServiceImpl implements OrderService {
 	public XiaobaoResult saveOrder(TbOrder order) {
 		
 		order.setOrderid(Factory.generateOrderId());
-		order.setBonus(0.00);
-		order.setReward(0.00);
+		order.setBonusalready(0.00);
+		order.setRewardalready(0.00);
 		String investmentDate = order.getInvestmentdate();
 		int rewardMonths = order.getRewardmonths();
 		int extraDays = order.getExtradays();

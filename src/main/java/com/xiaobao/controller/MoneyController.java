@@ -74,8 +74,10 @@ public class MoneyController {
 	
 	@RequestMapping(value="/money/distributeReward", method=RequestMethod.POST)
 	@ResponseBody
-	public XiaobaoResult distributeReward(@RequestParam String mobiles){		
-		XiaobaoResult result = moneyService.distributeReward(mobiles);
+	public XiaobaoResult distributeReward(@RequestParam String mobiles, @RequestParam String rewards){
+		System.err.println(mobiles);
+		System.err.println(rewards);
+		XiaobaoResult result = moneyService.distributeReward(mobiles, rewards);
 		return result;
 	}
 	

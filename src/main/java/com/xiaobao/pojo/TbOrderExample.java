@@ -565,123 +565,123 @@ public class TbOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andBonusIsNull() {
-            addCriterion("bonus is null");
+        public Criteria andBonusalreadyIsNull() {
+            addCriterion("bonusAlready is null");
             return (Criteria) this;
         }
 
-        public Criteria andBonusIsNotNull() {
-            addCriterion("bonus is not null");
+        public Criteria andBonusalreadyIsNotNull() {
+            addCriterion("bonusAlready is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBonusEqualTo(Double value) {
-            addCriterion("bonus =", value, "bonus");
+        public Criteria andBonusalreadyEqualTo(Double value) {
+            addCriterion("bonusAlready =", value, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusNotEqualTo(Double value) {
-            addCriterion("bonus <>", value, "bonus");
+        public Criteria andBonusalreadyNotEqualTo(Double value) {
+            addCriterion("bonusAlready <>", value, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusGreaterThan(Double value) {
-            addCriterion("bonus >", value, "bonus");
+        public Criteria andBonusalreadyGreaterThan(Double value) {
+            addCriterion("bonusAlready >", value, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusGreaterThanOrEqualTo(Double value) {
-            addCriterion("bonus >=", value, "bonus");
+        public Criteria andBonusalreadyGreaterThanOrEqualTo(Double value) {
+            addCriterion("bonusAlready >=", value, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusLessThan(Double value) {
-            addCriterion("bonus <", value, "bonus");
+        public Criteria andBonusalreadyLessThan(Double value) {
+            addCriterion("bonusAlready <", value, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusLessThanOrEqualTo(Double value) {
-            addCriterion("bonus <=", value, "bonus");
+        public Criteria andBonusalreadyLessThanOrEqualTo(Double value) {
+            addCriterion("bonusAlready <=", value, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusIn(List<Double> values) {
-            addCriterion("bonus in", values, "bonus");
+        public Criteria andBonusalreadyIn(List<Double> values) {
+            addCriterion("bonusAlready in", values, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusNotIn(List<Double> values) {
-            addCriterion("bonus not in", values, "bonus");
+        public Criteria andBonusalreadyNotIn(List<Double> values) {
+            addCriterion("bonusAlready not in", values, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusBetween(Double value1, Double value2) {
-            addCriterion("bonus between", value1, value2, "bonus");
+        public Criteria andBonusalreadyBetween(Double value1, Double value2) {
+            addCriterion("bonusAlready between", value1, value2, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andBonusNotBetween(Double value1, Double value2) {
-            addCriterion("bonus not between", value1, value2, "bonus");
+        public Criteria andBonusalreadyNotBetween(Double value1, Double value2) {
+            addCriterion("bonusAlready not between", value1, value2, "bonusalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardIsNull() {
-            addCriterion("reward is null");
+        public Criteria andRewardalreadyIsNull() {
+            addCriterion("rewardAlready is null");
             return (Criteria) this;
         }
 
-        public Criteria andRewardIsNotNull() {
-            addCriterion("reward is not null");
+        public Criteria andRewardalreadyIsNotNull() {
+            addCriterion("rewardAlready is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRewardEqualTo(Double value) {
-            addCriterion("reward =", value, "reward");
+        public Criteria andRewardalreadyEqualTo(Double value) {
+            addCriterion("rewardAlready =", value, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardNotEqualTo(Double value) {
-            addCriterion("reward <>", value, "reward");
+        public Criteria andRewardalreadyNotEqualTo(Double value) {
+            addCriterion("rewardAlready <>", value, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardGreaterThan(Double value) {
-            addCriterion("reward >", value, "reward");
+        public Criteria andRewardalreadyGreaterThan(Double value) {
+            addCriterion("rewardAlready >", value, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardGreaterThanOrEqualTo(Double value) {
-            addCriterion("reward >=", value, "reward");
+        public Criteria andRewardalreadyGreaterThanOrEqualTo(Double value) {
+            addCriterion("rewardAlready >=", value, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardLessThan(Double value) {
-            addCriterion("reward <", value, "reward");
+        public Criteria andRewardalreadyLessThan(Double value) {
+            addCriterion("rewardAlready <", value, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardLessThanOrEqualTo(Double value) {
-            addCriterion("reward <=", value, "reward");
+        public Criteria andRewardalreadyLessThanOrEqualTo(Double value) {
+            addCriterion("rewardAlready <=", value, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardIn(List<Double> values) {
-            addCriterion("reward in", values, "reward");
+        public Criteria andRewardalreadyIn(List<Double> values) {
+            addCriterion("rewardAlready in", values, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardNotIn(List<Double> values) {
-            addCriterion("reward not in", values, "reward");
+        public Criteria andRewardalreadyNotIn(List<Double> values) {
+            addCriterion("rewardAlready not in", values, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardBetween(Double value1, Double value2) {
-            addCriterion("reward between", value1, value2, "reward");
+        public Criteria andRewardalreadyBetween(Double value1, Double value2) {
+            addCriterion("rewardAlready between", value1, value2, "rewardalready");
             return (Criteria) this;
         }
 
-        public Criteria andRewardNotBetween(Double value1, Double value2) {
-            addCriterion("reward not between", value1, value2, "reward");
+        public Criteria andRewardalreadyNotBetween(Double value1, Double value2) {
+            addCriterion("rewardAlready not between", value1, value2, "rewardalready");
             return (Criteria) this;
         }
 

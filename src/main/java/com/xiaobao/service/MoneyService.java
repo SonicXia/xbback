@@ -21,7 +21,7 @@ public interface MoneyService {
 	
 	EUDataGridResult getMoneyListByNameAndMobileAndDate (int page, int rows, String name, String mobile, String releasedate);
 	
-	XiaobaoResult distributeReward(String mobiles);
+	XiaobaoResult distributeReward(String mobiles, String rewards);
 	
 	XiaobaoResult distributeBonus(String mobiles);
 	

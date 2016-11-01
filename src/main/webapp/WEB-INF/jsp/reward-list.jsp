@@ -46,18 +46,30 @@
     	return mobiles;
     }
     
+    function getSelectionsRewards(){
+    	var rewardList = $("#rewardList");
+    	var sels = rewardList.datagrid("getSelections");
+    	var rewards = [];
+    	for(var i in sels){
+    		rewards.push(sels[i].reward);	//sels[i].mobile要对应订单编号的field值
+    	}
+    	rewards = rewards.join(",");
+    	return rewards;
+    }
+    
     var toolbar = [{
         text:'完成',
         iconCls:'icon-ok',
         handler:function(){
         	var mobiles = getSelectionsMobiles('#rewardList');
+        	var rewards = getSelectionsRewards('#rewardList');
         	if(mobiles.length == 0){
         		$.messager.alert('提示','未选中分红条目!');
         		return ;
         	}
         	$.messager.confirm('确认','确定发放手机号为 '+mobiles+' 的分红吗？',function(r){
         	    if (r){
-        	    	var params = {"mobiles":mobiles};
+        	    	var params = {"mobiles":mobiles,"rewards":rewards};
                 	$.post("/money/distributeReward",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','发放分红成功!',undefined,function(){

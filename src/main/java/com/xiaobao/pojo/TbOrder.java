@@ -17,9 +17,9 @@ public class TbOrder {
 
     private String investmentdate;
 
-    private Double bonus;
+    private Double bonusalready;
 
-    private Double reward;
+    private Double rewardalready;
 
     private String address;
 
@@ -95,20 +95,20 @@ public class TbOrder {
         this.investmentdate = investmentdate == null ? null : investmentdate.trim();
     }
 
-    public Double getBonus() {
-        return bonus;
+    public Double getBonusalready() {
+        return bonusalready;
     }
 
-    public void setBonus(Double bonus) {
-        this.bonus = bonus;
+    public void setBonusalready(Double bonusalready) {
+        this.bonusalready = bonusalready;
     }
 
-    public Double getReward() {
-        return reward;
+    public Double getRewardalready() {
+        return rewardalready;
     }
 
-    public void setReward(Double reward) {
-        this.reward = reward;
+    public void setRewardalready(Double rewardalready) {
+        this.rewardalready = rewardalready;
     }
 
     public String getAddress() {

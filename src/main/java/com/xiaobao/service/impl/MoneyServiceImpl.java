@@ -11,9 +11,13 @@ import com.github.pagehelper.PageInfo;
 import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.mapper.TbMoneyMapper;
+import com.xiaobao.mapper.TbOrderMapper;
+import com.xiaobao.mapper.TbUserMapper;
 import com.xiaobao.pojo.TbMoney;
 import com.xiaobao.pojo.TbMoneyExample;
 import com.xiaobao.pojo.TbMoneyExample.Criteria;
+import com.xiaobao.pojo.TbOrder;
+import com.xiaobao.pojo.TbOrderExample;
 import com.xiaobao.service.MoneyService;
 
 
@@ -25,6 +29,13 @@ public class MoneyServiceImpl implements MoneyService {
 //	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private TbMoneyMapper moneyMapper;
+	@Autowired
+	private TbUserMapper userMapper;
+	@Autowired
+	private TbOrderMapper orderMapper;
+	
+	//定义每天每单的分红金额
+	private final double everyReward = 63.00;  
 	
 	/**
 	 * 无条件查询资金总记录
@@ -210,24 +221,107 @@ public class MoneyServiceImpl implements MoneyService {
 	 */
 	@Override
 	@Transactional
-	public XiaobaoResult distributeReward(String mobiles) {
+	public XiaobaoResult distributeReward(String mobiles, String rewards) {
 		String[] mobileArr = mobiles.split(",");
+		String[] rewardArr = rewards.split(",");
+		//遍历所有选中的手机号
 		for(int i = 0; i < mobileArr.length; i++){
+			//取得手机号以及对应的分红金额
 			String mobile = mobileArr[i];
-			System.err.println("mobile = "+mobile);
-			TbMoneyExample example = new TbMoneyExample();
-			Criteria criteria = example.createCriteria();	
-			criteria.andMobileEqualTo(mobile);
-			List<TbMoney> list = moneyMapper.selectByExample(example);	//根据mobile查询rewardVO
-			if(list != null && list.size() > 0){
-				TbMoney moneyVO = list.get(0);
-				System.err.println("name = "+moneyVO.getName());
-				moneyVO.setIsrewardrelease(true);
-				moneyMapper.updateByExample(moneyVO, example);
+			Double reward = Double.parseDouble(rewardArr[i]);
+			
+			TbMoneyExample moneyExample = new TbMoneyExample();
+			Criteria moneyCriteria = moneyExample.createCriteria();	
+			moneyCriteria.andMobileEqualTo(mobile);
+			List<TbMoney> moneyList = moneyMapper.selectByExample(moneyExample);	//根据mobile查询money
+			if(moneyList != null && moneyList.size() > 0){
+				TbMoney money = moneyList.get(0);
+				money.setIsrewardrelease(true);
+				moneyMapper.updateByExample(money, moneyExample);
+				
+				//修改mobile对应的当天tb_order表信息
+				//根据手机号更新tb_order表分红累计以及已分红天数信息
+				if(updateReward(mobile)){
+					
+				}
+				
+				
+				
 			}
+
 		}
 		return XiaobaoResult.ok();
 	}
+	
+	/**
+	 * 根据手机号更新tb_order表分红累计以及已分红天数信息
+	 * @param mobile
+	 * @return
+	 */
+	@Transactional
+	private boolean updateReward(String mobile){
+		TbOrderExample example1 = new TbOrderExample();
+		com.xiaobao.pojo.TbOrderExample.Criteria criteria1 = example1.createCriteria();
+		
+		criteria1.andMobileEqualTo(mobile);
+		criteria1.andOrderstatusEqualTo((byte) 1);
+		
+		List<TbOrder> list = orderMapper.selectByExample(example1);	//根据手机号和订单状态查询相关订单
+		if(list != null && list.size() > 0){
+			//遍历该mobile下的有效订单，并更新分红累计以及已分红天数信息
+			for(int i = 0; i < list.size(); i++){
+				TbOrder order = list.get(i);
+				String orderid = order.getOrderid();
+				Double rewardalready = order.getRewardalready();
+				Integer ordercnt = order.getOrdercnt();
+				Integer daysalready = order.getDaysalready();
+				
+				rewardalready += everyReward * ordercnt;	//累计每天的分红金额
+				daysalready += 1;	//分红天数自加1
+				
+				order.setRewardalready(rewardalready);
+				order.setDaysalready(daysalready);
+				
+				TbOrderExample example2 = new TbOrderExample();
+				com.xiaobao.pojo.TbOrderExample.Criteria criteria2 = example2.createCriteria();
+				criteria2.andOrderidEqualTo(orderid);
+				orderMapper.updateByExample(order, example2);	//根据订单号更新订单信息
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 根据手机号更新tb_order表奖励信息（未完成）
+	 * @param mobile
+	 * @return
+	 */
+	@Transactional
+	private boolean updateBonus(String mobile){
+		TbOrderExample example1 = new TbOrderExample();
+		com.xiaobao.pojo.TbOrderExample.Criteria criteria1 = example1.createCriteria();
+		
+		criteria1.andMobileEqualTo(mobile);
+		criteria1.andOrderstatusEqualTo((byte) 1);
+		
+		List<TbOrder> list = orderMapper.selectByExample(example1);	//根据手机号和订单状态查询相关订单
+		if(list != null && list.size() > 0){
+			//遍历该mobile下的有效订单
+			for(int i = 0; i < list.size(); i++){
+				TbOrder order = list.get(i);
+				/**
+				 *  奖励的回写逻辑
+				 */
+				
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * 确认发放奖励
