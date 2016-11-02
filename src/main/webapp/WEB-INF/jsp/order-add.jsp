@@ -4,8 +4,7 @@
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
 	<form id="orderAddForm" class="orderForm" method="post">
-	    <table cellpadding="10">
-	        
+	    <table cellpadding="10">      
 	        <tr>
 	            <td>姓名:</td>
 	            <td><input class="easyui-textbox" type="text" name="name" data-options="required:true" style="width: 280px;"></input></td>
@@ -28,7 +27,7 @@
 	        </tr>
 	        <tr>
 	            <td>投单日期:</td>
-	            <td><input class="easyui-textbox" type="text" name="investmentdate" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-datebox" name="investmentdate" data-options="required:true"></input></td>   
 	        </tr>
 	        <tr>
 	            <td>收货地址:</td>
@@ -45,8 +44,7 @@
 	        <tr>
 	            <td>额外分红天数:</td>
 	            <td><input class="easyui-textbox" type="text" name="extradays" data-options="required:true" style="width: 280px;"></input></td>
-	        </tr>
-	        
+	        </tr>   
 	    </table>
 	    
 	    <input type="hidden" value="" name='orderid'>
@@ -63,8 +61,9 @@
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
+
+
 <script type="text/javascript">
-	
 	//提交表单
 	function submitForm(){
 		//有效性验证
@@ -95,8 +94,7 @@
 	            error: function (xhr, type) {
 	                console.log('Ajax error');
 	            }
-	        })
-	        
+	        })   
 	}
 	
 	function clearForm(){

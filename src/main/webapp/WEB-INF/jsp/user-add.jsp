@@ -27,11 +27,14 @@
 	            <td><input class="easyui-textbox" type="text" name="referrermobile" style="width: 280px;"></input></td>
 	        </tr>
 	        <tr>
-	            <td>所属团队id:</td>
-	            <td><input class="easyui-textbox" type="text" name="teamid" data-options="required:true" style="width: 280px;"></input></td>
-	        </tr>
-	        
-	        
+	        	<td>所属团队:</td>
+	        	<td>
+			        <select class="easyui-combobox" name="teamid" style="width: 100px;">
+						<option value="1">江苏团队</option>
+						<option value="2">福建团队</option>
+					</select>
+				</td>	
+	        </tr>	        
 	    </table>
 	    
 	    <input type="hidden" value="" name='password'>

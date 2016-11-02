@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : local_mysql
 Source Server Version : 50529
 Source Host           : localhost:3306
 Source Database       : xiaobao
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50529
 File Encoding         : 65001
 
-Date: 2016-11-02 00:16:02
+Date: 2016-11-02 17:27:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -91,6 +91,7 @@ INSERT INTO `tb_order` VALUES ('B161021182746003', '15000000000', '陈六', '1',
 INSERT INTO `tb_order` VALUES ('B161021182857004', '13555555555', '王五', '3', '3200.00', '9600.00', '2016-09-11', '0.00', '378.00', '浙江杭州', '', '4', '0', '87', '2', '2016-10-21 18:28:57', '2016-11-01 22:21:49', '1');
 INSERT INTO `tb_order` VALUES ('B161021183034005', '13555555555', '王五', '1', '3200.00', '3200.00', '2016-08-18', '0.00', '126.00', '浙江杭州', '', '4', '3', '89', '89', '2016-10-21 18:30:34', '2016-11-01 22:21:49', '0');
 INSERT INTO `tb_order` VALUES ('B161024164001000', '13555555555', '王五', '2', '3000.00', '6000.00', '2016-05-05', '0.00', '0.00', '浙江杭州', '', '4', '0', '86', '0', '2016-10-24 16:40:01', '2016-10-24 16:40:01', '0');
+INSERT INTO `tb_order` VALUES ('B161102172533004', '212', '121', '1212', '1212.00', '1212.00', '2016-11-02', '0.00', '0.00', '1212', '', '12', '1', '261', '0', '2016-11-02 17:25:33', '2016-11-02 17:25:33', '1');
 
 -- ----------------------------
 -- Table structure for tb_team
@@ -134,7 +135,7 @@ CREATE TABLE `tb_user` (
   `updateDate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_user_mobile` (`mobile`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_user
@@ -151,6 +152,8 @@ INSERT INTO `tb_user` VALUES ('25', '呜呜呜', '42143145234', '4343433434', ''
 INSERT INTO `tb_user` VALUES ('26', '555555', '5555555', '555555', '', '', '0', '1', '0', '0', '', '', '1', '2016-11-02 00:07:41', '2016-11-02 00:07:41');
 INSERT INTO `tb_user` VALUES ('27', '6666', '66666', '66666', '', '', '0', '1', '0', '0', '鬼脚七', '17000000000', '1', '2016-11-02 00:13:00', '2016-11-02 00:13:00');
 INSERT INTO `tb_user` VALUES ('28', '7777', '7777', '7777', '', '', '0', '1', '0', '0', '', '', '7', '2016-11-02 00:13:35', '2016-11-02 00:13:35');
+INSERT INTO `tb_user` VALUES ('29', '0000', '000', '00000', '', '', '0', '1', '0', '0', '', '', '1', '2016-11-02 17:02:26', '2016-11-02 17:02:26');
+INSERT INTO `tb_user` VALUES ('30', '888', '888', '888', '', '', '0', '1', '0', '0', '', '', '2', '2016-11-02 17:03:10', '2016-11-02 17:03:10');
 
 -- ----------------------------
 -- Table structure for t_calendar
