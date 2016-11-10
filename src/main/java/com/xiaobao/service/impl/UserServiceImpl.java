@@ -17,6 +17,7 @@ import com.xiaobao.mapper.TbUserMapper;
 import com.xiaobao.pojo.TbUser;
 import com.xiaobao.pojo.TbUserExample;
 import com.xiaobao.pojo.TbUserExample.Criteria;
+import com.xiaobao.service.MoneyService;
 import com.xiaobao.service.UserService;
 
 @Service
@@ -24,6 +25,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TbUserMapper userMapper;
+	@Autowired
+	private MoneyService moneyService;
 	
 	/**
 	 * 通过用户名查找代理
@@ -42,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * 保存代理
+	 * 新增代理
 	 */
 	@Override
 	@Transactional
@@ -55,20 +58,15 @@ public class UserServiceImpl implements UserService {
 		newUser.setEmail(user.getEmail());
 		newUser.setReferrer(user.getReferrer());
 		newUser.setReferrermobile(user.getReferrermobile());
-		newUser.setTeamid(user.getTeamid());
-		//判断是否填入推荐人信息
-		if(StringUtils.isNotEmpty(user.getReferrer()) && 
-				StringUtils.isNotEmpty(user.getReferrermobile())){
-			if(referralCntAdd(user.getReferrermobile())){
-				userMapper.insert(newUser);
-				return XiaobaoResult.ok();
-			}else{
-				return XiaobaoResult.build(400, "推荐人推荐次数加1失败");
-			}
-		}else{
-			userMapper.insert(newUser);
-			return XiaobaoResult.ok();
-		}
+		newUser.setTeamid(user.getTeamid());		
+		//判断是否填入了推荐人信息
+		if(StringUtils.isNotEmpty(user.getReferrer()) && StringUtils.isNotEmpty(user.getReferrermobile())){	
+			referralCntAdd(user.getReferrermobile());	//有推荐人的情况下，推荐人推荐次数加1
+		}	
+		//没有填推荐人信息则忽略推荐人信息插入
+		userMapper.insert(newUser);
+		return XiaobaoResult.ok();
+		
 	}
 	
 	/**

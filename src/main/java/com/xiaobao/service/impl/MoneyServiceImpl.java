@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
+import com.xiaobao.common.utils.DateUtils;
 import com.xiaobao.mapper.TbMoneyMapper;
 import com.xiaobao.mapper.TbOrderMapper;
 import com.xiaobao.mapper.TbUserMapper;
@@ -36,8 +38,13 @@ public class MoneyServiceImpl implements MoneyService {
 	@Autowired
 	private TbOrderMapper orderMapper;
 	
-	//定义每天每单的分红金额
-	private final double everyReward = 63.00;  
+	@Value("${EVERY_REWARD}")
+	private double EVERY_REWARD;
+	@Value("${REFERRER_BONUS}")
+	private double REFERRER_BONUS;
+	
+//	//定义每天每单的分红金额
+//	private final double everyReward = 63.00;  
 	
 	/**
 	 * 无条件查询资金总记录
@@ -270,7 +277,7 @@ public class MoneyServiceImpl implements MoneyService {
 			for(int i = 0; i < list.size(); i++){
 				TbOrder order = list.get(i);
 				Integer ordercnt = order.getOrdercnt();
-				double rewardToday = everyReward * ordercnt;
+				double rewardToday = EVERY_REWARD * ordercnt;
 				todayRewardTotal += rewardToday;
 			}
 			if(todayRewardTotal == reward){	//校验前台传来的reward是否和后台数据库读取计算的todayRewardTotal一致
@@ -282,7 +289,7 @@ public class MoneyServiceImpl implements MoneyService {
 					Integer rewardDays = order.getRewarddays();
 					Integer ordercnt = order.getOrdercnt();
 					Integer daysalready = order.getDaysalready();
-					Double rewardToday = everyReward * ordercnt;
+					Double rewardToday = EVERY_REWARD * ordercnt;
 					
 					rewardalready += rewardToday;	//累计每天的分红金额
 					daysalready += 1;	//分红天数自加1
@@ -362,8 +369,34 @@ public class MoneyServiceImpl implements MoneyService {
 		return XiaobaoResult.ok();
 	}
 
-
-
+	/**
+	 * 生成推荐人奖励
+	 * 
+	 * @param mobile
+	 * @return
+	 */
+	@Transactional
+	public boolean generateBonus(String name, String mobile){
+		try {
+			TbMoney moneyVO = new TbMoney();
+			moneyVO.setName(name);
+			moneyVO.setMobile(mobile);
+			moneyVO.setBonus(REFERRER_BONUS);
+			moneyVO.setReward(0.00);
+			moneyVO.setIsbonusrelease(false);
+			moneyVO.setIsrewardrelease(false);
+			Date releaseDate = DateUtils.dateAdd(new Date(), 1);
+			String releaseDateStr = DateUtils.format(releaseDate, "yyyy-MM-dd");
+//			System.err.println(releaseDateStr);
+			moneyVO.setReleasedate(releaseDateStr);	//默认第二天发放
+			moneyMapper.insert(moneyVO);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
 	
 

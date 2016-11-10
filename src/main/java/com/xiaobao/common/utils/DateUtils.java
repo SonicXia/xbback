@@ -85,7 +85,7 @@ public abstract class DateUtils {
 	}
 
 	/**
-	 * 将日期加上某些天或减去天数，返回字符串
+	 * 将日期加上某些天或减去天数
 	 * 
 	 * @param date 待处理日期
 	 * @param to 加减的天数

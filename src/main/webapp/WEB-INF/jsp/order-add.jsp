@@ -87,8 +87,11 @@
 	            success: function (data) {
 	            	if(data.status == 200){
 	    				$.messager.alert('提示','新增订单成功!');
+	    				$('#orderAddForm').form('reset');
+	    			}else if(data.status == 400){
+	    				$.messager.alert('提示', data.msg);
 	    			}
-	            	$('#orderAddForm').form('reset');
+	            	
 	        		itemAddEditor.html('');
 	            },
 	            error: function (xhr, type) {

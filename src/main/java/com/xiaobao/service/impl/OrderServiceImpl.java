@@ -14,39 +14,97 @@ import com.xiaobao.common.pojo.EUDataGridResult;
 import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.common.utils.RewardDaysUtils;
 import com.xiaobao.mapper.TbOrderMapper;
+import com.xiaobao.mapper.TbUserMapper;
 import com.xiaobao.pojo.TbOrder;
 import com.xiaobao.pojo.TbOrderExample;
 import com.xiaobao.pojo.TbOrderExample.Criteria;
+import com.xiaobao.pojo.TbUser;
+import com.xiaobao.pojo.TbUserExample;
+import com.xiaobao.service.MoneyService;
 import com.xiaobao.service.OrderService;
+
+import jodd.util.StringUtil;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private TbOrderMapper orderMapper;
+	@Autowired
+	private TbUserMapper userMapper;
+	@Autowired
+	private MoneyService moneyService;
 	
 	/**
 	 * 保存订单
 	 */
 	@Transactional
 	public XiaobaoResult saveOrder(TbOrder order) {
-		
-		order.setOrderid(Factory.generateOrderId());
-		order.setBonusalready(0.00);
-		order.setRewardalready(0.00);
-		String investmentDate = order.getInvestmentdate();
-		int rewardMonths = order.getRewardmonths();
-		int extraDays = order.getExtradays();
-		int rewardDays = RewardDaysUtils.getRewardDays(investmentDate, rewardMonths, extraDays);
-		order.setRewarddays(rewardDays);
-		order.setDaysalready(0);
-		order.setCreatedate(new Date());
-		order.setUpdatedate(new Date());
-		order.setOrderstatus((byte) 1);
-		
-		orderMapper.insert(order);
-		
+		String mobile = order.getMobile();
+		String name = order.getName();
+		if(StringUtil.isNotEmpty(name) && StringUtil.isNotEmpty(mobile)){
+			// 投单人身份校验
+			if(!validateUser(name, order.getMobile())){
+				return XiaobaoResult.build(400, "投单人身份信息填写错误");
+			}
+			order.setOrderid(Factory.generateOrderId());
+			order.setBonusalready(0.00);
+			order.setRewardalready(0.00);
+			String investmentDate = order.getInvestmentdate();
+			int rewardMonths = order.getRewardmonths();
+			int extraDays = order.getExtradays();
+			int rewardDays = RewardDaysUtils.getRewardDays(investmentDate, rewardMonths, extraDays);
+			int orderCnt = order.getOrdercnt();
+			order.setRewarddays(rewardDays);
+			order.setDaysalready(0);
+			order.setCreatedate(new Date());
+			order.setUpdatedate(new Date());
+			order.setOrderstatus((byte) 1);
+			orderMapper.insert(order);			
+			// 根据mobile查询订单对应的投单人信息
+			TbUserExample example = new TbUserExample();
+			com.xiaobao.pojo.TbUserExample.Criteria criteria = example.createCriteria();
+			criteria.andMobileEqualTo(mobile);
+			List<TbUser> userList = userMapper.selectByExample(example);
+			if(userList != null && userList.size() > 0){
+				TbUser user = userList.get(0);
+				Integer totalCnt = user.getTotalcnt();
+				// 如果投单人之前没有投过单（即首次投单），则推荐人获得奖励
+				if(totalCnt == 0){
+					if(StringUtil.isNotEmpty(user.getReferrer()) && StringUtil.isNotEmpty(user.getReferrermobile())){
+						String referrer = user.getReferrer();
+						String referrerMobile = user.getReferrermobile();
+						moneyService.generateBonus(referrer, referrerMobile);
+					}
+				}
+				// 投单人投单总数增加
+				totalCnt += orderCnt;
+				user.setTotalcnt(totalCnt);
+				// 更新投单人投单总次数
+				userMapper.updateByExample(user, example);
+
+			}
+		}
 		return XiaobaoResult.ok();
+	}
+	
+	/**
+	 * 投单人身份校验
+	 * 
+	 * @param name
+	 * @param mobile
+	 * @return
+	 */
+	private boolean validateUser(String name, String mobile){
+		TbUserExample example = new TbUserExample();
+		com.xiaobao.pojo.TbUserExample.Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(name);
+		criteria.andMobileEqualTo(mobile);
+		List<TbUser> userList = userMapper.selectByExample(example);
+		if(userList != null && userList.size() > 0){
+			return true;
+		}
+		return false;
 	}
 	
 	/**

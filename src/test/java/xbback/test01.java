@@ -26,7 +26,7 @@ public class test01 {
 	
 	public static void main(String[] args) throws ParseException {
 //		System.err.println(RewardDaysUtils.getRewardDays("2016-01-31", 4, 0));
-		testRewardDays("2016-11-01", 4 , 0);
+		testRewardDays("2016-11-09", 4 , 0);
 	}
 
 }
