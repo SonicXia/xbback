@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +15,6 @@ import com.xiaobao.common.pojo.XiaobaoResult;
 import com.xiaobao.common.utils.DateUtils;
 import com.xiaobao.mapper.TbMoneyMapper;
 import com.xiaobao.mapper.TbOrderMapper;
-import com.xiaobao.mapper.TbUserMapper;
 import com.xiaobao.pojo.TbMoney;
 import com.xiaobao.pojo.TbMoneyExample;
 import com.xiaobao.pojo.TbMoneyExample.Criteria;
@@ -29,22 +27,31 @@ import com.xiaobao.service.MoneyService;
 @Service
 public class MoneyServiceImpl implements MoneyService {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+//	@Autowired
+//	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private TbMoneyMapper moneyMapper;
 	@Autowired
-	private TbUserMapper userMapper;
-	@Autowired
 	private TbOrderMapper orderMapper;
 	
+	// 定义每天每单的分红金额
 	@Value("${EVERY_REWARD}")
 	private double EVERY_REWARD;
 	@Value("${REFERRER_BONUS}")
 	private double REFERRER_BONUS;
-	
-//	//定义每天每单的分红金额
-//	private final double everyReward = 63.00;  
+	// 奖励梯度
+	@Value("${ONE_GENERATION_BONUS}")
+	private double ONE_GENERATION_BONUS;
+	@Value("${TWO_GENERATION_BONUS}")
+	private double TWO_GENERATION_BONUS;
+	@Value("${THREE_GENERATION_BONUS}")
+	private double THREE_GENERATION_BONUS;
+	@Value("${FOUR_GENERATION_BONUS}")
+	private double FOUR_GENERATION_BONUS;
+	@Value("${FIVE_GENERATION_BONUS}")
+	private double FIVE_GENERATION_BONUS;
+	@Value("${SIX_GENERATION_BONUS}")
+	private double SIX_GENERATION_BONUS;
 	
 	/**
 	 * 无条件查询资金总记录
@@ -370,13 +377,14 @@ public class MoneyServiceImpl implements MoneyService {
 	}
 
 	/**
-	 * 生成推荐人奖励
+	 * 计算推荐人奖励
 	 * 
 	 * @param mobile
 	 * @return
 	 */
+	@Override
 	@Transactional
-	public boolean generateBonus(String name, String mobile){
+	public boolean referrerBonus(String name, String mobile){
 		try {
 			TbMoney moneyVO = new TbMoney();
 			moneyVO.setName(name);
@@ -387,7 +395,6 @@ public class MoneyServiceImpl implements MoneyService {
 			moneyVO.setIsrewardrelease(false);
 			Date releaseDate = DateUtils.dateAdd(new Date(), 1);
 			String releaseDateStr = DateUtils.format(releaseDate, "yyyy-MM-dd");
-//			System.err.println(releaseDateStr);
 			moneyVO.setReleasedate(releaseDateStr);	//默认第二天发放
 			moneyMapper.insert(moneyVO);
 			return true;
@@ -397,10 +404,165 @@ public class MoneyServiceImpl implements MoneyService {
 		}
 		
 	}
-
 	
-
+	/**
+	 * 计算投单人奖励
+	 * 
+	 * @param name
+	 * @param mobile
+	 * @param totalCnt
+	 * @param orderCnt
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public boolean userBonus(String name, String mobile, int totalCnt, int orderCnt){
+		try {
+			TbMoney moneyVO = new TbMoney();
+			moneyVO.setName(name);
+			moneyVO.setMobile(mobile);
+			moneyVO.setBonus(getGenerationBonus(totalCnt, orderCnt));
+			moneyVO.setReward(0.00);
+			moneyVO.setIsbonusrelease(false);
+			moneyVO.setIsrewardrelease(false);
+			Date releaseDate = DateUtils.dateAdd(new Date(), 1);
+			String releaseDateStr = DateUtils.format(releaseDate, "yyyy-MM-dd");
+			moneyVO.setReleasedate(releaseDateStr);	//默认第二天发放
+			moneyMapper.insert(moneyVO);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 	
+	/**
+	 * **** 业务重点 ****
+	 * 
+	 * 投单人根据总单数获取奖励金额
+	 * 
+	 * @param totalCnt
+	 * @param orderCnt
+	 * @return sumGenerationBonus
+	 */
+	private double getGenerationBonus(int totalCnt, int orderCnt){
+		
+		int newCnt = totalCnt + orderCnt;	// 投单后的单数
+		int newCntInt = (int)newCnt / 10; // 取整
+		int newCntRem = newCnt % 10;	// 取余
+		int totalCntInt = (int)totalCnt / 10;
+		int totalCntRem = totalCnt % 10;
+		double sumGenerationBonus = 0.00;
+		double totalCntUp = Math.ceil((double)totalCnt / 10) * 10;	// 区间最大值
+		// 投单后区间没变，如原来17单，投了3单后20单，仍然属于第二代奖励范围
+		if(newCnt <= totalCntUp){
+			for(int i = totalCnt + 1; i <= newCnt; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt);		
+			}
+		}
+		// 投单后区间变化（跨了一个区间）
+		else if((newCnt > totalCntUp) && (newCnt <= totalCntUp + 10)) {
+			for(int i = totalCnt + 1; i <= totalCntUp; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt);		
+			}
+			for(int i = (int)totalCntUp + 1; i <= newCnt; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 1);		
+			}
+		}
+		// 投单后区间变化（跨两个区间）
+		else if((newCnt > totalCntUp + 10) && (newCnt <= totalCntUp + 20)){
+			for(int i = totalCnt + 1; i <= totalCntUp; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt);		
+			}
+			for(int i = (int)totalCntUp + 1; i <= (int)totalCntUp + 10; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 1);		
+			}
+			for(int i = (int)totalCntUp + 11; i <= newCnt; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 2);		
+			}
+		}
+		// 投单后区间变化（跨三个区间）
+		else if((newCnt > totalCntUp + 20) && (newCnt <= totalCntUp + 30)){
+			for(int i = totalCnt + 1; i <= totalCntUp; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt);		
+			}
+			for(int i = (int)totalCntUp + 1; i <= (int)totalCntUp + 10; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 1);		
+			}
+			for(int i = (int)totalCntUp + 11; i <= (int)totalCntUp + 20; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 2);		
+			}
+			for(int i = (int)totalCntUp + 21; i <= newCnt; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 3);		
+			}
+		}
+		// 投单后区间变化（跨四个区间）
+		else if((newCnt > totalCntUp + 30) && (newCnt <= totalCntUp + 40)){
+			for(int i = totalCnt + 1; i <= totalCntUp; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt);		
+			}
+			for(int i = (int)totalCntUp + 1; i <= (int)totalCntUp + 10; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 1);		
+			}
+			for(int i = (int)totalCntUp + 11; i <= (int)totalCntUp + 20; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 2);		
+			}
+			for(int i = (int)totalCntUp + 21; i <= (int)totalCntUp + 30; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 3);		
+			}
+			for(int i = (int)totalCntUp + 31; i <= newCnt; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 4);		
+			}
+		}
+		// 投单后区间变化（跨四个区间）
+		else if((newCnt > totalCntUp + 40) && (newCnt <= totalCntUp + 50)){
+			for(int i = totalCnt + 1; i <= totalCntUp; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt);		
+			}
+			for(int i = (int)totalCntUp + 1; i <= (int)totalCntUp + 10; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 1);		
+			}
+			for(int i = (int)totalCntUp + 11; i <= (int)totalCntUp + 20; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 2);		
+			}
+			for(int i = (int)totalCntUp + 21; i <= (int)totalCntUp + 30; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 3);		
+			}
+			for(int i = (int)totalCntUp + 31; i <= (int)totalCntUp + 40; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 4);		
+			}
+			for(int i = (int)totalCntUp + 41; i <= newCnt; i++){
+				sumGenerationBonus += caseGenerationBonus(totalCntInt + 5);		
+			}
+		}
+		return sumGenerationBonus;
+	}
+		
+	/**
+	 * 奖励梯度
+	 * 1-10单，一代奖励；2-20单，二代奖励，以此类推，目前只到六代
+	 * 
+	 * @param num
+	 * @return generationBonus
+	 */
+	private double caseGenerationBonus(int num){
+		double generationBonus;
+		switch((int)num){
+			case 0 : generationBonus =  ONE_GENERATION_BONUS; break;
+			case 1 : generationBonus =  TWO_GENERATION_BONUS; break;
+			case 2 : generationBonus =  THREE_GENERATION_BONUS; break;
+			case 3 : generationBonus =  FOUR_GENERATION_BONUS; break;
+			case 4 : generationBonus =  FIVE_GENERATION_BONUS; break;
+			case 5 : generationBonus =  SIX_GENERATION_BONUS; break;
+			default : generationBonus =  SIX_GENERATION_BONUS;
+		}
+		return generationBonus;
+	}
+		
+		
+		
+
 	//通过jdbcTemplate以及VO对象编写
 //	@Transactional
 //	public EUDataGridResult getRewardList(int page, int rows) {

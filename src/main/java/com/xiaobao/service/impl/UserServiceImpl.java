@@ -17,7 +17,6 @@ import com.xiaobao.mapper.TbUserMapper;
 import com.xiaobao.pojo.TbUser;
 import com.xiaobao.pojo.TbUserExample;
 import com.xiaobao.pojo.TbUserExample.Criteria;
-import com.xiaobao.service.MoneyService;
 import com.xiaobao.service.UserService;
 
 @Service
@@ -25,8 +24,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TbUserMapper userMapper;
-	@Autowired
-	private MoneyService moneyService;
 	
 	/**
 	 * 通过用户名查找代理

@@ -74,8 +74,12 @@ public class OrderServiceImpl implements OrderService {
 					if(StringUtil.isNotEmpty(user.getReferrer()) && StringUtil.isNotEmpty(user.getReferrermobile())){
 						String referrer = user.getReferrer();
 						String referrerMobile = user.getReferrermobile();
-						moneyService.generateBonus(referrer, referrerMobile);
+						moneyService.referrerBonus(referrer, referrerMobile);
 					}
+				}
+				// 如果投单人之前投过单，则奖励按照奖励梯度金额规定，归投单人所有
+				else if(totalCnt > 0){
+					moneyService.userBonus(name, mobile, totalCnt, orderCnt); // *业务重难点*
 				}
 				// 投单人投单总数增加
 				totalCnt += orderCnt;

@@ -25,6 +25,10 @@ public interface MoneyService {
 	
 	XiaobaoResult distributeBonus(String mobiles);
 	
-	boolean generateBonus(String name, String mobile);
+	boolean referrerBonus(String name, String mobile);
+	
+	boolean userBonus(String name, String mobile, int totalCnt, int orderCnt);	
+	
+	
 	
 }
